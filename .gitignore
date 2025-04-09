@@ -1,0 +1,6 @@
+build/
+*.o
+*.tab.c
+*.tab.h
+lexer.c
+parser.c
