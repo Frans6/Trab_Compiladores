@@ -1,0 +1,15 @@
+# Comentário de teste
+x = 42
+y = 3.14
+name = "Arthur"
+resultado = x + y * 10 / (5 - 2)
+
+if x > y:
+    print("x é maior")
+else:
+    print("y é maior ou igual")
+
+input("Digite algo: ")
+
+# Operadores adicionais
+z = !x == y % 2

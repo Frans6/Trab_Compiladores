@@ -12,6 +12,8 @@ const char *token_name(int token)
 {
     switch (token)
     {
+    case COLON:
+        return "COLON";
     case PRINT:
         return "PRINT";
     case INPUT:
@@ -98,7 +100,7 @@ int main(int argc, char **argv)
             printf("\nLinha %d:\n", current_line);
         }
 
-        printf("%s = %s ", token_name(token), yytext);
+        printf("%s = (%s) ", token_name(token), yytext);
     }
 
     fclose(yyin);
