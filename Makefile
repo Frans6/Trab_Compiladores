@@ -53,3 +53,15 @@ clean:
 
 run: all
 	./$(TARGET)
+
+
+# Teste do analisador léxico
+TEST_LEXER_SRC = tests/test_lexer.c
+TEST_LEXER_EXE = build/test_lexer
+
+build/test_lexer: $(LEXER_O) $(PARSER_O) $(TEST_LEXER_SRC)
+	$(CC) $(CFLAGS) $(TEST_LEXER_SRC) $(LEXER_O) $(PARSER_O) -o $(TEST_LEXER_EXE)
+
+test-lexer: build/test_lexer
+	@echo "Rodando teste do analisador léxico com tests/test1.txt:"
+	./build/test_lexer tests/test1.txt

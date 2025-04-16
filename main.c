@@ -4,7 +4,7 @@ int yyparse();
 
 int main()
 {
-    printf("Digite comandos (ex: print 2 + 3;):\n");
+    printf("Digite os comandos\n");
     yyparse();
     return 0;
 }
