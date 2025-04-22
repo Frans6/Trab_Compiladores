@@ -55,6 +55,9 @@ int yylex(void);
 %token <id> ID
 %token NEWLINE
 %token COLON
+%token COMMA SEMICOLON DOT
+%token LBRACKET RBRACKET LBRACE RBRACE AT
+
 
 %type <expr> expr expr_int expr_float expr_bool
 
