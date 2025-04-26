@@ -57,7 +57,7 @@ int yylex(void);
 %token COLON
 %token COMMA SEMICOLON DOT
 %token LBRACKET RBRACKET LBRACE RBRACE AT
-
+%token DEF RETURN CLASS WHILE FOR BREAK CONTINUE NONE AND OR
 
 %type <expr> expr expr_int expr_float expr_bool
 
@@ -75,7 +75,6 @@ program:
     | program statement
     ;
 
-//provavelmente é aqui onde mais vamos mexer
 statement: 
     PRINT LPAREN expr RPAREN NEWLINE {
         switch($3.type) {
@@ -97,6 +96,17 @@ expr:
     | expr_float  { $$ = $1; }
     | expr_bool   { $$ = $1; }
     | STRING      { $$.type = 2; $$.value.str_val = $1; }
+    | ID          { 
+        Symbol* sym = find_symbol($1);
+        if (sym) {
+            $$ = sym->expr;
+        } else {
+            yyerror("Variável não definida");
+            $$.type = 0;
+            $$.value.int_val = 0;
+        }
+        free($1);
+    }
     | LPAREN expr RPAREN { $$ = $2; }
     ;
 

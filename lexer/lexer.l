@@ -57,6 +57,17 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\\']|\\.)*'
 "if"          { return IF; }
 "else"        { return ELSE; }
 "elif"        { return ELIF; }
+"def"         { return DEF; }
+"return"      { return RETURN; }
+"class"       { return CLASS; }
+"while"       { return WHILE; }
+"for"         { return FOR; }
+"break"       { return BREAK; }
+"continue"    { return CONTINUE; }
+"None"        { return NONE; }
+"and"         { return AND; }
+"or"          { return OR; }
+"not"         { return NOT; }
 "True"        { yylval.bool_val = true; return BOOL; }
 "False"       { yylval.bool_val = false; return BOOL; }
 
@@ -75,16 +86,16 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\\']|\\.)*'
                 }
 
 ":"           { return COLON; }
-","            { return COMMA; }
-";"            { return SEMICOLON; }
+","           { return COMMA; }
+";"           { return SEMICOLON; }
 "\."          { return DOT; }
 "\["          { return LBRACKET; }
 "\]"          { return RBRACKET; }
 "\{"          { return LBRACE; }
 "\}"          { return RBRACE; }
-"@"            { return AT; }
-"("            { return LPAREN; }
-")"            { return RPAREN; }
+"@"           { return AT; }
+"("           { return LPAREN; }
+")"           { return RPAREN; }
 "**"          { return POW; }
 "*"           { return MUL; }
 "//"          { return MOD; }
@@ -101,10 +112,10 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\\']|\\.)*'
 "="           { return ASSIGN; }
 "!"           { return NOT; }
 
-{ID}           { yylval.id = strdup(yytext); return ID; }
+{ID}          { yylval.id = strdup(yytext); return ID; }
 
 [ \t]+        { /* ignora espaços */ }
 
-.              { fprintf(stderr, "Erro léxico: '%c' (linha %d)\n", yytext[0], line_num); }
+.             { fprintf(stderr, "Erro léxico: '%c' (linha %d)\n", yytext[0], line_num); }
 
 %%
