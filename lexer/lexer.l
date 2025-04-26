@@ -28,7 +28,7 @@ DIGIT       [0-9]
 ID          [a-zA-Z_][a-zA-Z0-9_]*
 INT         [+-]?{DIGIT}+
 FLOAT       [+-]?(({DIGIT}+\.{DIGIT}*)|(\.{DIGIT}+))([eE][+-]?{DIGIT}+)?
-STRING      \"([^\\\"]|\\.)*\"|'([^\\']|\\.)*'
+STRING      \"([^\\\"]|\\.)*\"|'([^\\\']|\\.)*'
 
 %%
 
@@ -36,10 +36,12 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\']|\\.)*'
     line_num++;
     int count = yyleng - 1;  /* espaços após '\n' */
     if (count > indent_stack[indent_top]) {
+        /* maior indent: gera INDENT */
         indent_stack[++indent_top] = count;
         yylval.int_val = count;
         return INDENT;
     } else {
+        /* menor indent: gera um DEDENT por vez */
         while (count < indent_stack[indent_top]) {
             indent_top--;
             yylval.int_val = indent_stack[indent_top];
@@ -50,7 +52,6 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\']|\\.)*'
 }
 
 "\n"          { line_num++; return NEWLINE; }
-
 "print"       { return PRINT; }
 "input"       { return INPUT; }
 "if"          { return IF; }
@@ -58,38 +59,6 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\']|\\.)*'
 "elif"        { return ELIF; }
 "True"        { yylval.bool_val = true; return BOOL; }
 "False"       { yylval.bool_val = false; return BOOL; }
-
-/* Adicionando mais palavras-chave do Python */
-"def"         { return DEF; }
-"return"      { return RETURN; }
-"class"       { return CLASS; }
-"for"         { return FOR; }
-"while"       { return WHILE; }
-"break"       { return BREAK; }
-"continue"    { return CONTINUE; }
-"pass"        { return PASS; }
-"try"         { return TRY; }
-"except"      { return EXCEPT; }
-"finally"     { return FINALLY; }
-"raise"       { return RAISE; }
-"with"        { return WITH; }
-"as"          { return AS; }
-"import"      { return IMPORT; }
-"from"        { return FROM; }
-"global"      { return GLOBAL; }
-"nonlocal"    { return NONLOCAL; }
-"async"       { return ASYNC; }
-"await"       { return AWAIT; }
-"and"         { return AND; }
-"or"          { return OR; }
-"is"          { return IS; }
-"not"         { return NOT; }
-"in"          { return IN; }
-"lambda"      { return LAMBDA; }
-"yield"       { return YIELD; }
-"yield from"  { return YIELD_FROM; }
-
-/* Fim da declaração das palavras-chave */
 
 "#"           { int c; while((c = input()) != '\n' && c != EOF); line_num++; }
 
@@ -120,8 +89,7 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\']|\\.)*'
 "*"           { return MUL; }
 "//"          { return MOD; }
 "/"           { return DIV; }
-"%"
-           { return MOD; }
+"%"           { return MOD; }
 "+"           { return ADD; }
 "-"           { return SUB; }
 "=="          { return EQ; }
