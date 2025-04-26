@@ -71,6 +71,26 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\\']|\\.)*'
 "True"        { yylval.bool_val = true; return BOOL; }
 "False"       { yylval.bool_val = false; return BOOL; }
 
+(r|f|u|rf|fr)?'''([^'\\]|\\.)*''' {
+    char* s = strdup(yytext);
+    size_t len = strlen(s);
+    yylval.str_val = (char*)malloc(len - 6);
+    strncpy(yylval.str_val, s + 3, len - 6);
+    yylval.str_val[len - 6] = '\0';
+    free(s);
+    return STRING;
+}
+
+(r|f|u|rf|fr)?"""([^'\\]|\\.)*""" {
+    char* s = strdup(yytext);
+    size_t len = strlen(s);
+    yylval.str_val = (char*)malloc(len - 6);
+    strncpy(yylval.str_val, s + 3, len - 6);
+    yylval.str_val[len - 6] = '\0';
+    free(s);
+    return STRING;
+}
+
 "#"           { int c; while((c = input()) != '\n' && c != EOF); line_num++; }
 
 {FLOAT}        { yylval.float_val = atof(yytext); return FLOAT; }
