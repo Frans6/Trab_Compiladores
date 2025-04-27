@@ -4,3 +4,4 @@ build/
 *.tab.h
 lexer.c
 parser.c
+venv/

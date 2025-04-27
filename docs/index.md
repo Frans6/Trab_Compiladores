@@ -1,17 +1,54 @@
-# Welcome to MkDocs
+# Interpretador Python
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Sobre o Projeto
 
-## Commands
+Trabalho da disciplina de Compiladores. O projeto tem como objetivo criar um interpretaro em python.
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Integrantes
 
-## Project layout
+<div style="display: grid; align-items: center; gap: 25px;">
+    <div style="display: flex; align-items: end; justify-content: center; gap: 50px;">
+        <div style="text-align: center;">
+            <br/>
+            <img src="https://github.com/anabfs.png" width="160px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/anabfs" target="_blank">Ana Beatriz</a>
+        </div>
+        <div style="text-align: center;">
+            <br/>
+            <img src="https://github.com/arthurevg.png" width="160px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/arthurevg" target="_blank">Arthur Evangelista</a>
+        </div>
+        <div style="text-align: center;">
+            <br/>
+            <img src="https://github.com/YuriBre.png" width="160px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/YuriBre" target="_blank">Breno Yuri</a>
+        </div>
+    </div>
+</div>
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+<div style="display: grid; align-items: center; gap: 25px;">
+    <div style="display: flex; align-items: end; justify-content: center; gap: 50px;">
+        <div style="text-align: center;">
+            <br/>
+            <img src="https://github.com/CarolinaBarb.png" width="160px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/CarolinaBarb" target="_blank">Caroline Barbosa</a>
+        </div>
+        <div style="text-align: center;">
+            <br/>
+            <img src="https://github.com/Frans6.png" width="160px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/Frans6" target="_blank">Jefferson França</a>
+        </div>
+        <div style="text-align: center;">
+            <br/>
+            <img src="https://github.com/LeticiaResende23.png" width="160px" height="50%" style="border-radius:50%"/>
+            <br/>
+            <a href="https://github.com/LeticiaResende23" target="_blank">Letícia Resende</a>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,52 @@
-site_name: My site
+site_name: Compiladores
 site_url: https://mydomain.org/mysite
 theme:
   name: material
+
+theme:
+  language: pt-BR
+  icon:
+    repo: fontawesome/brands/github
+  palette: 
+    - scheme: default
+      toggle:
+        icon: material/brightness-7 
+        name: Switch to dark mode
+
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - content.code.copy
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      pygments_lang_class: true
+      auto_title: true
+      linenums: true
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+    
+nav:
+  - Início: index.md
+  # Exemplo de organização de pastas e arquivos
+  # pastas e arquivos que quiserem que apareçam na documentação precisam estar dentro da pasta docs
+  # - Modelagem:
+  #   - Dicionário de dados: modelagem/dicionario_dados.md
+  #   - Modelo Entidade-Relacionamento: modelagem/modelo-entidade-relacionamento.md
+  #   - Diagrama Entidade-Relacionamento: modelagem/diagrama-entidade-relacionamento.md
+  # - SQL:
+  #   - DDL: sql/ddl/ddl.md
+  #   - DML: sql/dml/dml.md
+  #   - DQL: sql/dql/dql.md
+  #   - Trigger: sql/trigger_procedure/trigger.md
+  # - Apresentações:
+  #   - Apresentação 1: entregas/modulo1/apresentacao_1.md
+  #   - Apresentação 2: entregas/modulo2/apresentacao_2.md
+  #   - Apresentação 3: entregas/modulo3/apresentacao_3.md
