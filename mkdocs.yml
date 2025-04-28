@@ -37,6 +37,8 @@ nav:
   - Início: index.md
   - Cronograma: cronograma.md
   - Metodologia: metodologia.md
+  - Escopo: escopo.md
+  - Explicação do Projeto: explicacao.md
   # Exemplo de organização de pastas e arquivos
   # pastas e arquivos que quiserem que apareçam na documentação precisam estar dentro da pasta docs
   # - Modelagem:
