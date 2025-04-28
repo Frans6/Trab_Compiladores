@@ -28,3 +28,11 @@
 |            | 16/06 (qua)  | **Entrega final do compilador** (Até 27/06/2025, 23:59 via Teams)                             |
 |------------|------------|------------------------------------------------------------------------------------------------|
 | **Julho**  | 30/06 (seg)  | Entrevistas de defesa do trabalho final.                                                      |
+---
+
+## Histórico de Versão
+
+| Versão | Data          | Descrição                          | Autor(es)     |
+| ------ | ------------- | ---------------------------------- | ------------- |
+| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
+| `X.X`  |  XX/XX/XXXX |  -- | -- |
