@@ -5,7 +5,7 @@
 Neste documento, será apresentada a metodologia adotada para o desenvolvimento do **Interpretador da linguagem python**, com o objetivo de descrever as etapas e os processos seguidos para alcançar os resultados desejados. A metodologia define a abordagem sistemática e estruturada adotada para resolver o problema proposto.
 
 
-## 2. Abordagem Metodológica
+##  Abordagem Metodológica
 
 A metodologia utilizada no desenvolvimento do projeto foi baseada em práticas ágeis como o scrum e adapatada para a rotina dos membros do grupo, visando uma flexibilidade de horarios adequada ao desenvolvimento do projeto enquanto se mantém um controle rigoroso sobre os processos críticos. 
 
