@@ -36,7 +36,7 @@ Trabalho da disciplina de Compiladores. O projeto tem como objetivo criar um int
             <br/>
             <img src="https://github.com/CarolinaBarb.png" width="160px" height="50%" style="border-radius:50%"/>
             <br/>
-            <a href="https://github.com/CarolinaBarb" target="_blank">Caroline Barbosa</a>
+            <a href="https://github.com/CarolinaBarb" target="_blank">Carolina Barbosa</a>
         </div>
         <div style="text-align: center;">
             <br/>
