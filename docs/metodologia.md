@@ -7,7 +7,7 @@ Neste documento, será apresentada a metodologia adotada para o desenvolvimento 
 
 ##  Abordagem Metodológica
 
-A metodologia utilizada no desenvolvimento do projeto foi baseada em práticas ágeis como o scrum e adapatada para a rotina dos membros do grupo, visando uma flexibilidade de horarios adequada ao desenvolvimento do projeto enquanto se mantém um controle rigoroso sobre os processos críticos. 
+A metodologia utilizada no desenvolvimento do projeto foi baseada em práticas ágeis como o Scrum e adaptada para a rotina dos membros do grupo, visando uma flexibilidade de horários adequada ao desenvolvimento do projeto enquanto se mantém um controle rigoroso sobre os processos críticos. 
 
 O processo de trabalho foi dividido nas seguintes etapas:
 
@@ -28,12 +28,23 @@ A fase de desenvolvimento foi dividida em ciclos iterativos, com entregas increm
 - **Implementação final**: Ainda não finalizado.
 
 ## 3. Ferramentas
-O projeto utilizou uma série de ferramentas e tecnologias para garantir a eficiência e qualidade do trabalho, incluindo:
+O projeto utiliza uma série de ferramentas e tecnologias para garantir a eficiência e qualidade do trabalho, incluindo:
 
 - **Tecnologias de desenvolvimento**: C, Flex (para o analisador léxico), Bison (para o analisador sintático).
-- **Sistemas de controle de versão**: Git, para gerenciar o código-fonte e as versões do projeto.
+- **Sistemas de controle de versão**: Git e Github para gerenciar o código-fonte e as versões do projeto.
 - **Plataformas de colaboração**: Whatsapp e Google meet para comunicação entre os membros da equipe.
+- **Editor de código**: Visual Studio Code para desenvolvimento e depuração.
 
 ## 4. Conclusão
 
-A  metodologia adotada foi essencial para garantir o sucesso do projeto, permitindo o cumprimento dos objetivos dentro do prazo estabelecidos. 
+A metodologia adotada tem sido essencial para o progresso do projeto, permitindo que os objetivos sejam alcançados de forma incremental. Apesar de ainda estarmos na fase de desenvolvimento, os resultados obtidos até agora indicam que estamos no caminho certo para cumprir os objetivos dentro do prazo estabelecido.
+
+---
+
+## Histórico de Versão
+
+| Versão | Data          | Descrição                          | Autor(es)     |
+| ------ | ------------- | ---------------------------------- | ------------- |
+| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
+| `1.0`  |  27/04/2025 |  Criação da página "Metodologia" contendo informações sobre a metodologia utilizada | Carolina |
+| `1.1`  |  28/04/2025 |  Atualização de informações no documento | Arthur |
