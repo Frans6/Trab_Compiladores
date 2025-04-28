@@ -1,8 +1,8 @@
-# Interpretador Python
+# Interpretador Python usando Flex e Bison
 
 ## Sobre o Projeto
 
-Trabalho da disciplina de Compiladores. O projeto tem como objetivo criar um interpretaro em python.
+Este projeto consiste na implementação de um interpretador de Python, desenvolvido como trabalho acadêmico para a disciplina de Compiladores. O objetivo principal é aplicar os conceitos estudados ao longo da disciplina, como análise léxica, análise sintática e execução de comandos, utilizando as ferramentas Flex (para o analisador léxico) e Bison (para o analisador sintático).
 
 ## Integrantes
 
@@ -52,3 +52,13 @@ Trabalho da disciplina de Compiladores. O projeto tem como objetivo criar um int
         </div>
     </div>
 </div>
+
+---
+
+## Histórico de Versão
+
+| Versão | Data          | Descrição                          | Autor(es)     |
+| ------ | ------------- | ---------------------------------- | ------------- |
+| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
+| `1.0`  |  27/04/2025 |  Criação da Home do grupo | Jefferson |
+| `1.1`  |  28/04/2025 |  Atualização da Home no GitPages | Arthur |
