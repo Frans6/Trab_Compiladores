@@ -4,6 +4,11 @@ y = 3.14
 name = "Arthur"
 resultado = x + y * 10 / (5 - 2)
 
+print("fora")
+    print("dentro 1")
+    print("dentro 2")
+print("fora de novo")
+
 if x > y:
     print("x é maior")
 else:
