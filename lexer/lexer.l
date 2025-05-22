@@ -1,4 +1,5 @@
 %{
+#include "../parser/ast.h"
 #include "../parser/types.h"
 #include "../parser/parser.tab.h"
 #include <stdio.h>
