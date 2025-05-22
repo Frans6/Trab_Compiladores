@@ -1,10 +1,10 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#include <stdbool.h> 
+#include <stdbool.h>
 
 typedef struct {
-    enum { INT_T, FLOAT_T, STRING_T, BOOL_T } type;
+    int type; // 0=int, 1=float, 2=string, 3=bool
     union {
         int int_val;
         double float_val;
