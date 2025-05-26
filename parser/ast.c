@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include "ast.h"
 
+ASTNode* raiz_ast = NULL;
+
 ASTNode* create_int_node(int value) {
     ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
     node->type = AST_INT;
