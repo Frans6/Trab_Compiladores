@@ -28,9 +28,9 @@ TARGET = build/main
 
 all: $(TARGET)
 
-# Gera parser.tab.c e parser.tab.h
+# Gera parser.tab.c e parser.tab.h com debug ativado (-t)
 $(PARSER_C) $(PARSER_H): $(PARSER_SRC)
-	$(BISON) -d -o $(PARSER_C) $(PARSER_SRC)
+	$(BISON) -d -t -o $(PARSER_C) $(PARSER_SRC)
 
 # Gera lexer.c
 $(LEXER_C): $(LEXER_SRC) $(PARSER_H)
