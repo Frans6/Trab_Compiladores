@@ -2,7 +2,7 @@
 
 x = 42;
 y = 3.14;
-name = "Arthur";
+name = "Leticia";
 resultado = x + y * 10 / (5 - 2);
 
 print("fora");
