@@ -1,34 +1,31 @@
 # Cronograma do Projeto 
 
-| **Mês**    | **Data**   | **Descrição**                                                                                  |
-|------------|------------|------------------------------------------------------------------------------------------------|
-|       **Março**     | 26/03 (qua)  | Prática: configuração de ambiente para desenvolvimento de compiladores.                        |
-|------------|------------|------------------------------------------------------------------------------------------------|
-| **Abril**  | 02/04 (qua)   | Prática: construção de analisadores léxicos simples (expressões regulares)                                                                         |
-|            | 09/04 (qua)   | Prática: projeto inicial do compilador (fase léxica)                                                            |
-|            | 16/04 (qua)  | Prática: implementação inicial do parser                                               |
-|            | 23/04 (seg)  | Reunião do grupo.                                                                              |
-|            | 28/04 (seg)  | **Data limite para preenchimento do formulário P1** <br> [Formulário P1](https://forms.office.com/r/MyKh4HiAAu) |
-|            | 30/04 (dom)  | **Apresentação do ponto de controle P1** (Ordem crescente dos números das equipes). <br> Cada equipe terá até 5 minutos para apresentação. |
-|------------|------------|------------------------------------------------------------------------------------------------|
-| **Maio**   | 07/05 (qua)   | Prática: integração da análise semântica no compilador.                                         |
-|            | 14/05 (qua)  | Prática: protótipo de geração de código  intermediário.        |
-|            | 21/05 (qua)  | Prática: aplicação de otimzações no projeto. |
-|            | 28/05 (qua)  | Prática: protótipo de geração de código final. |
-|------------|------------|------------------------------------------------------------------------------------------------|
-| **Junho**  | 02/06 (seg)   | **Data limite para preenchimento do formulário P2** <br> [Formulário P2](https://forms.office.com/r/gNG6Eb7e71)                                                                      |
-|            | 04/06 (qua)   | Apresentação do ponto de controle P2.                                                          |
-|            | 11/06 (qua)  | Prática: consolidação do compilador e testes integrados. Disponibilização do GitHub do trabalho para o professor: usuário sergioaafreitas OU sergiofreitas@unb.br. Atenção: A não disponibilização, até esta data, inviabilizará a avaliação do projeto final (C) e da entrevista (T), e a equipe ficará com 0(zero) nestes itens.  |     
-|            | 18/06 (qua)   | Prática: refinamento de mensagens de erro e robustez                                                        |
-|            | 25/06 (qua)   |Prática: fechamento das funcionalidades do compilador. Até 27/06/2025 (23:59) Entrega do compilador (via Teams).  |
-|            | 30/06 (seg)   |Entrevistas de entrega do trabalho final (T)                                                      |
-|------------|------------|------------------------------------------------------------------------------------------------|
-| **Julho**  | 02/06 (qua)  | Entrevistas de defesa do trabalho final.                                                      |
+## Cronograma planejado das sprints
+
+| Sprint  | Período           | Objetivos Principais                                                                                                         | Entregas Principais                                                                                      | Tarefas Principais                                                                                                                                                                                                                      |
+|---------|-------------------|----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Sprint 1| 24/03 a 09/04     | Formar equipe, configurar ambiente, definir linguagem e criar gramática inicial                                            | Documento da linguagem, protótipo da gramática, ambiente testado                                         | Definir escopo, configurar repositório, instalar ferramentas, criar gramática inicial (.y) e regras léxicas (.l)                                                                                                                      |
+| Sprint 2| 10/04 a 30/04     | Finalizar análise léxica, implementar regras básicas do parser, preparar apresentação P1                                   | Arquivo .l completo, regras sintáticas iniciais, formulário e apresentação P1                            | Finalizar expressões regulares, desenvolver regras sintáticas básicas, testar tokens/parser, preparar apresentação                                                                                                                     |
+| Sprint 3| 01/05 a 14/05     | Implementar AST, iniciar análise semântica básica, melhorar mensagens de erro                                              | Estruturas da AST, módulo de análise semântica inicial, parser construindo AST                           | Implementar ações semânticas para AST, criar tabela de símbolos, tratar erros sintáticos/semânticos, testar AST                                                                                                                        |
+| Sprint 4| 15/05 a 04/06     | Implementar interpretação da AST, aprimorar análise semântica, preparar apresentação P2                                    | Interpretador funcional, análise semântica robusta, formulário e apresentação P2                         | Criar lógica de interpretação recursiva, consolidar estruturas de controle, testar interpretador, preparar apresentação                                                                                                                |
+| Sprint 5| 05/06 a 25/06     | Corrigir erros e débitos técnicos, garantir estabilidade e qualidade para entrega final                                    | Versão revisada e estável, bugs corrigidos, débitos técnicos resolvidos, projeto pronto para entrega      | Revisar/corrigir bugs, refatorar código, atualizar documentação, garantir cobertura de testes, testes finais de integração                                                                                                             |
+| Sprint 6| 26/06 a 09/07     | Entrevistas finais, corrigir pendências, finalizar documentação e encerrar o projeto                                       | Entrevistas finais, documentação completa, ajustes finais                                                | Preparar-se para entrevistas, corrigir falhas apontadas, finalizar documentação e exemplos de uso                                                                                                                                      |
+
+## Débitos Técnicos e Pendências
+
+| Descrição do Débito Técnico ou Pendência | Sprint em que surgiu | Status (Aberto/Resolvido) |
+|------------------------------------------|----------------------|---------------------------|
+| Melhorar mensagens de erro    | Sprint 3     | Aberto                    | 
+| Adicionar testes para o analisador sintático| Sprint 3|Aberto                    |
+| Adicionar testes para AST     | Sprint 3             | Aberto                    |
+| Interpretar interpretação da AST| Sprint 4             | Aberto                    |
 
 
 ## Histórico de Versão
 
 | Versão | Data          | Descrição                          | Autor(es)     |
 | ------ | ------------- | ---------------------------------- | ------------- |
-| `0.1`  |  27/04/2025 |  Documentação de cronograma | Breno Yuri |
-| `0.2`  |  28/04/2025 |  Correções | Breno Yuri |
+| `1.0`  |  27/04/2025 |  Documentação de cronograma | Breno Yuri |
+| `1.1`  |  28/04/2025 |  Correções | Breno Yuri |
+| `1.1`  |  26/05/2025 |  Organização do cronograma em formato de tabela e adição da tabela de débitos técnicos | Arthur Evangelista |
+
