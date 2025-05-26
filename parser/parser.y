@@ -1,38 +1,11 @@
 %{
+#include "ast.h"
+#include "symbol_table.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "types.h"
-
-// Tabela de símbolos
-typedef struct Symbol {
-    char* name;
-    Expression expr;
-    struct Symbol* next;
-} Symbol;
-
-Symbol* symbol_table = NULL;
-
-Symbol* find_symbol(char* name) {
-    Symbol* s = symbol_table;
-    while(s) {
-        if(strcmp(s->name, name) == 0) return s;
-        s = s->next;
-    }
-    return NULL;
-}
-
-void add_symbol(char* name, Expression expr) {
-    Symbol* s = (Symbol*)malloc(sizeof(Symbol));
-    s->name = strdup(name);
-    s->expr = expr;
-    s->next = symbol_table;
-    symbol_table = s;
-}
-
-void yyerror(const char* msg);
-int yylex(void);
 %}
 
 %union {
