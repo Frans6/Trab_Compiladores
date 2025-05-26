@@ -1,0 +1,55 @@
+# Teste básico para parser
+
+x = 42;
+y = 3.14;
+name = "Arthur";
+resultado = x + y * 10 / (5 - 2);
+
+print("fora");
+print("dentro 1");
+print("dentro 2");
+print("fora de novo");
+
+if x > y {
+    print("x é maior");
+} else {
+    print("y é maior ou igual");
+}
+
+input("Digite algo: ");
+
+# Operadores adicionais
+z = !x == y % 2;
+
+# Teste de identificadores
+variavel = 42;
+_underline = 10;
+nome123 = "teste";
+
+# Teste de números
+inteiro = 42;
+negativo = -15;
+float_simples = 3.14;
+float_negativo = -0.5;
+float_cientifico = 1.23e-4;
+
+# Teste de strings
+aspas_duplas = "texto";
+aspas_simples = 'outro texto';
+string_vazia = "";
+
+# Operadores aritméticos
+soma = a + b;
+subtracao = x - y;
+multiplicacao = m * n;
+divisao = p / q;
+potencia = 2 ** 3;
+modulo = 10 % 3;
+
+# Operadores de comparação
+igual = x == y;
+diferente = a != b;
+maior = m > n;
+menor = p < q;
+maior_igual = x >= y;
+menor_igual = a <= b;

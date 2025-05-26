@@ -5,6 +5,7 @@
 
 Symbol* symbol_table = NULL;
 
+
 Symbol* find_symbol(char* name) {
     Symbol* s = symbol_table;
     while(s) {

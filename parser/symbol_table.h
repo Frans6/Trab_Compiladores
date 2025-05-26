@@ -3,6 +3,7 @@
 
 #include "types.h"
 
+
 typedef struct Symbol {
     char* name;
     Expression expr;

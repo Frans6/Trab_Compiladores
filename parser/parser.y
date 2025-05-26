@@ -8,6 +8,9 @@
 #include "types.h"
 %}
 
+%debug
+
+
 %union {
     Expression expr;
     char* id;
@@ -45,9 +48,12 @@
 
 %%
 
-program: 
-    | program statement
+program:
+      /* vazio */
+    | program statement NEWLINE
+    | program NEWLINE
     ;
+
 
 statement: 
       PRINT LPAREN expr RPAREN NEWLINE {

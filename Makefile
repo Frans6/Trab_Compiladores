@@ -76,3 +76,16 @@ build/test_lexer: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(TEST_LEXER
 test-lexer: build/test_lexer
 	@echo "Rodando teste do analisador léxico com tests/test1.txt:"
 	./build/test_lexer tests/test1.txt
+
+
+# Teste do analisador sintático
+TEST_PARSER_SRC = tests/test_parser.c
+TEST_PARSER_EXE = build/test_parser
+TEST_PARSER_INPUT = tests/test2.txt
+
+build/test_parser: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(TEST_PARSER_SRC)
+	$(CC) $(CFLAGS) $(TEST_PARSER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) -o $(TEST_PARSER_EXE)
+
+test-parser: build/test_parser
+	@echo "Rodando teste do analisador sintático com $(TEST_PARSER_INPUT):"
+	./build/test_parser $(TEST_PARSER_INPUT)
