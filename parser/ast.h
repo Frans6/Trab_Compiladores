@@ -46,4 +46,22 @@ ASTNode* create_if_node(ASTNode* cond, ASTNode* then_branch, ASTNode* else_branc
 ASTNode* create_seq_node(ASTNode* first, ASTNode* second);
 void free_ast(ASTNode* node);
 void print_ast(ASTNode* node, int level);
+
+typedef enum { VAL_INT, VAL_FLOAT, VAL_BOOL, VAL_STRING } ValueType;
+
+typedef struct Value {
+    ValueType type;
+    union {
+        int    i;
+        double f;
+        bool   b;
+        char*  s;
+    } data;
+} Value;
+
+// protótipos para o interpretador
+void    exec_ast(ASTNode* root);
+Value   eval_node(ASTNode* node);
+
+
 #endif
