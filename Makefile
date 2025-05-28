@@ -89,3 +89,6 @@ build/test_parser: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(TEST_PARS
 test-parser: build/test_parser
 	@echo "Rodando teste do analisador sintático com $(TEST_PARSER_INPUT):"
 	./build/test_parser $(TEST_PARSER_INPUT)
+
+ast_exec.o: ast_exec.c ast.h
+    $(CC) $(CFLAGS) -c ast_exec.c
