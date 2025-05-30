@@ -1,0 +1,9 @@
+#test para ast
+x = 10 + 20;
+print(x);
+
+if (x > 15) {
+    print("x é maior que 15");
+} else {
+    print("x é menor ou igual a 15");
+}
