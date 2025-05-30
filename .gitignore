@@ -10,3 +10,5 @@ build/
 lexer.c
 parser.c
 venv/
+
+lex.yy.c
