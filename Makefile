@@ -8,8 +8,9 @@ CFLAGS = -I. -Iparser
 LEXER_SRC = lexer/lexer.l
 PARSER_SRC = parser/parser.y
 MAIN_SRC = main.c
-SYMBOL_TABLE_SRC = parser/symbol_table.c      # ADICIONADO
-AST_SRC = parser/ast.c                       # ADICIONADO
+SYMBOL_TABLE_SRC = parser/symbol_table.c
+AST_SRC = parser/ast.c
+AST_EXEC_SRC = parser/ast_exec.c
 
 # Arquivos gerados
 LEXER_C = build/lexer.c
@@ -20,8 +21,9 @@ PARSER_H = parser/parser.tab.h
 LEXER_O = build/lexer.o
 PARSER_O = build/parser.o
 MAIN_O = build/main.o
-SYMBOL_TABLE_O = build/symbol_table.o         # ADICIONADO
-AST_O = build/ast.o                           # ADICIONADO
+SYMBOL_TABLE_O = build/symbol_table.o
+AST_O = build/ast.o
+AST_EXEC_O = build/ast_exec.o
 
 # Executável
 TARGET = build/main
@@ -52,13 +54,17 @@ $(SYMBOL_TABLE_O): $(SYMBOL_TABLE_SRC)
 $(AST_O): $(AST_SRC)
 	$(CC) $(CFLAGS) -c $(AST_SRC) -o $(AST_O)
 
+# Compila ast_exec
+$(AST_EXEC_O): $(AST_EXEC_SRC) parser/ast.h
+	$(CC) $(CFLAGS) -c $(AST_EXEC_SRC) -o $(AST_EXEC_O)
+
 # Compila main
 $(MAIN_O): $(MAIN_SRC)
 	$(CC) $(CFLAGS) -c $(MAIN_SRC) -o $(MAIN_O)
 
-# Linka tudo
-$(TARGET): $(LEXER_O) $(PARSER_O) $(MAIN_O) $(SYMBOL_TABLE_O) $(AST_O)
-	$(CC) $(LEXER_O) $(PARSER_O) $(MAIN_O) $(SYMBOL_TABLE_O) $(AST_O) -o $(TARGET)
+# Linka tudo (única regra para o executável)
+$(TARGET): $(LEXER_O) $(PARSER_O) $(MAIN_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O)
+	$(CC) $(LEXER_O) $(PARSER_O) $(MAIN_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) -o $(TARGET)
 
 clean:
 	rm -f build/* parser/parser.tab.*
@@ -70,25 +76,21 @@ run: all
 TEST_LEXER_SRC = tests/test_lexer.c
 TEST_LEXER_EXE = build/test_lexer
 
-build/test_lexer: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(TEST_LEXER_SRC)
-	$(CC) $(CFLAGS) $(TEST_LEXER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) -o $(TEST_LEXER_EXE)
+build/test_lexer: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) $(TEST_LEXER_SRC)
+	$(CC) $(CFLAGS) $(TEST_LEXER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) -o $(TEST_LEXER_EXE)
 
 test-lexer: build/test_lexer
 	@echo "Rodando teste do analisador léxico com tests/test1.txt:"
 	./build/test_lexer tests/test1.txt
-
 
 # Teste do analisador sintático
 TEST_PARSER_SRC = tests/test_parser.c
 TEST_PARSER_EXE = build/test_parser
 TEST_PARSER_INPUT = tests/test2.txt
 
-build/test_parser: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(TEST_PARSER_SRC)
-	$(CC) $(CFLAGS) $(TEST_PARSER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) -o $(TEST_PARSER_EXE)
+build/test_parser: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) $(TEST_PARSER_SRC)
+	$(CC) $(CFLAGS) $(TEST_PARSER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) -o $(TEST_PARSER_EXE)
 
 test-parser: build/test_parser
 	@echo "Rodando teste do analisador sintático com $(TEST_PARSER_INPUT):"
 	./build/test_parser $(TEST_PARSER_INPUT)
-
-ast_exec.o: ast_exec.c ast.h
-    $(CC) $(CFLAGS) -c ast_exec.c
