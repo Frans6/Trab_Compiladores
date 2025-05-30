@@ -2,31 +2,41 @@ CC = gcc
 FLEX = flex
 BISON = bison
 
-CFLAGS = -I. -Iparser
+CFLAGS = -I. -Iparser -Wall -Wextra -g
+
+# Diretórios
+BUILD_DIR = build
+TESTS_DIR = tests
+PARSER_DIR = parser
+LEXER_DIR = lexer
 
 # Arquivos
-LEXER_SRC = lexer/lexer.l
-PARSER_SRC = parser/parser.y
+LEXER_SRC = $(LEXER_DIR)/lexer.l
+PARSER_SRC = $(PARSER_DIR)/parser.y
 MAIN_SRC = main.c
-SYMBOL_TABLE_SRC = parser/symbol_table.c
-AST_SRC = parser/ast.c
-AST_EXEC_SRC = parser/ast_exec.c
+TABELA_SRC = $(PARSER_DIR)/tabela.c  # Nome atualizado
+AST_SRC = $(PARSER_DIR)/ast.c
+AST_EXEC_SRC = $(PARSER_DIR)/ast_exec.c
 
 # Arquivos gerados
-LEXER_C = build/lexer.c
-PARSER_C = parser/parser.tab.c
-PARSER_H = parser/parser.tab.h
+LEXER_C = $(BUILD_DIR)/lexer.c
+PARSER_C = $(PARSER_DIR)/parser.tab.c
+PARSER_H = $(PARSER_DIR)/parser.tab.h
 
 # Objetos
-LEXER_O = build/lexer.o
-PARSER_O = build/parser.o
-MAIN_O = build/main.o
-SYMBOL_TABLE_O = build/symbol_table.o
-AST_O = build/ast.o
-AST_EXEC_O = build/ast_exec.o
+LEXER_O = $(BUILD_DIR)/lexer.o
+PARSER_O = $(BUILD_DIR)/parser.o
+MAIN_O = $(BUILD_DIR)/main.o
+TABELA_O = $(BUILD_DIR)/tabela.o  # Nome atualizado
+AST_O = $(BUILD_DIR)/ast.o
+AST_EXEC_O = $(BUILD_DIR)/ast_exec.o
 
-# Executável
-TARGET = build/main
+# Executáveis
+TARGET = $(BUILD_DIR)/main
+TEST_TABELA = $(BUILD_DIR)/test_tabela
+
+# Criar diretório de build se não existir
+$(shell mkdir -p $(BUILD_DIR))
 
 all: $(TARGET)
 
@@ -46,51 +56,55 @@ $(LEXER_O): $(LEXER_C)
 $(PARSER_O): $(PARSER_C)
 	$(CC) $(CFLAGS) -c $(PARSER_C) -o $(PARSER_O)
 
-# Compila symbol_table
-$(SYMBOL_TABLE_O): $(SYMBOL_TABLE_SRC)
-	$(CC) $(CFLAGS) -c $(SYMBOL_TABLE_SRC) -o $(SYMBOL_TABLE_O)
+# Compila tabela (nome atualizado)
+$(TABELA_O): $(TABELA_SRC) $(PARSER_DIR)/tabela.h
+	$(CC) $(CFLAGS) -c $(TABELA_SRC) -o $(TABELA_O)
 
 # Compila ast
-$(AST_O): $(AST_SRC)
+$(AST_O): $(AST_SRC) $(PARSER_DIR)/ast.h
 	$(CC) $(CFLAGS) -c $(AST_SRC) -o $(AST_O)
 
 # Compila ast_exec
-$(AST_EXEC_O): $(AST_EXEC_SRC) parser/ast.h
+$(AST_EXEC_O): $(AST_EXEC_SRC) $(PARSER_DIR)/ast.h
 	$(CC) $(CFLAGS) -c $(AST_EXEC_SRC) -o $(AST_EXEC_O)
 
 # Compila main
 $(MAIN_O): $(MAIN_SRC)
 	$(CC) $(CFLAGS) -c $(MAIN_SRC) -o $(MAIN_O)
 
-# Linka tudo (única regra para o executável)
-$(TARGET): $(LEXER_O) $(PARSER_O) $(MAIN_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O)
-	$(CC) $(LEXER_O) $(PARSER_O) $(MAIN_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) -o $(TARGET)
+# Linka o interpretador principal
+$(TARGET): $(LEXER_O) $(PARSER_O) $(MAIN_O) $(TABELA_O) $(AST_O) $(AST_EXEC_O)  # Atualizado
+	$(CC) $^ -o $@
+
+# Teste da tabela de símbolos
+TEST_TABELA_SRC = $(TESTS_DIR)/test_tabela.c
+
+$(TEST_TABELA): $(TEST_TABELA_SRC) $(TABELA_O)  # Atualizado
+	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
-	rm -f build/* parser/parser.tab.*
+	rm -rf $(BUILD_DIR)/* $(PARSER_DIR)/parser.tab.*
 
-run: all
+run: $(TARGET)
 	./$(TARGET)
 
-# Teste do analisador léxico
-TEST_LEXER_SRC = tests/test_lexer.c
-TEST_LEXER_EXE = build/test_lexer
+# Testes
+test-tabela: $(TEST_TABELA)
+	./$(TEST_TABELA)
 
-build/test_lexer: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) $(TEST_LEXER_SRC)
-	$(CC) $(CFLAGS) $(TEST_LEXER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) -o $(TEST_LEXER_EXE)
+test-lexer: $(BUILD_DIR)/test_lexer
+	@echo "Rodando teste do analisador léxico com $(TESTS_DIR)/test1.txt:"
+	./$< $(TESTS_DIR)/test1.txt
 
-test-lexer: build/test_lexer
-	@echo "Rodando teste do analisador léxico com tests/test1.txt:"
-	./build/test_lexer tests/test1.txt
+test-parser: $(BUILD_DIR)/test_parser
+	@echo "Rodando teste do analisador sintático com $(TESTS_DIR)/test2.txt:"
+	./$< $(TESTS_DIR)/test2.txt
 
-# Teste do analisador sintático
-TEST_PARSER_SRC = tests/test_parser.c
-TEST_PARSER_EXE = build/test_parser
-TEST_PARSER_INPUT = tests/test2.txt
+# Build e run para testes específicos
+$(BUILD_DIR)/test_lexer: $(TESTS_DIR)/test_lexer.c $(LEXER_O) $(PARSER_O) $(TABELA_O) $(AST_O) $(AST_EXEC_O)  # Atualizado
+	$(CC) $(CFLAGS) $^ -o $@
 
-build/test_parser: $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) $(TEST_PARSER_SRC)
-	$(CC) $(CFLAGS) $(TEST_PARSER_SRC) $(LEXER_O) $(PARSER_O) $(SYMBOL_TABLE_O) $(AST_O) $(AST_EXEC_O) -o $(TEST_PARSER_EXE)
+$(BUILD_DIR)/test_parser: $(TESTS_DIR)/test_parser.c $(LEXER_O) $(PARSER_O) $(TABELA_O) $(AST_O) $(AST_EXEC_O)  # Atualizado
+	$(CC) $(CFLAGS) $^ -o $@
 
-test-parser: build/test_parser
-	@echo "Rodando teste do analisador sintático com $(TEST_PARSER_INPUT):"
-	./build/test_parser $(TEST_PARSER_INPUT)
+.PHONY: all clean run test-tabela test-lexer test-parser
