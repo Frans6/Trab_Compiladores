@@ -1,67 +1,121 @@
 #ifndef AST_H
 #define AST_H
 
-#include <stdbool.h>
+#include "tabela.h"
 
 typedef enum {
-    AST_INT,
-    AST_FLOAT,
-    AST_STRING,
-    AST_BOOL,
-    AST_VAR,
-    AST_BINOP,
-    AST_ASSIGN,
-    AST_PRINT,
-    AST_SEQ,
-    AST_IF
-} ASTNodeType;
+    NODO_OPERACAO,
+    NODO_VALOR,
+    NODO_IDENTIFICADOR,
+    NODO_ATRIBUICAO,
+    NODO_CHAMADA_FUNCAO,
+    NODO_CONDICIONAL,
+    NODO_LOOP,
+    NODO_BLOCO
+} TipoNo;
 
-typedef struct ASTNode {
-    ASTNodeType type;
+typedef enum {
+    // Operadores aritméticos
+    ADICAO,
+    SUBTRACAO,
+    MULTIPLICACAO,
+    DIVISAO,
+    MODULO,
+    POTENCIA,
+    
+    // Operadores de comparação
+    IGUAL,
+    DIFERENTE,
+    MENOR,
+    MENOR_IGUAL,
+    MAIOR,
+    MAIOR_IGUAL,
+    
+    // Operadores lógicos
+    E_LOGICO,
+    OU_LOGICO,
+    NAO_LOGICO
+} TipoOperador;
+
+typedef struct NoAst NoAst;
+
+typedef struct {
+    NoAst** declaracoes;
+    int quantidade;
+} BlocoDeclaracoes;
+
+struct NoAst {
+    TipoNo tipo;
+    int linha;
+    
     union {
-        int int_val;
-        double float_val;
-        char* str_val;
-        bool bool_val;
-        char* var_name;
-        struct { struct ASTNode* left; struct ASTNode* right; char op; } binop;
-        struct { char* var; struct ASTNode* expr; } assign;
-        struct { struct ASTNode* expr; } print;
-        struct { struct ASTNode* cond; struct ASTNode* then_branch; struct ASTNode* else_branch; } if_stmt;
-        struct { struct ASTNode* first; struct ASTNode* second; } seq;
-    } data;
-    struct ASTNode* next;
-} ASTNode;
+        // Operações binárias (a + b, a % b, etc)
+        struct {
+            TipoOperador operador;
+            NoAst* esquerda;
+            NoAst* direita;
+        } operacao;
+        
+        // Valores (inteiro, float, string, bool)
+        struct {
+            TipoDado tipo;
+            union {
+                int int_val;
+                double float_val;
+                char* string_val;
+                bool bool_val;
+            } valor;
+        } literal;
+        
+        // Identificador (variável)
+        char* identificador;
+        
+        // Atribuição (x = 10)
+        struct {
+            char* nome;
+            NoAst* valor;
+        } atribuicao;
+        
+        // Chamada de função (print("oi"))
+        struct {
+            char* nome_funcao;
+            NoAst** argumentos;
+            int num_argumentos;
+        } chamada_funcao;
+        
+        // Condicional (if/else)
+        struct {
+            NoAst* condicao;
+            BlocoDeclaracoes* bloco_if;
+            BlocoDeclaracoes* bloco_else;
+        } condicional;
+        
+        // Loop (while/for)
+        struct {
+            NoAst* condicao;
+            BlocoDeclaracoes* bloco;
+        } loop;
+        
+        // Bloco de declarações ({ ... })
+        BlocoDeclaracoes* bloco;
+    } dados;
+};
 
-// Funções para criar nós (exemplo)
-ASTNode* create_int_node(int value);
-ASTNode* create_float_node(double value);
-ASTNode* create_string_node(char* value);
-ASTNode* create_bool_node(bool value);
-ASTNode* create_var_node(char* name);
-ASTNode* create_binop_node(char op, ASTNode* left, ASTNode* right);
-ASTNode* create_assign_node(char* var, ASTNode* expr);
-ASTNode* create_print_node(ASTNode* expr);
-ASTNode* create_if_node(ASTNode* cond, ASTNode* then_branch, ASTNode* else_branch);
-ASTNode* create_seq_node(ASTNode* first, ASTNode* second);
-void free_ast(ASTNode* node);
-void print_ast(ASTNode* node, int level);
+// Métodos para criação de nós
+NoAst* criar_no_operacao(TipoOperador op, NoAst* esq, NoAst* dir, int linha);
+NoAst* criar_no_valor_int(int valor, int linha);
+NoAst* criar_no_valor_float(double valor, int linha);
+NoAst* criar_no_valor_string(const char* valor, int linha);
+NoAst* criar_no_valor_bool(bool valor, int linha);
+NoAst* criar_no_identificador(const char* id, int linha);
+NoAst* criar_no_atribuicao(const char* nome, NoAst* valor, int linha);
+NoAst* criar_no_chamada_funcao(const char* nome, NoAst** args, int num_args, int linha);
+NoAst* criar_no_condicional(NoAst* condicao, BlocoDeclaracoes* bloco_if, BlocoDeclaracoes* bloco_else, int linha);
+NoAst* criar_no_loop(NoAst* condicao, BlocoDeclaracoes* bloco, int linha);
+BlocoDeclaracoes* criar_bloco_declaracoes(NoAst** declaracoes, int quantidade);
+NoAst* criar_no_bloco(BlocoDeclaracoes* bloco, int linha);
 
-typedef enum { VAL_INT, VAL_FLOAT, VAL_BOOL, VAL_STRING } ValueType;
-
-typedef struct Value {
-    ValueType type;
-    union {
-        int    i;
-        double f;
-        bool   b;
-        char*  s;
-    } data;
-} Value;
-
-// protótipos para o interpretador
-void    exec_ast(ASTNode* root);
-Value   eval_node(ASTNode* node);
-
+// Método para destruir a AST
+void destruir_ast(NoAst* no);
 
 #endif

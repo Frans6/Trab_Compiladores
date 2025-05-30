@@ -1,5 +1,4 @@
 # Teste básico para parser
-
 x = 42;
 y = 3.14;
 name = "Leticia";

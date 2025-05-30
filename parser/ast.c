@@ -1,175 +1,181 @@
+#include "ast.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "ast.h"
 
-ASTNode* raiz_ast = NULL;
-
-ASTNode* create_int_node(int value) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_INT;
-    node->data.int_val = value;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_operacao(TipoOperador op, NoAst* esq, NoAst* dir, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_OPERACAO;
+    no->linha = linha;
+    no->dados.operacao.operador = op;
+    no->dados.operacao.esquerda = esq;
+    no->dados.operacao.direita = dir;
+    return no;
 }
 
-ASTNode* create_float_node(double value) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_FLOAT;
-    node->data.float_val = value;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_valor_int(int valor, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_VALOR;
+    no->linha = linha;
+    no->dados.literal.tipo = TIPO_INT;
+    no->dados.literal.valor.int_val = valor;
+    return no;
 }
 
-ASTNode* create_string_node(char* value) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_STRING;
-    node->data.str_val = strdup(value);
-    node->next = NULL;
-    return node;
+NoAst* criar_no_valor_float(double valor, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_VALOR;
+    no->linha = linha;
+    no->dados.literal.tipo = TIPO_FLOAT;
+    no->dados.literal.valor.float_val = valor;
+    return no;
 }
 
-ASTNode* create_bool_node(bool value) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_BOOL;
-    node->data.bool_val = value;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_valor_string(const char* valor, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_VALOR;
+    no->linha = linha;
+    no->dados.literal.tipo = TIPO_STRING;
+    no->dados.literal.valor.string_val = strdup(valor);
+    return no;
 }
 
-ASTNode* create_var_node(char* name) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_VAR;
-    node->data.var_name = strdup(name);
-    node->next = NULL;
-    return node;
+NoAst* criar_no_valor_bool(bool valor, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_VALOR;
+    no->linha = linha;
+    no->dados.literal.tipo = TIPO_BOOL;
+    no->dados.literal.valor.bool_val = valor;
+    return no;
 }
 
-ASTNode* create_binop_node(char op, ASTNode* left, ASTNode* right) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_BINOP;
-    node->data.binop.left = left;
-    node->data.binop.right = right;
-    node->data.binop.op = op;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_identificador(const char* id, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_IDENTIFICADOR;
+    no->linha = linha;
+    no->dados.identificador = strdup(id);
+    return no;
 }
 
-ASTNode* create_assign_node(char* var, ASTNode* expr) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_ASSIGN;
-    node->data.assign.var = strdup(var);
-    node->data.assign.expr = expr;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_atribuicao(const char* nome, NoAst* valor, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_ATRIBUICAO;
+    no->linha = linha;
+    no->dados.atribuicao.nome = strdup(nome);
+    no->dados.atribuicao.valor = valor;
+    return no;
 }
 
-ASTNode* create_print_node(ASTNode* expr) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_PRINT;
-    node->data.print.expr = expr;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_chamada_funcao(const char* nome, NoAst** args, int num_args, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_CHAMADA_FUNCAO;
+    no->linha = linha;
+    no->dados.chamada_funcao.nome_funcao = strdup(nome);
+    no->dados.chamada_funcao.argumentos = args;
+    no->dados.chamada_funcao.num_argumentos = num_args;
+    return no;
 }
 
-ASTNode* create_if_node(ASTNode* cond, ASTNode* then_branch, ASTNode* else_branch) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_IF;
-    node->data.if_stmt.cond = cond;
-    node->data.if_stmt.then_branch = then_branch;
-    node->data.if_stmt.else_branch = else_branch;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_condicional(NoAst* condicao, BlocoDeclaracoes* bloco_if, BlocoDeclaracoes* bloco_else, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_CONDICIONAL;
+    no->linha = linha;
+    no->dados.condicional.condicao = condicao;
+    no->dados.condicional.bloco_if = bloco_if;
+    no->dados.condicional.bloco_else = bloco_else;
+    return no;
 }
 
-ASTNode* create_seq_node(ASTNode* first, ASTNode* second) {
-    ASTNode* node = (ASTNode*)malloc(sizeof(ASTNode));
-    node->type = AST_SEQ;
-    node->data.seq.first = first;
-    node->data.seq.second = second;
-    node->next = NULL;
-    return node;
+NoAst* criar_no_loop(NoAst* condicao, BlocoDeclaracoes* bloco, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_LOOP;
+    no->linha = linha;
+    no->dados.loop.condicao = condicao;
+    no->dados.loop.bloco = bloco;
+    return no;
 }
 
-void print_ast(ASTNode* node, int level) {
-    if (!node) return;
-    for (int i = 0; i < level; i++) printf("  ");
-    switch (node->type) {
-        case AST_INT:
-            printf("INT: %d\n", node->data.int_val);
+BlocoDeclaracoes* criar_bloco_declaracoes(NoAst** declaracoes, int quantidade) {
+    BlocoDeclaracoes* bloco = malloc(sizeof(BlocoDeclaracoes));
+    bloco->declaracoes = declaracoes;
+    bloco->quantidade = quantidade;
+    return bloco;
+}
+
+NoAst* criar_no_bloco(BlocoDeclaracoes* bloco, int linha) {
+    NoAst* no = malloc(sizeof(NoAst));
+    no->tipo = NODO_BLOCO;
+    no->linha = linha;
+    no->dados.bloco = bloco;
+    return no;
+}
+
+void destruir_ast(NoAst* no) {
+    if (no == NULL) return;
+    
+    switch (no->tipo) {
+        case NODO_OPERACAO:
+            destruir_ast(no->dados.operacao.esquerda);
+            destruir_ast(no->dados.operacao.direita);
             break;
-        case AST_FLOAT:
-            printf("FLOAT: %f\n", node->data.float_val);
+            
+        case NODO_VALOR:
+            if (no->dados.literal.tipo == TIPO_STRING) {
+                free(no->dados.literal.valor.string_val);
+            }
             break;
-        case AST_STRING:
-            printf("STRING: %s\n", node->data.str_val);
+            
+        case NODO_IDENTIFICADOR:
+            free(no->dados.identificador);
             break;
-        case AST_BOOL:
-            printf("BOOL: %s\n", node->data.bool_val ? "True" : "False");
+            
+        case NODO_ATRIBUICAO:
+            free(no->dados.atribuicao.nome);
+            destruir_ast(no->dados.atribuicao.valor);
             break;
-        case AST_VAR:
-            printf("VAR: %s\n", node->data.var_name);
+            
+        case NODO_CHAMADA_FUNCAO:
+            free(no->dados.chamada_funcao.nome_funcao);
+            for (int i = 0; i < no->dados.chamada_funcao.num_argumentos; i++) {
+                destruir_ast(no->dados.chamada_funcao.argumentos[i]);
+            }
+            free(no->dados.chamada_funcao.argumentos);
             break;
-        case AST_ASSIGN:
-            printf("ASSIGN: %s =\n", node->data.assign.var);
-            print_ast(node->data.assign.expr, level + 1);
+            
+        case NODO_CONDICIONAL:
+            destruir_ast(no->dados.condicional.condicao);
+            for (int i = 0; i < no->dados.condicional.bloco_if->quantidade; i++) {
+                destruir_ast(no->dados.condicional.bloco_if->declaracoes[i]);
+            }
+            free(no->dados.condicional.bloco_if->declaracoes);
+            free(no->dados.condicional.bloco_if);
+            
+            if (no->dados.condicional.bloco_else) {
+                for (int i = 0; i < no->dados.condicional.bloco_else->quantidade; i++) {
+                    destruir_ast(no->dados.condicional.bloco_else->declaracoes[i]);
+                }
+                free(no->dados.condicional.bloco_else->declaracoes);
+                free(no->dados.condicional.bloco_else);
+            }
             break;
-        case AST_PRINT:
-            printf("PRINT:\n");
-            print_ast(node->data.print.expr, level + 1);
+            
+        case NODO_LOOP:
+            destruir_ast(no->dados.loop.condicao);
+            for (int i = 0; i < no->dados.loop.bloco->quantidade; i++) {
+                destruir_ast(no->dados.loop.bloco->declaracoes[i]);
+            }
+            free(no->dados.loop.bloco->declaracoes);
+            free(no->dados.loop.bloco);
             break;
-        case AST_BINOP:
-            printf("BINOP: %c\n", node->data.binop.op);
-            print_ast(node->data.binop.left, level + 1);
-            print_ast(node->data.binop.right, level + 1);
+            
+        case NODO_BLOCO:
+            for (int i = 0; i < no->dados.bloco->quantidade; i++) {
+                destruir_ast(no->dados.bloco->declaracoes[i]);
+            }
+            free(no->dados.bloco->declaracoes);
+            free(no->dados.bloco);
             break;
-        case AST_SEQ:
-            printf("SEQ:\n");
-            print_ast(node->data.seq.first, level + 1);
-            print_ast(node->data.seq.second, level + 1);
-            break;
-        case AST_IF:
-            printf("IF:\n");
-            print_ast(node->data.if_stmt.cond, level + 1);
-            print_ast(node->data.if_stmt.then_branch, level + 1);
-            print_ast(node->data.if_stmt.else_branch, level + 1);
-            break;
-        default:
-            printf("UNKNOWN NODE\n");
     }
-}
-
-void free_ast(ASTNode* node) {
-    if (!node) return;
-    switch (node->type) {
-        case AST_STRING:
-            free(node->data.str_val);
-            break;
-        case AST_VAR:
-            free(node->data.var_name);
-            break;
-        case AST_BINOP:
-            free_ast(node->data.binop.left);
-            free_ast(node->data.binop.right);
-            break;
-        case AST_ASSIGN:
-            free(node->data.assign.var);
-            free_ast(node->data.assign.expr);
-            break;
-        case AST_PRINT:
-            free_ast(node->data.print.expr);
-            break;
-        case AST_IF:
-            free_ast(node->data.if_stmt.cond);
-            free_ast(node->data.if_stmt.then_branch);
-            free_ast(node->data.if_stmt.else_branch);
-            break;
-        case AST_SEQ:
-            free_ast(node->data.seq.first);
-            free_ast(node->data.seq.second);
-            break;
-        default:
-            break;
-    }
-    free(node);
+    
+    free(no);
 }
