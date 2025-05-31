@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <string.h>
 
+//PARA RODAR ESSE TESTE, USE OS COMANDOS NA PASTA TESTS:
+// gcc ../parser/ast.c test_ast.c -o testes_ast
+// ./testes_ast
+
 void teste_criacao_nos_basicos()
 {
     printf("\n=== Teste 1: Criacao de Nos basicos ===\n");
@@ -134,7 +138,7 @@ void teste_chamada_funcao()
 
 void teste_destruicao_ast()
 {
-    printf("\n=== Teste 5: Destruicao Completa ===\n");
+    printf("\n=== Teste 5: Destruio Completa ===\n");
 
     // Cria uma AST complexa
     NoAst *ast_complexa = criar_no_bloco(
