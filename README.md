@@ -7,10 +7,10 @@ Este projeto consiste na implementação de um interpretador de Python, desenvol
 ```
 .
 ├── build/             # Arquivos compilados (gerados pelo Makefile)
-├── docs/              # Documentação (não utilizado ainda)
+├── docs/              # Documentação 
 ├── lexer/             # Analisador léxico (lexer.l)
 ├── parser/            # Analisador sintático (parser.y)
-├── tests/             # Casos de teste (opcional)
+├── tests/             # Casos de teste
 ├── main.c             # Função principal
 └── Makefile           # Script de compilação
 ```
