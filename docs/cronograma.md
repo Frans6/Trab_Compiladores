@@ -15,7 +15,7 @@
 
 | Descrição do Débito Técnico ou Pendência | Sprint em que surgiu | Status (Aberto/Resolvido) |
 |------------------------------------------|----------------------|---------------------------|
-| Melhorar mensagens de erro    | Sprint 3     | Aberto                    | 
+| Melhorar mensagens de erro    | Sprint 3     | Resolvido                   |
 | Adicionar testes para o analisador sintático| Sprint 3|Aberto                    |
 | Adicionar testes para AST     | Sprint 3             | Resolvido                    |
 | Interpretar interpretação da AST| Sprint 4             | Aberto                    |
@@ -29,4 +29,4 @@
 | `1.1`  |  28/04/2025 |  Correções | Breno Yuri |
 | `1.2`  |  26/05/2025 |  Organização do cronograma em formato de tabela e adição da tabela de débitos técnicos. | Arthur Evangelista |
 | `1.21`  |  26/05/2025 | Débito técnico "adicionar testes para AST" resolvido. | Arthur Evangelista |
-
+| `1.3`  |  20/06/2025 | Débito técnico "melhorar mensagens de erro" resolvido. | Ana Beatriz |
