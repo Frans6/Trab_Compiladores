@@ -100,3 +100,43 @@ $(BUILD_DIR)/test_parser: test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_
 test-erros: all
 	@echo "Executando testes automatizados de mensagens de erro..."
 	@./test_erros.sh
+
+# Nova suite de testes do parser
+test-parser-suite: $(BUILD_DIR)/test_parser_suite
+	@echo "--- Executando suite completa de testes do parser ---"
+	./$<
+$(BUILD_DIR)/test_parser_suite: test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+# Teste do parser original (mantido para compatibilidade)
+test-parser: $(BUILD_DIR)/test_parser_original
+	@echo "--- Pré-processando '$(TESTS_DIR)/test2.txt'... ---"
+	@$(PYTHON) indent_preproc.py $(TESTS_DIR)/test2.txt > $(BUILD_DIR)/processed_parser_test.txt
+	@echo "--- Rodando teste do analisador sintático... ---"
+	./$< $(BUILD_DIR)/processed_parser_test.txt
+$(BUILD_DIR)/test_parser_original: test_parser_original.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+# --- Teste de Mensagens de Erro ---
+test-erros: all
+	@echo "Executando testes automatizados de mensagens de erro..."
+	@./test_erros.sh
+
+# --- Testes individuais do parser ---
+test-expressoes: $(BUILD_DIR)/test_parser_suite
+	./$< tests/test_expressoes.py
+
+test-condicionais: $(BUILD_DIR)/test_parser_suite
+	./$< tests/test_condicionais.py
+
+test-loops: $(BUILD_DIR)/test_parser_suite
+	./$< tests/test_loops.py
+
+test-tipos: $(BUILD_DIR)/test_parser_suite
+	./$< tests/test_tipos_dados.py
+
+test-comparacoes: $(BUILD_DIR)/test_parser_suite
+	./$< tests/test_comparacoes.py
+
+test-casos-extremos: $(BUILD_DIR)/test_parser_suite
+	./$< tests/test_casos_extremos.py
