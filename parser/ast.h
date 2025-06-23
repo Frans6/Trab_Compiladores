@@ -68,7 +68,7 @@ struct NoAst
             BlocoDeclaracoes *bloco_else;
         } condicional;
 
-        // Loop (while/for)
+        // Loop (while)
         struct
         {
             NoAst *condicao;

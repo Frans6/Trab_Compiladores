@@ -1,4 +1,3 @@
-/* parser/interpretador.h */
 #ifndef INTERPRETADOR_H
 #define INTERPRETADOR_H
 

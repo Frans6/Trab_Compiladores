@@ -1,4 +1,3 @@
-/* parser/interpretador.c (VERSÃO FINAL E CORRIGIDA) */
 #include "interpretador.h"
 #include "types.h"
 #include "tabela.h"
@@ -8,7 +7,6 @@
 #include <stdbool.h>
 #include <math.h>
 
-// É uma boa prática declarar a função de erro que pode ser chamada
 extern void yyerror(const char* s);
 
 // --- Declarações Antecipadas ---
@@ -76,7 +74,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
         case NODO_OPERACAO: {
             Resultado esq = avaliar_expressao(no->dados.operacao.esquerda, tabela);
             
-            // Operador unário NOT
+            // operador NOT
             if (no->dados.operacao.operador == NAO_LOGICO) {
                 Resultado res = criar_resultado_vazio(); 
                 res.tipo = TIPO_BOOL;
@@ -192,8 +190,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
         }
         
         case NODO_CHAMADA_FUNCAO: {
-            // Para chamadas de função, retornamos um resultado vazio
-            // A interpretação real é feita em interpretar_no
+            // para chamadas de função, retornamos um resultado vazio, o valor é calculado em interpretar_no
             return criar_resultado_vazio();
         }
         
@@ -202,7 +199,6 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
     }
 }
 
-// ESTA É A FUNÇÃO CORRETA PARA EXECUTAR BLOCOS DE CÓDIGO
 static Resultado interpretar_bloco(BlocoDeclaracoes* bloco, TabelaSimbolos* tabela) {
     Resultado res = criar_resultado_vazio();
     if (bloco == NULL) return res;
