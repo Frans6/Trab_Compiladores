@@ -22,17 +22,36 @@ TabelaSimbolos *criar_tabela()
 // Função auxiliar para liberar valor de um símbolo
 static void liberar_valor_simbolo(Simbolo *simbolo)
 {
+    if (!simbolo)
+        return;
+
     if (simbolo->valor != NULL)
     {
-        if (simbolo->tipo == TIPO_STRING)
+        switch (simbolo->tipo)
         {
-            free(*(char **)simbolo->valor);
-            free(simbolo->valor);
-        }
-        else if (simbolo->tipo != TIPO_NULO)
+        case TIPO_STRING:
         {
-            free(simbolo->valor);
+            char **str_ptr = (char **)simbolo->valor;
+            if (*str_ptr != NULL) {
+                free(*str_ptr);
+            }
+            break;
         }
+        case TIPO_INT:
+        case TIPO_FLOAT:
+        case TIPO_BOOL:
+            // Esses tipos não precisam de liberação especial
+            break;
+        case TIPO_NULO:
+            // Nada a fazer
+            break;
+        }
+        free(simbolo->valor);
+    }
+    else if (simbolo->tipo != TIPO_NULO)
+    {
+        // Se não há valor mas o tipo não é nulo, não fazemos nada
+        // para evitar double free
     }
 }
 
@@ -52,14 +71,20 @@ void destruir_tabela(TabelaSimbolos *tabela)
             if (temp->simbolo)
             {
                 liberar_valor_simbolo(temp->simbolo);
-                free(temp->simbolo->nome);
+                if (temp->simbolo->nome) {
+                    free(temp->simbolo->nome);
+                }
                 free(temp->simbolo);
             }
-            free(temp->chave);
+            if (temp->chave) {
+                free(temp->chave);
+            }
             free(temp);
         }
     }
-    free(tabela->entradas);
+    if (tabela->entradas) {
+        free(tabela->entradas);
+    }
     free(tabela);
 }
 
@@ -81,8 +106,8 @@ static void *duplicar_valor(TipoDado tipo, void *valor)
     }
     case TIPO_FLOAT:
     {
-        float *copia = malloc(sizeof(float));
-        *copia = *(float *)valor;
+        double *copia = malloc(sizeof(double));
+        *copia = *(double *)valor;
         return copia;
     }
     case TIPO_BOOL:
@@ -113,19 +138,14 @@ void inserir_simbolo(TabelaSimbolos *tabela, const char *nome, TipoDado tipo, vo
 
     unsigned int slot = funcao_hash(nome);
     EntradaTabela *entrada = tabela->entradas[slot];
-    EntradaTabela *anterior = NULL;
 
     // Verificar se o símbolo já existe
     while (entrada != NULL)
     {
         if (strcmp(entrada->chave, nome) == 0)
         {
-            // Liberar valor antigo se necessário
             liberar_valor_simbolo(entrada->simbolo);
-
-            // Atualizar tipo e valor
             entrada->simbolo->tipo = tipo;
-
             if (tipo == TIPO_NULO)
             {
                 entrada->simbolo->valor = NULL;
@@ -136,11 +156,9 @@ void inserir_simbolo(TabelaSimbolos *tabela, const char *nome, TipoDado tipo, vo
             }
             return;
         }
-        anterior = entrada;
         entrada = entrada->proximo;
     }
 
-    // Criar novo símbolo
     Simbolo *novo_simbolo = malloc(sizeof(Simbolo));
     novo_simbolo->nome = strdup(nome);
     novo_simbolo->tipo = tipo;
@@ -154,7 +172,6 @@ void inserir_simbolo(TabelaSimbolos *tabela, const char *nome, TipoDado tipo, vo
         novo_simbolo->valor = duplicar_valor(tipo, valor);
     }
 
-    // Criar nova entrada
     EntradaTabela *nova_entrada = malloc(sizeof(EntradaTabela));
     nova_entrada->chave = strdup(nome);
     nova_entrada->simbolo = novo_simbolo;
@@ -172,8 +189,9 @@ Simbolo *buscar_simbolo(TabelaSimbolos *tabela, const char *nome)
 
     while (entrada != NULL)
     {
-        if (strcmp(entrada->chave, nome) == 0)
+        if (strcmp(entrada->chave, nome) == 0) {
             return entrada->simbolo;
+        }
         entrada = entrada->proximo;
     }
     return NULL;

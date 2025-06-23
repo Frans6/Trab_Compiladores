@@ -19,7 +19,7 @@ def process_file(filepath):
             continue
 
         if stripped_line.startswith('#'):
-            print(line.rstrip()) # Imprime a linha de comentário sem quebra extra
+            print(line.rstrip()) #imprime a linha de comentário sem quebra extra
             continue
             
         leading_spaces = len(line) - len(stripped_line)

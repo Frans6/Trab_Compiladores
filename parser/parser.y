@@ -1,8 +1,3 @@
-/*
- * ===================================================================
- * parser/parser.y (VERSÃO FINAL E CORRIGIDA)
- * ===================================================================
- */
 %{
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,7 +15,7 @@ void yyerror(const char* s);
 NoAst* raiz_ast = NULL;
 %}
 
-/* ========================== DEFINIÇÕES ========================== */
+/* definicoes*/
 
 /* A %union define todos os tipos possíveis para tokens e regras */
 %union {
@@ -33,14 +28,14 @@ NoAst* raiz_ast = NULL;
     ArgList*            args;
 }
 
-/* Tokens que carregam valor (associados a um campo da union) */
+/* tokens que carregam valor */
 %token <int_val>    INT
 %token <float_val>  FLOAT
 %token <str_val>    STRING
 %token <bool_val>   BOOL
 %token <str_val>    ID
 
-/* Tokens que não carregam valor (palavras-chave e símbolos) */
+/* palavras chaves e simbolos */
 %token PRINT INPUT IF ELSE WHILE BREAK CONTINUE AND OR NOT
 %token NEWLINE INDENT DEDENT COLON COMMA LPAREN RPAREN
 %token POW EQ NEQ GTE LTE GT LT ASSIGN
@@ -52,7 +47,7 @@ NoAst* raiz_ast = NULL;
 %type <args>  arg_lista_opt arg_lista
 %type <str_val> nome_funcao // O nome de uma função é uma string
 
-/* ========================== PRECEDÊNCIA ========================== */
+/* precedencia de operadores*/
 %left  OR AND
 %nonassoc EQ NEQ GT LT GTE LTE
 %left  ADD SUB
@@ -61,7 +56,7 @@ NoAst* raiz_ast = NULL;
 %precedence ELSE
 
 %%
-/* ========================== REGRAS DA GRAMÁTICA ========================== */
+// regras da gramática
 
 programa:
     statement_list NEWLINE

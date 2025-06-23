@@ -1,151 +1,92 @@
+/* tests/test_lexer.c (VERSÃO MELHORADA) */
 #include <stdio.h>
 #include <stdlib.h>
 #include "../parser/types.h"
 #include "../parser/parser.tab.h"
 
 extern int yylex();
-extern char *yytext; // Corrigido para char* (Flex define yytext como ponteiro)
+extern char *yytext;
 extern FILE *yyin;
-extern int line_num;
+extern int yylineno;
+extern YYSTYPE yylval;
 
-const char *token_name(int token)
-{
-    switch (token)
-    {
-    case COLON:
-        return "COLON";
-    case PRINT:
-        return "PRINT";
-    case INPUT:
-        return "INPUT";
-    case IF:
-        return "IF";
-    case ELSE:
-        return "ELSE";
-    case ELIF:
-        return "ELIF";
-    case BOOL:
-        return "BOOL";
-    case FLOAT:
-        return "FLOAT";
-    case INT:
-        return "INT";
-    case STRING:
-        return "STRING";
-    case LPAREN:
-        return "LPAREN";
-    case RPAREN:
-        return "RPAREN";
-    case ADD:
-        return "ADD";
-    case SUB:
-        return "SUB";
-    case MUL:
-        return "MUL";
-    case DIV:
-        return "DIV";
-    case POW:
-        return "POW";
-    case MOD:
-        return "MOD";
-    case ASSIGN:
-        return "ASSIGN";
-    case NOT:
-        return "NOT";
-    case EQ:
-        return "EQ";
-    case NEQ:
-        return "NEQ";
-    case GT:
-        return "GT";
-    case LT:
-        return "LT";
-    case GTE:
-        return "GTE";
-    case LTE:
-        return "LTE";
-    case ID:
-        return "ID";
-    case NEWLINE:
-        return "NEWLINE";
-    case DEF:
-        return "DEF";
-    case RETURN:
-        return "RETURN";
-    case CLASS:
-        return "CLASS";
-    case WHILE:
-        return "WHILE";
-    case FOR:
-        return "FOR";
-    case BREAK:
-        return "BREAK";
-    case CONTINUE:
-        return "CONTINUE";
-    case NONE:
-        return "NONE";
-    case AND:
-        return "AND";
-    case OR:
-        return "OR";
-    case LBRACKET:
-        return "LBRACKET";
-    case RBRACKET:
-        return "RBRACKET";
-    case LBRACE:
-        return "LBRACE";
-    case RBRACE:
-        return "RBRACE";
-    case COMMA:
-        return "COMMA";
-    case SEMICOLON:
-        return "SEMICOLON";
-    case DOT:
-        return "DOT";
-    case AT:
-        return "AT";
-    default:
-        return "UNKNOWN";
+const char *get_token_name(int token) {
+    switch (token) {
+        case PRINT: return "PRINT";
+        case IF: return "IF";
+        case ELSE: return "ELSE";
+        case WHILE: return "WHILE";
+        case BREAK: return "BREAK";
+        case CONTINUE: return "CONTINUE";
+        case AND: return "AND";
+        case OR: return "OR";
+        case NOT: return "NOT";
+        case ID: return "ID";
+        case INT: return "INT";
+        case FLOAT: return "FLOAT";
+        case STRING: return "STRING";
+        case BOOL: return "BOOL";
+        case ADD: return "ADD";
+        case SUB: return "SUB";
+        case MUL: return "MUL";
+        case DIV: return "DIV";
+        case POW: return "POW"; // Adicionado
+        case MOD: return "MOD"; // Adicionado
+        case ASSIGN: return "ASSIGN";
+        case EQ: return "EQ";
+        case NEQ: return "NEQ";
+        case GT: return "GT";
+        case LT: return "LT";
+        case GTE: return "GTE";
+        case LTE: return "LTE";
+        case LPAREN: return "LPAREN";
+        case RPAREN: return "RPAREN";
+        case COLON: return "COLON";
+        case COMMA: return "COMMA";
+        case INDENT: return "INDENT";
+        case DEDENT: return "DEDENT";
+        case NEWLINE: return "NEWLINE";
+        case INPUT: return "INPUT"; // Adicionado
+        default: return "TOKEN_DESCONHECIDO";
     }
 }
 
-int main(int argc, char **argv)
-{
-    if (argc < 2)
-    {
-        printf("Uso: %s <arquivo_de_teste>\n", argv[0]);
+int main(int argc, char **argv) {
+    if (argc < 2) {
+        fprintf(stderr, "Uso: %s <arquivo_de_teste>\n", argv[0]);
         return 1;
     }
-
     yyin = fopen(argv[1], "r");
-    if (!yyin)
-    {
+    if (!yyin) {
         perror("Erro ao abrir o arquivo");
         return 1;
     }
 
     int token;
-    int current_line = 1;
-    printf("Linha %d:\n", current_line);
+    printf("--- Iniciando Analise Lexica de '%s' ---\n\n", argv[1]);
 
-    while ((token = yylex()))
-    {
-        if (line_num > current_line)
-        {
-            current_line = line_num;
-            printf("\nLinha %d:\n", current_line);
+    while ((token = yylex())) {
+
+        printf("Linha %-3d | Token: %-15s | ", yylineno, get_token_name(token));
+
+        // Para INDENT/DEDENT, não imprimimos o yytext
+        if (token == INDENT || token == DEDENT || token == NEWLINE) {
+            printf("[Controle de Bloco/Linha]");
+        } else {
+            printf("Texto: '%s'", yytext);
         }
 
-        const char *name = token_name(token);
-        if (!name)
-        {
-            fprintf(stderr, "Erro: Token desconhecido (código: %d) na linha %d\n", token, line_num);
-            continue;
+        // Imprime o valor associado ao token, se houver
+        switch (token) {
+            case INT: printf(" (Valor: %d)", yylval.int_val); break;
+            case FLOAT: printf(" (Valor: %f)", yylval.float_val); break;
+            case ID: case STRING: printf(" (Valor: \"%s\")", yylval.str_val); break;
+            case BOOL: printf(" (Valor: %s)", yylval.bool_val ? "true" : "false"); break;
         }
-
-        printf("%s = (%s) ", name, yytext ? yytext : "NULL");
+        printf("\n");
     }
 
+    printf("\n--- Fim da Analise Lexica ---\n");
     fclose(yyin);
     return 0;
 }

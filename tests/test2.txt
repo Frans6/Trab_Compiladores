@@ -1,54 +1,60 @@
-# Teste básico para parser
-x = 42;
-y = 3.14;
-name = "Leticia";
-resultado = x + y * 10 / (5 - 2);
+# Teste corrigido para a sintaxe do nosso interpretador
 
-print("fora");
-print("dentro 1");
-print("dentro 2");
-print("fora de novo");
+x = 42
+y = 3.14
+name = "Leticia"
+resultado = x + y * 10 / (5 - 2)
 
-if x > y {
-    print("x é maior");
-} else {
-    print("y é maior ou igual");
-}
+print("fora")
+# Blocos if/else usam ':' e indentação
+if x > 10:
+    print("dentro 1")
+    print("dentro 2")
+else:
+    print("nao deveria entrar aqui")
+print("fora de novo")
 
-input("Digite algo: ");
+# Estrutura if/else completa
+if y > x:
+    print("y eh maior")
+else:
+    print("x eh maior ou igual")
 
-# Operadores adicionais
-z = !x == y % 2;
+# A função input() que definimos não usa o valor, apenas o chama.
+input("Digite algo: ")
+
+# Operadores adicionais (Python usa 'not' em vez de '!')
+z = not x == y % 2
 
 # Teste de identificadores
-variavel = 42;
-_underline = 10;
-nome123 = "teste";
+variavel = 42
+_underline = 10
+nome123 = "teste"
 
 # Teste de números
-inteiro = 42;
-negativo = -15;
-float_simples = 3.14;
-float_negativo = -0.5;
-float_cientifico = 1.23e-4;
+inteiro = 42
+negativo = -15
+float_simples = 3.14
+float_negativo = -0.5
+float_cientifico = 1.23e-4
 
 # Teste de strings
-aspas_duplas = "texto";
-aspas_simples = 'outro texto';
-string_vazia = "";
+aspas_duplas = "texto"
+aspas_simples = 'outro texto'
+string_vazia = ""
 
 # Operadores aritméticos
-soma = a + b;
-subtracao = x - y;
-multiplicacao = m * n;
-divisao = p / q;
-potencia = 2 ** 3;
-modulo = 10 % 3;
+# soma = a + b # 'a' e 'b' não foram definidos, causaria erro no interpretador
+subtracao = x - y
+multiplicacao = 2 * 3
+divisao = 10 / 5
+potencia = 2 ** 3
+modulo = 10 % 3
 
 # Operadores de comparação
-igual = x == y;
-diferente = a != b;
-maior = m > n;
-menor = p < q;
-maior_igual = x >= y;
-menor_igual = a <= b;
+igual = x == 42
+diferente = x != y
+maior = x > y
+menor = y < x
+maior_igual = x >= y
+menor_igual = y <= x

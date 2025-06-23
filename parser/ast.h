@@ -2,44 +2,13 @@
 #define AST_H
 
 #include "tabela.h"
-
-typedef enum
-{
-    NODO_OPERACAO,
-    NODO_VALOR,
-    NODO_IDENTIFICADOR,
-    NODO_ATRIBUICAO,
-    NODO_CHAMADA_FUNCAO,
-    NODO_CONDICIONAL,
-    NODO_LOOP,
-    NODO_BLOCO
-} TipoNo;
-
-typedef enum
-{
-    // Começa em 0(ADICAO(+)) e termina em 14(NAO_LOGICO(!))
-    ADICAO,
-    SUBTRACAO,
-    MULTIPLICACAO,
-    DIVISAO,
-    MODULO,
-    POTENCIA,
-    // Operadores de comparação
-    IGUAL,
-    DIFERENTE,
-    MENOR,
-    MENOR_IGUAL,
-    MAIOR,
-    MAIOR_IGUAL,
-    // Operadores lógicos
-    E_LOGICO,
-    OU_LOGICO,
-    NAO_LOGICO
-} TipoOperador;
+#include "types.h"
+#include <stdbool.h>
+#include <stdlib.h>
 
 typedef struct NoAst NoAst;
 
-typedef struct
+typedef struct BlocoDeclaracoes
 {
     NoAst **declaracoes;
     int quantidade;
@@ -124,6 +93,8 @@ NoAst *criar_no_condicional(NoAst *condicao, BlocoDeclaracoes *bloco_if, BlocoDe
 NoAst *criar_no_loop(NoAst *condicao, BlocoDeclaracoes *bloco, int linha);
 BlocoDeclaracoes *criar_bloco_declaracoes(NoAst **declaracoes, int quantidade);
 NoAst *criar_no_bloco(BlocoDeclaracoes *bloco, int linha);
+NoAst* criar_no_break(int linha);
+NoAst* criar_no_continue(int linha);
 
 // Método para destruir a AST
 void destruir_ast(NoAst *no);

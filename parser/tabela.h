@@ -3,16 +3,12 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include "types.h"
+#include "ast.h"
+#include <string.h>
 
 #define TAMANHO_TABELA 256
 
-typedef enum {
-    TIPO_INT,
-    TIPO_FLOAT,
-    TIPO_STRING,
-    TIPO_BOOL,
-    TIPO_NULO,
-} TipoDado;
 
 typedef struct Simbolo {
     char* nome;
