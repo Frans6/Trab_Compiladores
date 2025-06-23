@@ -54,7 +54,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
         case NODO_IDENTIFICADOR: {
             Simbolo* s = buscar_simbolo(tabela, no->dados.identificador);
             if (!s) {
-                printf("[ERRO] Variável '%s' não definida na linha %d\n", no->dados.identificador, no->linha);
+                fprintf(stderr, "[ERRO] (linha %d): Variável '%s' não definida\n", no->linha, no->dados.identificador);
                 return criar_resultado_vazio();
             }
             Resultado resultado = criar_resultado_vazio();
@@ -166,7 +166,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
                     break;
                 case DIVISAO: 
                     if (val_dir == 0.0) {
-                        fprintf(stderr, "Erro na linha %d: Divisao por zero\n", no->linha);
+                        fprintf(stderr, "[ERRO] (linha %d): Divisão por zero\n", no->linha);
                         exit(1);
                     }
                     if (res.tipo == TIPO_FLOAT) res.valor.float_val = val_esq / val_dir;
@@ -174,7 +174,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
                     break;
                 case MODULO: 
                     if (val_dir == 0.0) {
-                        fprintf(stderr, "Erro na linha %d: Modulo por zero\n", no->linha);
+                        fprintf(stderr, "[ERRO] (linha %d): Módulo por zero\n", no->linha);
                         exit(1);
                     }
                     if (res.tipo == TIPO_FLOAT) res.valor.float_val = fmod(val_esq, val_dir);
@@ -266,7 +266,7 @@ static Resultado interpretar_no(NoAst* no, TabelaSimbolos* tabela) {
                             case TIPO_BOOL: printf("%s", res_arg.valor.bool_val ? "True" : "False"); break;
                             case TIPO_STRING: printf("%s", res_arg.valor.string_val); break;
                             default:
-                                fprintf(stderr, "[ERRO] print: tipo de dado desconhecido (%d) ou variável não inicializada!\n", res_arg.tipo);
+                                fprintf(stderr, "[AVISO] (linha %d): Tipo desconhecido no print\n", no->linha);
                                 printf("None");
                                 break;
                         }
@@ -282,7 +282,7 @@ static Resultado interpretar_no(NoAst* no, TabelaSimbolos* tabela) {
                         printf("Input recebido: %s\n", buffer);
                     }
                 } else {
-                    fprintf(stderr, "Erro: Funcao '%s' desconhecida.\n", no->dados.chamada_funcao.nome_funcao);
+                    fprintf(stderr, "[ERRO] (linha %d): Função '%s' não definida\n", no->linha, no->dados.chamada_funcao.nome_funcao);
                 }
                 return criar_resultado_vazio();
             }

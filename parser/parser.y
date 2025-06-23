@@ -217,4 +217,7 @@ valor:
         { $$ = $2; }
     ;
 %%
-void yyerror(const char* s) { fprintf(stderr, "Erro de Sintaxe na linha %d: %s\n", yylineno, s); exit(1); }
+void yyerror(const char* s) { 
+    fprintf(stderr, "[ERRO] (linha %d): %s\n", yylineno, s);
+    exit(1); 
+}

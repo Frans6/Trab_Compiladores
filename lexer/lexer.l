@@ -72,6 +72,8 @@ STRING      \"([^\\\"]|\\.)*\"|'([^\\\']|\\.)*'
 }
 {ID}     { yylval.str_val = strdup(yytext); return ID; }
 
-.        { fprintf(stderr, "ERRO LEXICO: Caractere invalido '%s'\n", yytext); }
+.        { 
+    fprintf(stderr, "[ERRO] (linha %d): Caractere inválido '%s'\n", yylineno, yytext);
+}
 
 %%
