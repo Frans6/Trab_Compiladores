@@ -1,159 +1,225 @@
+/*
+ * ===================================================================
+ * parser/parser.y (VERSÃO FINAL E CORRIGIDA)
+ * ===================================================================
+ */
 %{
-#include "ast.h"
-#include "symbol_table.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
+#include <stdbool.h>
+#include "ast.h"
 #include "types.h"
+#include "interpretador.h"
 
-ASTNode* raiz_ast = NULL;  // raiz da AST global
+extern int yylex();
+extern int yylineno;
+extern char* yytext;
+void yyerror(const char* s);
+
+NoAst* raiz_ast = NULL;
 %}
 
+/* ========================== DEFINIÇÕES ========================== */
+
+/* A %union define todos os tipos possíveis para tokens e regras */
 %union {
-    Expression expr;
-    char* id;
-    int int_val;
-    double float_val;
-    char* str_val;
-    bool bool_val;
+    int                 int_val;
+    double              float_val;
+    char*               str_val;
+    bool                bool_val;
+    struct NoAst*       node;
+    struct BlocoDeclaracoes* bloco;
+    ArgList*            args;
 }
 
-%token LPAREN RPAREN
-%token PRINT INPUT IF ELSE ELIF
-%token <int_val> INT
-%token <float_val> FLOAT
-%token <str_val> STRING
-%token <bool_val> BOOL
-%token ADD SUB MUL DIV POW MOD
-%token ASSIGN EQ NOT NEQ GT LT GTE LTE
-%token <id> ID
-%token NEWLINE
-%token COLON
-%token COMMA SEMICOLON DOT
-%token LBRACKET RBRACKET LBRACE RBRACE AT
-%token DEF RETURN CLASS WHILE FOR BREAK CONTINUE NONE AND OR
-%token IN   /* Corrigido: token IN adicionado aqui */
+/* Tokens que carregam valor (associados a um campo da union) */
+%token <int_val>    INT
+%token <float_val>  FLOAT
+%token <str_val>    STRING
+%token <bool_val>   BOOL
+%token <str_val>    ID
 
-%type <expr> expr expr_int expr_float expr_bool
+/* Tokens que não carregam valor (palavras-chave e símbolos) */
+%token PRINT INPUT IF ELSE WHILE BREAK CONTINUE AND OR NOT
+%token NEWLINE INDENT DEDENT COLON COMMA LPAREN RPAREN
+%token POW EQ NEQ GTE LTE GT LT ASSIGN
+%token ADD SUB MUL DIV MOD
 
-%nonassoc LPAREN RPAREN
-%left ADD SUB
-%left MUL DIV MOD
-%right POW
-%right UMINUS
-%nonassoc IF
-%nonassoc ELSE ELIF
+/* Tipos das regras da gramática (não-terminais) e seus tipos da union */
+%type <node>  statement simple_stmt compound_stmt atribuicao expressao termo fator chamada_funcao condicional loop valor
+%type <bloco> suite statement_list else_part
+%type <args>  arg_lista_opt arg_lista
+%type <str_val> nome_funcao // O nome de uma função é uma string
+
+/* ========================== PRECEDÊNCIA ========================== */
+%left  OR AND
+%nonassoc EQ NEQ GT LT GTE LTE
+%left  ADD SUB
+%left  MUL DIV MOD
+%right NOT POW UMINUS
+%precedence ELSE
 
 %%
+/* ========================== REGRAS DA GRAMÁTICA ========================== */
 
-program
-    : stmt_list { raiz_ast = $1; }
+programa:
+    statement_list NEWLINE
+        { raiz_ast = criar_no_bloco($1, 1); }
+    | statement_list
+        { raiz_ast = criar_no_bloco($1, 1); }
     ;
 
-stmt_list
-    : stmt                      { $$ = $1; }
-    | stmt_list stmt            { $$ = create_seq_node($1, $2); }
-    ;
-
-statement
-    : PRINT LPAREN expr RPAREN NEWLINE {
-          exec_print($3);
+statement_list:
+      /* vazio */ { 
+          BlocoDeclaracoes* bloco = malloc(sizeof(BlocoDeclaracoes));
+          bloco->declaracoes = NULL;
+          bloco->quantidade = 0;
+          $$ = bloco; 
       }
-    | ID ASSIGN expr NEWLINE { 
-          raiz_ast = create_seq_node(raiz_ast,
-                      create_assign_node($1, $3));
-          free($1);
-      }
-    | if_statement
-    | while_statement
-    | for_statement
-    | break_statement
-    | continue_statement
+    | statement_list statement
+        {
+            if ($2) {
+                $1->quantidade++;
+                $1->declaracoes = realloc($1->declaracoes, $1->quantidade * sizeof(NoAst*));
+                $1->declaracoes[$1->quantidade - 1] = $2;
+            }
+            $$ = $1;
+        }
+    | statement_list NEWLINE
+        { $$ = $1; }
     ;
 
-while_statement:
-    WHILE LPAREN expr_bool RPAREN LBRACE program RBRACE
+statement:
+      simple_stmt NEWLINE     { $$ = $1; }
+    | simple_stmt             { $$ = $1; }
+    | compound_stmt           { $$ = $1; }
+    | NEWLINE                 { $$ = NULL; }
     ;
 
-for_statement:
-    FOR ID IN expr LBRACE program RBRACE
+simple_stmt:
+    atribuicao              { $$ = $1; }
+    | chamada_funcao        { $$ = $1; }
+    | BREAK                 { $$ = criar_no_break(@1.first_line); }
+    | CONTINUE              { $$ = criar_no_continue(@1.first_line); }
     ;
 
-break_statement:
-    BREAK NEWLINE
+compound_stmt:
+    condicional             { $$ = $1; }
+    | loop                  { $$ = $1; }
     ;
 
-continue_statement:
-    CONTINUE NEWLINE
+suite:
+    COLON NEWLINE INDENT statement_list DEDENT
+        { $$ = $4; }
     ;
 
-expr
-    : expr_int      { $$ = $1; }
-    | expr_float    { $$ = $1; }
-    | expr_bool     { $$ = $1; }
-    | STRING        { $$.type = VAL_STRING; $$.value.s = $1; }
-    | ID            { $$ = create_var_node($1); free($1); }
-    | INPUT LPAREN RPAREN {
-        $$ = create_input_node();
-      }
-    | LPAREN expr RPAREN { $$ = $2; }
+atribuicao:
+    ID ASSIGN expressao
+        { $$ = criar_no_atribuicao($1, $3, @1.first_line); free($1); }
     ;
 
-expr_int
-    : INT                { $$.type = VAL_INT; $$.value.i = $1; }
-    | expr_int ADD expr_int { $$.type = VAL_INT; $$.value.i = $1.value.i + $3.value.i; }
-    | expr_int SUB expr_int { $$.type = VAL_INT; $$.value.i = $1.value.i - $3.value.i; }
-    | expr_int MUL expr_int { $$.type = VAL_INT; $$.value.i = $1.value.i * $3.value.i; }
-    | expr_int DIV expr_int {
-        if($3.value.i == 0) yyerror("Divisão por zero");
-        $$.type = VAL_INT; $$.value.i = $1.value.i / $3.value.i;
-      }
-    | LPAREN expr_int RPAREN { $$ = $2; }
-    | SUB expr_int %prec UMINUS { $$.type = VAL_INT; $$.value.i = -$2.value.i; }
+chamada_funcao:
+    nome_funcao LPAREN arg_lista_opt RPAREN
+        { $$ = criar_no_chamada_funcao($1, $3->args, $3->count, @1.first_line); free($1); free($3); }
     ;
 
-expr_float
-    : FLOAT              { $$.type = VAL_FLOAT; $$.value.f = $1; }
-    | expr_float ADD expr_float { $$.type = VAL_FLOAT; $$.value.f = $1.value.f + $3.value.f; }
-    | expr_float SUB expr_float { $$.type = VAL_FLOAT; $$.value.f = $1.value.f - $3.value.f; }
-    | expr_float MUL expr_float { $$.type = VAL_FLOAT; $$.value.f = $1.value.f * $3.value.f; }
-    | expr_float DIV expr_float { $$.type = VAL_FLOAT; $$.value.f = $1.value.f / $3.value.f; }
-    | LPAREN expr_float RPAREN { $$ = $2; }
-    | SUB expr_float %prec UMINUS { $$.type = VAL_FLOAT; $$.value.f = -$2.value.f; }
+nome_funcao:
+    ID      { $$ = $1; } // O ID já é uma string (char*)
+    | PRINT { $$ = strdup("print"); }
+    | INPUT { $$ = strdup("input"); }
     ;
 
-expr_bool
-    : BOOL               { $$.type = VAL_BOOL; $$.value.b = $1; }
-    | expr_int EQ expr_int { $$.type = VAL_BOOL; $$.value.b = $1.value.i == $3.value.i; }
-    | expr_int NEQ expr_int { $$.type = VAL_BOOL; $$.value.b = $1.value.i != $3.value.i; }
-    | expr_int GT expr_int { $$.type = VAL_BOOL; $$.value.b = $1.value.i > $3.value.i; }
-    | expr_int LT expr_int { $$.type = VAL_BOOL; $$.value.b = $1.value.i < $3.value.i; }
-    | expr_int GTE expr_int { $$.type = VAL_BOOL; $$.value.b = $1.value.i >= $3.value.i; }
-    | expr_int LTE expr_int { $$.type = VAL_BOOL; $$.value.b = $1.value.i <= $3.value.i; }
-    | LPAREN expr_bool RPAREN { $$ = $2; }
+arg_lista_opt:
+    { $$ = calloc(1, sizeof(ArgList)); }
+    | arg_lista { $$ = $1; }
     ;
 
-if_statement:
-    IF LPAREN expr_bool RPAREN LBRACE program RBRACE else_part
+arg_lista:
+    expressao
+        { $$ = malloc(sizeof(ArgList)); $$->args = malloc(sizeof(NoAst*)); $$->args[0] = $1; $$->count = 1; }
+    | arg_lista COMMA expressao
+        { $1->count++; $1->args = realloc($1->args, $1->count * sizeof(NoAst*)); $1->args[$1->count - 1] = $3; $$ = $1; }
+    ;
+
+condicional:
+    IF expressao suite else_part
+        { $$ = criar_no_condicional($2, $3, $4, @1.first_line); }
     ;
 
 else_part:
-    | /* empty */
-    | ELSE LBRACE program RBRACE
-    | ELIF LPAREN expr_bool RPAREN LBRACE program RBRACE else_part
+      /* vazio */ { $$ = NULL; }
+    | ELSE suite { $$ = $2; }
+    | NEWLINE ELSE suite { $$ = $3; }
     ;
 
+loop:
+    WHILE expressao suite
+        { $$ = criar_no_loop($2, $3, @1.first_line); }
+    ;
+
+expressao: 
+    termo 
+        { $$ = $1; }
+    | expressao ADD termo 
+        { $$ = criar_no_operacao(ADICAO, $1, $3, @1.first_line); }
+    | expressao SUB termo 
+        { $$ = criar_no_operacao(SUBTRACAO, $1, $3, @1.first_line); }
+    | expressao AND termo 
+        { $$ = criar_no_operacao(E_LOGICO, $1, $3, @1.first_line); }
+    | expressao OR termo 
+        { $$ = criar_no_operacao(OU_LOGICO, $1, $3, @1.first_line); }
+    | expressao EQ termo 
+        { $$ = criar_no_operacao(IGUAL, $1, $3, @1.first_line); }
+    | expressao NEQ termo 
+        { $$ = criar_no_operacao(DIFERENTE, $1, $3, @1.first_line); }
+    | expressao GT termo 
+        { $$ = criar_no_operacao(MAIOR, $1, $3, @1.first_line); }
+    | expressao LT termo 
+        { $$ = criar_no_operacao(MENOR, $1, $3, @1.first_line); }
+    | expressao GTE termo 
+        { $$ = criar_no_operacao(MAIOR_IGUAL, $1, $3, @1.first_line); }
+    | expressao LTE termo 
+        { $$ = criar_no_operacao(MENOR_IGUAL, $1, $3, @1.first_line); }
+    ;
+
+termo: 
+    fator 
+        { $$ = $1; }
+    | termo MUL fator 
+        { $$ = criar_no_operacao(MULTIPLICACAO, $1, $3, @1.first_line); }
+    | termo DIV fator 
+        { $$ = criar_no_operacao(DIVISAO, $1, $3, @1.first_line); }
+    | termo MOD fator 
+        { $$ = criar_no_operacao(MODULO, $1, $3, @1.first_line); }
+    ;
+
+fator: 
+    valor 
+        { $$ = $1; }
+    | SUB valor %prec UMINUS 
+        { $$ = criar_no_operacao(SUBTRACAO, criar_no_valor_int(0, @1.first_line), $2, @1.first_line); }
+    | NOT valor 
+        { $$ = criar_no_operacao(NAO_LOGICO, $2, NULL, @1.first_line); }
+    | valor POW fator 
+        { $$ = criar_no_operacao(POTENCIA, $1, $3, @1.first_line); }
+    ;
+
+valor: 
+    INT 
+        { $$ = criar_no_valor_int($1, @1.first_line); }
+    | FLOAT 
+        { $$ = criar_no_valor_float($1, @1.first_line); }
+    | STRING 
+        { $$ = criar_no_valor_string($1, @1.first_line); free($1); }
+    | BOOL 
+        { $$ = criar_no_valor_bool($1, @1.first_line); }
+    | ID 
+        { $$ = criar_no_identificador($1, @1.first_line); free($1); }
+    | chamada_funcao 
+        { $$ = $1; }
+    | LPAREN expressao RPAREN 
+        { $$ = $2; }
+    ;
 %%
-
-int main(int argc, char** argv) {
-    if (yyparse() == 0) {
-        exec_ast(raiz_ast);
-        free_ast(raiz_ast);
-    }
-    return 0;
-}
-
-void yyerror(const char* msg) {
-    fprintf(stderr, "Erro: %s\n", msg);
-}
+void yyerror(const char* s) { fprintf(stderr, "Erro de Sintaxe na linha %d: %s\n", yylineno, s); exit(1); }
