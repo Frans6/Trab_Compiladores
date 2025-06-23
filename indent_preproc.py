@@ -6,7 +6,7 @@ def process_file(filepath):
         with open(filepath, 'r', encoding='utf-8-sig') as f:
             lines = f.readlines()
     except FileNotFoundError:
-        print(f"Erro: Arquivo '{filepath}' nao encontrado.", file=sys.stderr)
+        print(f"[ERRO]: Arquivo '{filepath}' não encontrado", file=sys.stderr)
         sys.exit(1)
 
     indent_stack = [0]
@@ -33,7 +33,7 @@ def process_file(filepath):
             print('@DEDENT@') # Imprime em sua própria linha
 
         if leading_spaces != indent_stack[-1]:
-            print(f"Erro de indentacao na linha: {line.strip()}", file=sys.stderr)
+            print(f"[ERRO]: Indentação inconsistente na linha {len(lines)}", file=sys.stderr)
             sys.exit(1)
 
         print(stripped_line.rstrip()) # Remove quebra de linha extra
@@ -47,7 +47,7 @@ def process_file(filepath):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Uso: python3 indent_preproc.py <arquivo>", file=sys.stderr)
+        print("[ERRO]: Uso: python3 indent_preproc.py <arquivo>", file=sys.stderr)
         sys.exit(1)
     
     process_file(sys.argv[1])

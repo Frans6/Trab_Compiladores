@@ -8,31 +8,31 @@ extern NoAst* raiz_ast;
 
 int main(int argc, char **argv) {
     if (argc < 2) {
-        fprintf(stderr, "Uso: %s <arquivo.py>\n", argv[0]);
+        fprintf(stderr, "[ERRO]: Uso: %s <arquivo.py>\n", argv[0]);
         return 1;
     }
 
     FILE *file = fopen(argv[1], "r");
     if (!file) {
-        perror("Nao foi possivel abrir o arquivo");
+        fprintf(stderr, "[ERRO]: Não foi possível abrir o arquivo '%s'\n", argv[1]);
         return 1;
     }
 
     yyin = file;
 
     if (yyparse() == 0) {
-        printf("Analise sintatica concluida com sucesso!\n");
+        printf("Análise sintática concluída com sucesso!\n");
         if (raiz_ast) {
             printf("AST criada com sucesso\n");
         } else {
-            printf("ERRO: AST raiz é NULL!\n");
+            fprintf(stderr, "[ERRO]: AST raiz é NULL!\n");
             return 1;
         }
-        printf("--- INICIO DA EXECUCAO ---\n");
+        printf("--- INÍCIO DA EXECUÇÃO ---\n");
         interpretar(raiz_ast);
-        printf("--- FIM DA EXECUCAO ---\n");
+        printf("--- FIM DA EXECUÇÃO ---\n");
     } else {
-        printf("Analise sintatica falhou.\n");
+        fprintf(stderr, "[ERRO]: Análise sintática falhou\n");
     }
 
     fclose(file);

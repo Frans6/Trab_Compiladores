@@ -30,7 +30,7 @@ TARGET = interpretador
 SCRIPT ?= teste.py
 PROCESSED_SCRIPT = $(BUILD_DIR)/processed.py
 
-.PHONY: all clean run test test-tabela test-ast test-integrado test-lexer test-parser
+.PHONY: all clean run test test-tabela test-ast test-integrado test-lexer test-parser test-erros
 
 # --- Regras Principais ---
 all: $(TARGET)
@@ -95,3 +95,8 @@ test-parser: $(BUILD_DIR)/test_parser
 	./$< $(BUILD_DIR)/processed_parser_test.txt
 $(BUILD_DIR)/test_parser: test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+
+# --- Teste de Mensagens de Erro ---
+test-erros: all
+	@echo "Executando testes automatizados de mensagens de erro..."
+	@./test_erros.sh
