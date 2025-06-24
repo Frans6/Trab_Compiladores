@@ -30,7 +30,9 @@ TARGET = interpretador
 SCRIPT ?= teste.py
 PROCESSED_SCRIPT = $(BUILD_DIR)/processed.py
 
-.PHONY: all clean run test test-tabela test-ast test-integrado test-lexer test-parser test-erros
+.PHONY: all clean run test test-tabela test-ast test-integrado test-lexer test-parser test-erros \
+        test-expressoes test-condicionais test-loops test-tipos test-comparacoes test-casos-extremos \
+        test-funcoes-builtin test-operadores-logicos test-precedencia-operadores
 
 # --- Regras Principais ---
 all: $(TARGET)
@@ -63,7 +65,7 @@ run: all
 	./$(TARGET) $(PROCESSED_SCRIPT)
 
 # --- Alvos de Teste ---
-test: test-tabela test-ast test-integrado test-lexer test-parser
+test: test-tabela test-ast test-integrado test-lexer test-parser-suite test-erros
 
 test-tabela: $(BUILD_DIR)/test_tabela
 	./$<
@@ -88,55 +90,34 @@ test-lexer: $(BUILD_DIR)/test_lexer_exe
 $(BUILD_DIR)/test_lexer_exe: test_lexer.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-test-parser: $(BUILD_DIR)/test_parser
-	@echo "--- Pré-processando '$(TESTS_DIR)/test2.txt'... ---"
-	@$(PYTHON) indent_preproc.py $(TESTS_DIR)/test2.txt > $(BUILD_DIR)/processed_parser_test.txt
-	@echo "--- Rodando teste do analisador sintático... ---"
-	./$< $(BUILD_DIR)/processed_parser_test.txt
-$(BUILD_DIR)/test_parser: test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
-
 # --- Teste de Mensagens de Erro ---
 test-erros: all
 	@echo "Executando testes automatizados de mensagens de erro..."
 	@./test_erros.sh
 
-# Nova suite de testes do parser
-test-parser-suite: $(BUILD_DIR)/test_parser_suite
-	@echo "--- Executando suite completa de testes do parser ---"
-	./$<
-$(BUILD_DIR)/test_parser_suite: test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
+# --- Suite de testes do parser ---
+test-parser-suite: test-expressoes test-condicionais test-loops test-tipos test-comparacoes test-casos-extremos \
+                   test-funcoes-builtin test-operadores-logicos test-precedencia-operadores
+
+# --- Testes individuais ---
+RUN_PARSER_TEST = $(BUILD_DIR)/test_parser
+$(RUN_PARSER_TEST): test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
-# Teste do parser original (mantido para compatibilidade)
-test-parser: $(BUILD_DIR)/test_parser_original
-	@echo "--- Pré-processando '$(TESTS_DIR)/test2.txt'... ---"
-	@$(PYTHON) indent_preproc.py $(TESTS_DIR)/test2.txt > $(BUILD_DIR)/processed_parser_test.txt
-	@echo "--- Rodando teste do analisador sintático... ---"
-	./$< $(BUILD_DIR)/processed_parser_test.txt
-$(BUILD_DIR)/test_parser_original: test_parser_original.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+define RUN_TEST_TEMPLATE
+.PHONY: $(1)
+$(1): $(RUN_PARSER_TEST)
+	@echo "--- Pré-processando e rodando teste de $(1)... ---"
+	@$(PYTHON) indent_preproc.py $(TESTS_DIR)/$(2).py > $(BUILD_DIR)/processed_$(2).py
+	./$(RUN_PARSER_TEST) $(BUILD_DIR)/processed_$(2).py
+endef
 
-# --- Teste de Mensagens de Erro ---
-test-erros: all
-	@echo "Executando testes automatizados de mensagens de erro..."
-	@./test_erros.sh
-
-# --- Testes individuais do parser ---
-test-expressoes: $(BUILD_DIR)/test_parser_suite
-	./$< tests/test_expressoes.py
-
-test-condicionais: $(BUILD_DIR)/test_parser_suite
-	./$< tests/test_condicionais.py
-
-test-loops: $(BUILD_DIR)/test_parser_suite
-	./$< tests/test_loops.py
-
-test-tipos: $(BUILD_DIR)/test_parser_suite
-	./$< tests/test_tipos_dados.py
-
-test-comparacoes: $(BUILD_DIR)/test_parser_suite
-	./$< tests/test_comparacoes.py
-
-test-casos-extremos: $(BUILD_DIR)/test_parser_suite
-	./$< tests/test_casos_extremos.py
+$(eval $(call RUN_TEST_TEMPLATE,test-expressoes,test_expressoes))
+$(eval $(call RUN_TEST_TEMPLATE,test-condicionais,test_condicionais))
+$(eval $(call RUN_TEST_TEMPLATE,test-loops,test_loops))
+$(eval $(call RUN_TEST_TEMPLATE,test-tipos,test_tipos_dados))
+$(eval $(call RUN_TEST_TEMPLATE,test-comparacoes,test_comparacoes))
+$(eval $(call RUN_TEST_TEMPLATE,test-casos-extremos,test_casos_extremos))
+$(eval $(call RUN_TEST_TEMPLATE,test-funcoes-builtin,test_funcoes_builtin))
+$(eval $(call RUN_TEST_TEMPLATE,test-operadores-logicos,test_operadores_logicos))
+$(eval $(call RUN_TEST_TEMPLATE,test-precedencia-operadores,test_precedencia_operadores))
