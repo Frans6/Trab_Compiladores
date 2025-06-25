@@ -16,17 +16,20 @@
 | Descrição do Débito Técnico ou Pendência | Sprint em que surgiu | Status (Aberto/Resolvido) |
 |------------------------------------------|----------------------|---------------------------|
 | Melhorar mensagens de erro    | Sprint 3     | Resolvido                   |
-| Adicionar testes para o analisador sintático| Sprint 3|Aberto                    |
-| Adicionar testes para AST     | Sprint 3             | Resolvido                    |
-| Interpretar interpretação da AST| Sprint 4             | Aberto                    |
+| Adicionar testes para o analisador sintático| Sprint 3| Resolvido                    |
+| Adicionar testes para AST     | Sprint 3    | Resolvido                    |
+| Interpretar interpretação da AST| Sprint 4   | Resolvido                   |
+| Corrigir erros e débitos técnicos, garantir estabilidade e qualidade para entrega final | Sprint 5   | Resolvido                   |
 
 
 ## Histórico de Versão
 
 | Versão | Data          | Descrição                          | Autor(es)     |
 | ------ | ------------- | ---------------------------------- | ------------- |
-| `1.0`  |  27/04/2025 |  Documentação de cronograma | Breno Yuri |
-| `1.1`  |  28/04/2025 |  Correções | Breno Yuri |
-| `1.2`  |  26/05/2025 |  Organização do cronograma em formato de tabela e adição da tabela de débitos técnicos. | Arthur Evangelista |
-| `1.21`  |  26/05/2025 | Débito técnico "adicionar testes para AST" resolvido. | Arthur Evangelista |
-| `1.3`  |  20/06/2025 | Débito técnico "melhorar mensagens de erro" resolvido. | Ana Beatriz |
+| `1.0`  |  27/04/2025 |  Documentação de cronograma | [Breno Yuri](https://github.com/YuriBre) |
+| `1.1`  |  28/04/2025 |  Correções | [Breno Yuri](https://github.com/YuriBre) |
+| `1.2`  |  26/05/2025 |  Organização do cronograma em formato de tabela e adição da tabela de débitos técnicos. | [Arthur Evangelista](https://github.com/arthurevg) |
+| `1.3`  |  26/05/2025 | Débito técnico "adicionar testes para AST" resolvido. | [Arthur Evangelista](https://github.com/arthurevg) |
+| `1.4`  |  20/06/2025 | Débito técnico "melhorar mensagens de erro" resolvido. | [Ana Beatriz](https://github.com/anabfs) |
+| `1.5`  |  25/06/2025 | Débito técnico "Interpretação da AST" resolvido e "Adicionar testes para o analisador sintático" resolvido | [Letícia Resende](https://github.com/LeticiaResende23) |
+| `1.6`  |  25/06/2025 | Débito técnico "Corrigir erros e débitos técnicos, garantir estabilidade e qualidade para entrega final" Resolvido| [Letícia Resende](https://github.com/LeticiaResende23) |
