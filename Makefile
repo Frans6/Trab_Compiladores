@@ -45,42 +45,42 @@ PROCESSED_SCRIPT = $(BUILD_DIR)/processed.py
 all: $(TARGET)
 
 $(TARGET): $(OBJS_APP)
-	@echo -e "$(BLUE)🔧 Linkando executável final...$(NC)"
+	@echo -e "$(BLUE)Linkando executável final...$(NC)"
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
-	@echo -e "$(GREEN)✅ Compilação concluída com sucesso!$(NC)"
+	@echo -e "$(GREEN)Compilação concluída com sucesso!$(NC)"
 
 # --- Regras de Geração e Compilação ---
 $(PARSER_DIR)/parser.tab.c $(PARSER_DIR)/parser.tab.h: $(PARSER_DIR)/parser.y
-	@echo -e "$(BLUE)📝 Gerando parser com Bison...$(NC)"
+	@echo -e "$(BLUE)Gerando parser com Bison...$(NC)"
 	$(BISON) -d -t -o $(PARSER_DIR)/parser.tab.c $<
 
 $(BUILD_DIR)/lexer.c: $(LEXER_DIR)/lexer.l $(PARSER_DIR)/parser.tab.h | $(BUILD_DIR)
-	@echo -e "$(BLUE)📝 Gerando lexer com Flex...$(NC)"
+	@echo -e "$(BLUE)Gerando lexer com Flex...$(NC)"
 	$(FLEX) -o $@ $<
 
 $(BUILD_DIR):
-	@echo -e "$(BLUE)📁 Criando diretório build...$(NC)"
+	@echo -e "$(BLUE)Criando diretório build...$(NC)"
 	mkdir -p $(BUILD_DIR)
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando $<...$(NC)"
+	@echo -e "$(BLUE)Compilando $<...$(NC)"
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # --- Comandos Utilitários ---
 clean:
-	@echo -e "$(YELLOW)🧹 Limpando arquivos temporários...$(NC)"
+	@echo -e "$(YELLOW)Limpando arquivos temporários...$(NC)"
 	rm -rf $(BUILD_DIR) $(TARGET) $(PARSER_DIR)/parser.tab.*
-	@echo -e "$(GREEN)✅ Limpeza concluída!$(NC)"
+	@echo -e "$(GREEN)Limpeza concluída!$(NC)"
 
 run: all
-	@echo -e "$(BLUE)🔄 Pré-processando '$(SCRIPT)' para resolver indentação...$(NC)"
+	@echo -e "$(BLUE)Pré-processando '$(SCRIPT)' para resolver indentação...$(NC)"
 	@$(PYTHON) indent_preproc.py $(SCRIPT) > $(PROCESSED_SCRIPT)
-	@echo -e "$(BLUE)🚀 Executando interpretador no script processado$(NC)"
+	@echo -e "$(BLUE)Executando interpretador no script processado$(NC)"
 	./$(TARGET) $(PROCESSED_SCRIPT)
 
 # --- Alvos de Teste ---
 test: test-tabela test-ast test-integrado test-lexer test-parser-suite test-erros
-	@echo -e "$(GREEN)🎉 Todos os testes foram executados!$(NC)"
+	@echo -e "$(GREEN)Todos os testes foram executados!$(NC)"
 
 test-tabela: $(BUILD_DIR)/test_tabela
 	@if ./$< > /dev/null 2>&1; then \
@@ -90,7 +90,7 @@ test-tabela: $(BUILD_DIR)/test_tabela
 	fi
 
 $(BUILD_DIR)/test_tabela: test_tabela.c $(BUILD_DIR)/tabela.o | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando teste da tabela...$(NC)"
+	@echo -e "$(BLUE)Compilando teste da tabela...$(NC)"
 	$(CC) $(CFLAGS) $^ -o $@
 
 test-ast: $(BUILD_DIR)/test_ast
@@ -101,7 +101,7 @@ test-ast: $(BUILD_DIR)/test_ast
 	fi
 
 $(BUILD_DIR)/test_ast: test_ast.c $(COMMON_OBJS) | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando teste da AST...$(NC)"
+	@echo -e "$(BLUE)Compilando teste da AST...$(NC)"
 	$(CC) $(CFLAGS) $^ -o $@
 
 test-integrado: $(BUILD_DIR)/test_integrado
@@ -112,7 +112,7 @@ test-integrado: $(BUILD_DIR)/test_integrado
 	fi
 
 $(BUILD_DIR)/test_integrado: test_tabela-ast.c $(COMMON_OBJS) | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando teste de integração...$(NC)"
+	@echo -e "$(BLUE)Compilando teste de integração...$(NC)"
 	$(CC) $(CFLAGS) $^ -o $@
 
 test-lexer: $(BUILD_DIR)/test_lexer_exe
@@ -128,28 +128,28 @@ test-lexer: $(BUILD_DIR)/test_lexer_exe
 	fi
 
 $(BUILD_DIR)/test_lexer_exe: test_lexer.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando teste do lexer...$(NC)"
+	@echo -e "$(BLUE)Compilando teste do lexer...$(NC)"
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 # --- Teste de Mensagens de Erro ---
 test-erros: all
-	@echo -e "$(BLUE)🧪 Executando testes de tratamento de erros...$(NC)"
+	@echo -e "$(BLUE)Executando testes de tratamento de erros...$(NC)"
 	@if [ -x "./test_erros.sh" ]; then \
 		chmod +x ./test_erros.sh; \
 		./test_erros.sh; \
 	else \
-		echo -e "$(YELLOW)⚠️  Script test_erros.sh não encontrado ou não executável$(NC)"; \
+		echo -e "$(YELLOW)Script test_erros.sh não encontrado ou não executável$(NC)"; \
 	fi
 
 # --- Suite de testes do parser ---
 test-parser-suite: test-expressoes test-condicionais test-loops test-tipos test-comparacoes test-casos-extremos \
                    test-funcoes-builtin test-operadores-logicos test-precedencia-operadores
-	@echo -e "$(GREEN)🎯 Suite de testes do parser concluída!$(NC)"
+	@echo -e "$(GREEN)Suite de testes do parser concluída!$(NC)"
 
 # --- Testes individuais ---
 RUN_PARSER_TEST = $(BUILD_DIR)/test_parser
 $(RUN_PARSER_TEST): test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando executável de teste do parser...$(NC)"
+	@echo -e "$(BLUE)Compilando executável de teste do parser...$(NC)"
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 define RUN_TEST_TEMPLATE
