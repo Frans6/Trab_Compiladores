@@ -1,36 +1,28 @@
 # Teste de funções built-in
+# Teste da função print
+print("Testando função print")
+print("Múltiplos", "argumentos", "na", "mesma", "linha")
 
-# Função print com diferentes tipos
-print("String simples")
+# Teste com variáveis
+nome = "Compilador"
+versao = 1.0
+print("Nome:", nome)
+print("Versão:", versao)
+
+# Teste da função input (comentado pois é interativo)
+# usuario = input("Digite seu nome: ")
+# print("Olá", usuario)
+
+# Print com diferentes tipos
 print(42)
 print(3.14)
 print(True)
 print(False)
 
-# Print com variáveis
-nome = "Maria"
-idade = 25
-print(nome)
-print(idade)
-
-# Print com expressões simples
+# Print com expressões
 x = 10
 y = 5
-print(x + y)
-print(x * y)
+print("Soma:", x + y)
+print("Produto:", x * y)
 
-# Print de strings
-print("")
-print("Texto")
-
-# Função input básica (comentado se causar problemas)
-# entrada1 = input("Digite: ")
-
-# Mais testes de print
-resultado = x + y
-print(resultado)
-
-numero_negativo = -42
-print(numero_negativo)
-
-print("Fim dos testes")
+print("Teste de funções built-in concluído")

@@ -1,39 +1,27 @@
-# Teste de diferentes tipos de dados e atribuições
+# Teste de diferentes tipos de dados
 # Números inteiros
-inteiro_positivo = 42
-inteiro_negativo = -15
-inteiro_zero = 0
+numero_int = 42
+numero_negativo = -15
 
-# Números de ponto flutuante
-float_positivo = 3.14
-float_negativo = -2.71
-float_zero = 0.0
+# Números decimais
+numero_float = 3.14159
+numero_decimal = -2.5
 
 # Strings
-string_aspas_duplas = "Hello World"
-string_aspas_simples = "Python"
-string_vazia = ""
+texto_simples = "Hello World"
+texto_vazio = ""
+texto_aspas = 'Python'
 
-# Valores booleanos
+# Booleanos
 verdadeiro = True
 falso = False
 
-# Identificadores válidos
-variavel = 10
-variavel123 = 30
+# Operações com tipos
+soma_int = numero_int + 10
+soma_float = numero_float * 2
+concatenacao = texto_simples + " " + texto_aspas
 
-# Atribuições simples
-a = 1
-b = a
-c = b + 5
+# Conversões implícitas
+resultado_misto = numero_int + numero_float
 
-# Reatribuições
-x = 10
-x = 20
-x = x + 5
-
-print(inteiro_positivo)
-print(float_positivo)
-print(string_aspas_duplas)
-print(verdadeiro)
-print(x)
+print("Teste de tipos de dados concluído")

@@ -1,44 +1,61 @@
 #!/bin/bash
 
-echo "=== TESTE RÁPIDO DO COMPILADOR ==="
+# Colors
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║                   🚀 TESTE RÁPIDO DO COMPILADOR           ║${NC}"
+echo -e "${CYAN}╚════════════════════════════════════════════════════════════╝${NC}"
+echo ""
 
 # Build the project
-echo "1. Compilando..."
+echo -e "${BLUE}📦 1. Compilando o projeto...${NC}"
 make clean > /dev/null 2>&1
 make all > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-    echo "✓ Compilação bem-sucedida"
+    echo -e "   ${GREEN}✅ Compilação bem-sucedida${NC}"
 else
-    echo "✗ Falha na compilação"
+    echo -e "   ${RED}❌ Falha na compilação${NC}"
     exit 1
 fi
 
 # Test basic functionality
-echo "2. Testando funcionalidade básica..."
+echo -e "\n${BLUE}🔍 2. Testando funcionalidade básica...${NC}"
 cat > build/test_basico.py << 'EOF'
+# Teste básico do interpretador
 x = 42
 y = 3.14
-nome = "Teste"
+nome = "Teste Compilador"
 resultado = x + 10
-print(resultado)
-print(nome)
+print("Resultado:", resultado)
+print("Nome:", nome)
+print("Sucesso no teste básico!")
 EOF
 
 ./interpretador build/test_basico.py > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "✓ Interpretador executou com sucesso"
+    echo -e "   ${GREEN}✅ Interpretador executou com sucesso${NC}"
 else
-    echo "✗ Falha na execução do interpretador"
+    echo -e "   ${RED}❌ Falha na execução do interpretador${NC}"
 fi
 
 # Test symbol table
-echo "3. Testando tabela de símbolos..."
+echo -e "\n${BLUE}🗃️  3. Testando tabela de símbolos...${NC}"
 make test-tabela > /dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "✓ Testes da tabela de símbolos passaram"
+    echo -e "   ${GREEN}✅ Testes da tabela de símbolos passaram${NC}"
 else
-    echo "✗ Falha nos testes da tabela de símbolos"
+    echo -e "   ${RED}❌ Falha nos testes da tabela de símbolos${NC}"
 fi
 
-echo "=== TESTE RÁPIDO CONCLUÍDO ==="
+echo ""
+echo -e "${PURPLE}╔════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${PURPLE}║                 🎉 TESTE RÁPIDO CONCLUÍDO                 ║${NC}"
+echo -e "${PURPLE}╚════════════════════════════════════════════════════════════╝${NC}"

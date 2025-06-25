@@ -5,13 +5,6 @@ extern int yyparse();
 extern FILE *yyin;
 extern int yydebug;
 
-#include <stdio.h>
-#include <stdlib.h>
-
-extern int yyparse();
-extern FILE *yyin;
-extern int yydebug;
-
 int main(int argc, char **argv)
 {
     if (argc < 2)
@@ -22,26 +15,24 @@ int main(int argc, char **argv)
 
     for (int i = 1; i < argc; i++)
     {
-        printf("\n=== Teste %d: Executando parser no arquivo '%s' ===\n", i, argv[i]);
         yyin = fopen(argv[i], "r");
         if (!yyin)
         {
-            perror("ERRO: não foi possível abrir o arquivo\n");
+            printf("❌ Erro ao abrir arquivo '%s'\n", argv[i]);
             continue;
         }
 
-        yydebug = 1; // Ativa debug do bison
+        yydebug = 0;
         int result = yyparse();
-
         fclose(yyin);
 
         if (result == 0)
         {
-            printf("SUCESSO: parsing concluído sem erros!\n");
+            printf("✅ %s\n", argv[i]);
         }
         else
         {
-            printf("FALHA: erros encontrados durante o parsing\n");
+            printf("❌ %s\n", argv[i]);
         }
     }
 

@@ -1,87 +1,68 @@
 # Teste de precedência de operadores
-print("=== INICIANDO TESTES DE PRECEDÊNCIA DE OPERADORES ===")
+print("=== TESTE DE PRECEDÊNCIA DE OPERADORES ===")
 
-a = 2
+# Precedência aritmética básica
+resultado1 = 2 + 3 * 4      # Esperado: 14 (multiplicação primeiro)
+resultado2 = (2 + 3) * 4    # Esperado: 20 (parênteses primeiro)
+resultado3 = 10 - 6 / 2     # Esperado: 7 (divisão primeiro)
+resultado4 = (10 - 6) / 2   # Esperado: 2 (parênteses primeiro)
+
+print("2 + 3 * 4 =", resultado1)
+print("(2 + 3) * 4 =", resultado2)
+print("10 - 6 / 2 =", resultado3)
+print("(10 - 6) / 2 =", resultado4)
+
+# Precedência com múltiplas operações
+resultado5 = 2 + 3 * 4 - 5      # Esperado: 9 (2 + 12 - 5)
+resultado6 = 2 * 3 + 4 * 5      # Esperado: 26 (6 + 20)
+resultado7 = 20 / 4 + 3 * 2     # Esperado: 11 (5 + 6)
+
+print("2 + 3 * 4 - 5 =", resultado5)
+print("2 * 3 + 4 * 5 =", resultado6)
+print("20 / 4 + 3 * 2 =", resultado7)
+
+# Precedência com comparações
+a = 5
 b = 3
-c = 4
-d = 5
+c = 2
 
-print("Valores iniciais:")
-print("a = 2, b = 3, c = 4, d = 5")
-print("")
+comp1 = a > b + c       # Esperado: False (5 > 5)
+comp2 = a + b > c * 2   # Esperado: True (8 > 4)
+comp3 = a * b > c + 10  # Esperado: True (15 > 12)
 
-# Precedência aritmética
-print("--- PRECEDÊNCIA ARITMÉTICA ---")
-resultado1 = a + b * c          # 2 + (3 * 4) = 2 + 12 = 14
-resultado2 = (a + b) * c        # (2 + 3) * 4 = 5 * 4 = 20
-resultado3 = a * b + c          # (2 * 3) + 4 = 6 + 4 = 10
-resultado4 = a + b ** c         # 2 + (3 ** 4) = 2 + 81 = 83
-resultado5 = (a + b) ** c       # (2 + 3) ** 4 = 5 ** 4 = 625
-
-print("a + b * c =", resultado1)       # Esperado: 14
-print("(a + b) * c =", resultado2)     # Esperado: 20
-print("a * b + c =", resultado3)       # Esperado: 10
-print("a + b ** c =", resultado4)      # Esperado: 83
-print("(a + b) ** c =", resultado5)    # Esperado: 625
-print("")
-
-# Precedência com divisão e módulo
-print("--- PRECEDÊNCIA COM DIVISÃO E MÓDULO ---")
-resultado6 = a + b / c * d      # 2 + ((3 / 4) * 5) = 2 + (0.75 * 5) = 2 + 3.75 = 5.75
-resultado7 = a * b % c + d      # ((2 * 3) % 4) + 5 = (6 % 4) + 5 = 2 + 5 = 7
-resultado8 = a + b % c * d      # 2 + ((3 % 4) * 5) = 2 + (3 * 5) = 2 + 15 = 17
-
-print("a + b / c * d =", resultado6)   # Esperado: 5.75
-print("a * b % c + d =", resultado7)   # Esperado: 7
-print("a + b % c * d =", resultado8)   # Esperado: 17
-print("")
-
-# Precedência com operadores de comparação
-print("--- PRECEDÊNCIA COM COMPARAÇÕES ---")
-comp1 = a + b > c * d           # (2 + 3) > (4 * 5) = 5 > 20 = False
-comp2 = a * b == c + d          # (2 * 3) == (4 + 5) = 6 == 9 = False
-comp3 = a + b <= c ** d         # (2 + 3) <= (4 ** 5) = 5 <= 1024 = True
-
-print("a + b > c * d =", comp1)        # Esperado: False
-print("a * b == c + d =", comp2)       # Esperado: False
-print("a + b <= c ** d =", comp3)      # Esperado: True
-print("")
+print("a > b + c =", comp1)
+print("a + b > c * 2 =", comp2)
+print("a * b > c + 10 =", comp3)
 
 # Precedência com operadores lógicos
-print("--- PRECEDÊNCIA COM OPERADORES LÓGICOS ---")
-bool1 = True
-bool2 = False
-logico1 = bool1 and a > b or bool2     # (True and (2 > 3)) or False = (True and False) or False = False or False = False
-logico2 = bool1 or a > b and bool2     # True or ((2 > 3) and False) = True or (False and False) = True or False = True
-logico3 = not bool1 and a == b         # (not True) and (2 == 3) = False and False = False
+log1 = True or False and False    # Esperado: True (and primeiro)
+log2 = True and False or True     # Esperado: True (and primeiro)
+log3 = not False and True        # Esperado: True (not primeiro)
 
-print("bool1 and a > b or bool2 =", logico1)      # Esperado: False
-print("bool1 or a > b and bool2 =", logico2)      # Esperado: True
-print("not bool1 and a == b =", logico3)          # Esperado: False
-print("")
+print("True or False and False =", log1)
+print("True and False or True =", log2)
+print("not False and True =", log3)
 
-# Expressões complexas
-print("--- EXPRESSÕES COMPLEXAS ---")
-# a + b * c > d and bool1 or not bool2
-# = (2 + (3 * 4)) > 5 and True or (not False)
-# = (2 + 12) > 5 and True or True
-# = 14 > 5 and True or True
-# = True and True or True
-# = True or True
-# = True
-complexo = a + b * c > d and bool1 or not bool2
+# Precedência mista (aritmética + comparação + lógica)
+x = 10
+y = 5
+z = 3
 
-print("a + b * c > d and bool1 or not bool2 =", complexo)  # Esperado: True
-print("")
+misto1 = x > y and y > z          # Esperado: True (10 > 5 and 5 > 3)
+misto2 = x + y > z * 4 or False   # Esperado: True (15 > 12 or False)
+misto3 = not x < y or y == z + 2  # Esperado: True (not False or True)
 
-# Teste adicional de precedência
-print("--- TESTES ADICIONAIS DE PRECEDÊNCIA ---")
-teste1 = a + b * c / d          # 2 + ((3 * 4) / 5) = 2 + (12 / 5) = 2 + 2.4 = 4.4
-teste2 = a ** b + c * d         # (2 ** 3) + (4 * 5) = 8 + 20 = 28
-teste3 = a < b and c > d        # (2 < 3) and (4 > 5) = True and False = False
+print("x > y and y > z =", misto1)
+print("x + y > z * 4 or False =", misto2)
+print("not x < y or y == z + 2 =", misto3)
 
-print("a + b * c / d =", teste1)       # Esperado: 4.4
-print("a ** b + c * d =", teste2)      # Esperado: 28
-print("a < b and c > d =", teste3)     # Esperado: False
+# Precedência com parênteses complexos
+complexo1 = (x + y) * (z - 1)     # Esperado: 30 (15 * 2)
+complexo2 = x * (y + z) - 10      # Esperado: 70 (10 * 8 - 10)
+complexo3 = (x > y) and (y > z)   # Esperado: True (True and True)
 
-print("=== TESTES DE PRECEDÊNCIA CONCLUÍDOS ===")
+print("(x + y) * (z - 1) =", complexo1)
+print("x * (y + z) - 10 =", complexo2)
+print("(x > y) and (y > z) =", complexo3)
+
+print("=== TESTE DE PRECEDÊNCIA CONCLUÍDO ===")
