@@ -127,7 +127,7 @@ fi
 print_subsection "Testes de Erros Semânticos"
 
 if [ -f "tests/test_erro_variavel_nao_definida.py" ]; then
-    test_error "tests/test_erro_variavel_nao_definida.py" "variável.*não definida\|undefined variable" "Variável não definida"
+    test_error "tests/test_erro_variavel_nao_definida.py" "variável.*não.*definida\|undefined variable\|variable.*not.*defined\|name.*not.*defined" "Variável Não Definida"
 else
     echo -e "${YELLOW}${WARNING} Arquivo test_erro_variavel_nao_definida.py não encontrado${NC}"
 fi

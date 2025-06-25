@@ -1,4 +1,4 @@
 # Teste: Função não definida
-x = 10
-y = 20
-soma = add(x, y)  # Função 'add' não existe 
+print("Teste de função não definida")
+resultado = funcao_inexistente(5, 10)  # Esta função não foi definida
+print("Resultado:", resultado)
