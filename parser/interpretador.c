@@ -55,7 +55,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
             Simbolo* s = buscar_simbolo(tabela, no->dados.identificador);
             if (!s) {
                 fprintf(stderr, "[ERRO] (linha %d): Variável '%s' não definida\n", no->linha, no->dados.identificador);
-                return criar_resultado_vazio();
+                exit(1);
             }
             Resultado resultado = criar_resultado_vazio();
             resultado.tipo = s->tipo;
@@ -283,6 +283,7 @@ static Resultado interpretar_no(NoAst* no, TabelaSimbolos* tabela) {
                     }
                 } else {
                     fprintf(stderr, "[ERRO] (linha %d): Função '%s' não definida\n", no->linha, no->dados.chamada_funcao.nome_funcao);
+                    exit(1);
                 }
                 return criar_resultado_vazio();
             }

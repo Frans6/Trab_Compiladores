@@ -109,31 +109,74 @@ done
 print_header "TESTES AVANÇADOS"
 
 print_subsection "Tratamento de Erros"
-# Test error handling with corrected files
+# Testes de erro com verificação de mensagem
 error_tests_passed=0
 total_error_tests=0
 
+declare -A error_tests_msgs
+error_tests_msgs["test_erro_divisao_zero.py"]="Divisão por zero"
+error_tests_msgs["test_erro_modulo_zero.py"]="Módulo por zero"
+error_tests_msgs["test_erro_variavel_nao_definida.py"]="Variável 'x' não definida"
+error_tests_msgs["test_erro_funcao_nao_definida.py"]="Função 'add' não definida"
+error_tests_msgs["test_erro_sintaxe.py"]="syntax error"
+error_tests_msgs["test_erro_indentacao.py"]="Indentação inconsistente na linha"
+error_tests_msgs["test_erro_caractere_invalido.py"]="Caractere inválido '@'"
+error_tests_msgs["test_erro_arquivo_inexistente.py"]="Não foi possível abrir o arquivo"
+
 test_files=(
     "test_erro_divisao_zero.py:Divisão por Zero"
-    "test_erro_modulo_zero.py:Módulo por Zero"  
+    "test_erro_modulo_zero.py:Módulo por Zero"
     "test_erro_variavel_nao_definida.py:Variável Não Definida"
+    "test_erro_funcao_nao_definida.py:Função Não Definida"
+    "test_erro_sintaxe.py:Erro de Sintaxe"
+    "test_erro_indentacao.py:Erro de Indentação"
+    "test_erro_caractere_invalido.py:Caractere Inválido"
+    "test_erro_arquivo_inexistente.py:Arquivo Inexistente"
 )
 
 for test_pair in "${test_files[@]}"; do
     IFS=':' read -r filename test_desc <<< "$test_pair"
     ((total_error_tests++))
-    
-    if [ -f "tests/$filename" ]; then
-        python3 indent_preproc.py "tests/$filename" > "build/processed_$filename" 2>/dev/null
-        timeout 5s ./interpretador "build/processed_$filename" > /dev/null 2>&1
-        if [ $? -ne 0 ]; then
+    expected_msg="${error_tests_msgs[$filename]}"
+    if [ "$filename" = "test_erro_arquivo_inexistente.py" ]; then
+        # Testa arquivo inexistente
+        output=$(timeout 5s ./interpretador build/arquivo_que_nao_existe.py 2>&1)
+        status=$?
+        if [ $status -ne 0 ] && echo "$output" | grep -q "$expected_msg"; then
             ((error_tests_passed++))
             print_test_result 0 "$test_desc"
         else
             print_test_result 1 "$test_desc"
+            echo -e "${YELLOW}${WARNING} Saída obtida:${NC}\n$output"
         fi
     else
-        echo -e "${YELLOW}${WARNING} Arquivo tests/$filename não encontrado${NC}"
+        if [ -f "tests/$filename" ]; then
+            if [ "$filename" = "test_erro_indentacao.py" ]; then
+                # Para erro de indentação, capturar saída do pré-processador
+                output=$(python3 indent_preproc.py "tests/$filename" 2>&1)
+                status=$?
+                if [ $status -ne 0 ] && echo "$output" | grep -q "$expected_msg"; then
+                    ((error_tests_passed++))
+                    print_test_result 0 "$test_desc"
+                else
+                    print_test_result 1 "$test_desc"
+                    echo -e "${YELLOW}${WARNING} Saída obtida:${NC}\n$output"
+                fi
+            else
+                python3 indent_preproc.py "tests/$filename" > "build/processed_$filename" 2>/dev/null
+                output=$(timeout 5s ./interpretador "build/processed_$filename" 2>&1)
+                status=$?
+                if [ $status -ne 0 ] && echo "$output" | grep -q "$expected_msg"; then
+                    ((error_tests_passed++))
+                    print_test_result 0 "$test_desc"
+                else
+                    print_test_result 1 "$test_desc"
+                    echo -e "${YELLOW}${WARNING} Saída obtida:${NC}\n$output"
+                fi
+            fi
+        else
+            echo -e "${YELLOW}${WARNING} Arquivo tests/$filename não encontrado${NC}"
+        fi
     fi
 done
 
@@ -173,7 +216,10 @@ while contador < 3:
 print("Teste de integração concluído com sucesso!")
 EOF
 
-./interpretador build/integration_test.py > /dev/null 2>&1
+# Process the integration test through the preprocessor
+python3 indent_preproc.py build/integration_test.py > build/processed_integration_test.py 2>/dev/null
+
+./interpretador build/processed_integration_test.py > /dev/null 2>&1
 print_test_result $? "Teste de Integração Completo"
 
 # Final Summary

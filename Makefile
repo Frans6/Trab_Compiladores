@@ -39,7 +39,7 @@ PROCESSED_SCRIPT = $(BUILD_DIR)/processed.py
 
 .PHONY: all clean run test test-tabela test-ast test-integrado test-lexer test-parser test-erros \
         test-expressoes test-condicionais test-loops test-tipos test-comparacoes test-casos-extremos \
-        test-funcoes-builtin test-operadores-logicos test-precedencia-operadores test-parser-suite
+        test-funcoes-builtin test-operadores-logicos test-precedencia-operadores test-parser-suite test-resultados
 
 # --- Regras Principais ---
 all: $(TARGET)
@@ -141,16 +141,23 @@ test-erros: all
 		echo -e "$(YELLOW)⚠️  Script test_erros.sh não encontrado ou não executável$(NC)"; \
 	fi
 
+# --- Teste de Resultados ---
+test-resultados: all
+	@echo -e "$(BLUE)🧪 Executando testes automatizados de resultados...$(NC)"
+	@if [ -x "./test_resultados.sh" ]; then \
+		chmod +x ./test_resultados.sh; \
+		./test_resultados.sh; \
+	else \
+		echo -e "$(YELLOW)⚠️  Script test_resultados.sh não encontrado ou não executável$(NC)"; \
+	fi
+
 # --- Suite de testes do parser ---
 test-parser-suite: test-expressoes test-condicionais test-loops test-tipos test-comparacoes test-casos-extremos \
                    test-funcoes-builtin test-operadores-logicos test-precedencia-operadores
 	@echo -e "$(GREEN)🎯 Suite de testes do parser concluída!$(NC)"
 
 # --- Testes individuais ---
-RUN_PARSER_TEST = $(BUILD_DIR)/test_parser
-$(RUN_PARSER_TEST): test_parser.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUILD_DIR)
-	@echo -e "$(BLUE)🔨 Compilando executável de teste do parser...$(NC)"
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+RUN_PARSER_TEST = $(TARGET)
 
 define RUN_TEST_TEMPLATE
 .PHONY: $(1)
