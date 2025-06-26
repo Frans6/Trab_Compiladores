@@ -9,6 +9,7 @@ PARSER_DIR = parser
 LEXER_DIR  = lexer
 BUILD_DIR  = build
 TESTS_DIR  = tests
+SCRIPTS_DIR = scripts
 
 # --- Configurações de Compilação ---
 CFLAGS   = -I$(PARSER_DIR) -Wall -Wextra -g
@@ -39,7 +40,7 @@ PROCESSED_SCRIPT = $(BUILD_DIR)/processed.py
 
 .PHONY: all clean run test test-tabela test-ast test-integrado test-lexer test-parser test-erros \
         test-expressoes test-condicionais test-loops test-tipos test-comparacoes test-casos-extremos \
-        test-funcoes-builtin test-operadores-logicos test-precedencia-operadores test-parser-suite test-resultados
+        test-funcoes-builtin test-operadores-logicos test-precedencia-operadores test-parser-suite test-resultados test-complete
 
 # --- Regras Principais ---
 all: $(TARGET)
@@ -81,6 +82,16 @@ run: all
 # --- Alvos de Teste ---
 test: test-tabela test-ast test-integrado test-lexer test-parser-suite test-erros
 	@echo -e "$(GREEN)Todos os testes foram executados!$(NC)"
+
+# --- Teste completo com script principal ---
+test-complete: all
+	@echo -e "$(BLUE)Executando suite completa de testes...$(NC)"
+	@if [ -x "$(SCRIPTS_DIR)/run_tests.sh" ]; then \
+		chmod +x $(SCRIPTS_DIR)/run_tests.sh; \
+		$(SCRIPTS_DIR)/run_tests.sh; \
+	else \
+		echo -e "$(YELLOW)Script $(SCRIPTS_DIR)/run_tests.sh não encontrado ou não executável$(NC)"; \
+	fi
 
 test-tabela: $(BUILD_DIR)/test_tabela
 	@if ./$< > /dev/null 2>&1; then \
@@ -134,21 +145,21 @@ $(BUILD_DIR)/test_lexer_exe: test_lexer.c $(PARSER_OBJS) $(COMMON_OBJS) | $(BUIL
 # --- Teste de Mensagens de Erro ---
 test-erros: all
 	@echo -e "$(BLUE)Executando testes de tratamento de erros...$(NC)"
-	@if [ -x "./test_erros.sh" ]; then \
-		chmod +x ./test_erros.sh; \
-		./test_erros.sh; \
+	@if [ -x "$(SCRIPTS_DIR)/test_erros.sh" ]; then \
+		chmod +x $(SCRIPTS_DIR)/test_erros.sh; \
+		$(SCRIPTS_DIR)/test_erros.sh; \
 	else \
-		echo -e "$(YELLOW)Script test_erros.sh não encontrado ou não executável$(NC)"; \
+		echo -e "$(YELLOW)Script $(SCRIPTS_DIR)/test_erros.sh não encontrado ou não executável$(NC)"; \
 	fi
 
 # --- Teste de Resultados ---
 test-resultados: all
 	@echo -e "$(BLUE)🧪 Executando testes automatizados de resultados...$(NC)"
-	@if [ -x "./test_resultados.sh" ]; then \
-		chmod +x ./test_resultados.sh; \
-		./test_resultados.sh; \
+	@if [ -x "$(SCRIPTS_DIR)/test_resultados.sh" ]; then \
+		chmod +x $(SCRIPTS_DIR)/test_resultados.sh; \
+		$(SCRIPTS_DIR)/test_resultados.sh; \
 	else \
-		echo -e "$(YELLOW)⚠️  Script test_resultados.sh não encontrado ou não executável$(NC)"; \
+		echo -e "$(YELLOW)⚠️  Script $(SCRIPTS_DIR)/test_resultados.sh não encontrado ou não executável$(NC)"; \
 	fi
 
 # --- Suite de testes do parser ---
