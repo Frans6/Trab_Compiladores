@@ -1,5 +1,6 @@
-# Teste: Indentação inconsistente
-x = 10
-if x > 5:
-    print("x é maior que 5")
-  print("Esta linha tem indentação errada")  # Indentação inconsistente 
+# Teste: Erro de indentação inconsistente
+x = 5
+if x > 0:
+    print("x é positivo")
+  print("Indentação incorreta")  # Esta linha tem indentação errada
+print("Esta linha nunca deve ser executada")

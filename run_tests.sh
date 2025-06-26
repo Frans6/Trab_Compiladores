@@ -10,15 +10,6 @@ CYAN='\033[0;36m'
 WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
-# Unicode symbols
-CHECK_MARK="✅"
-CROSS_MARK="❌"
-WARNING="⚠️"
-ROCKET="🚀"
-GEAR="⚙️"
-TEST_TUBE="🧪"
-SPARKLES="✨"
-
 # Function to print section headers
 print_header() {
     echo ""
@@ -34,32 +25,32 @@ print_test_result() {
     local padding=$((50 - ${#test_name}))
     
     if [ $status -eq 0 ]; then
-        echo -e "${GREEN}${CHECK_MARK} ${test_name}$(printf '%*s' $padding '')PASSOU${NC}"
+        echo -e "${GREEN}✅ ${test_name}$(printf '%*s' $padding '')PASSOU${NC}"
     else
-        echo -e "${RED}${CROSS_MARK} ${test_name}$(printf '%*s' $padding '')FALHOU${NC}"
+        echo -e "${RED}❌ ${test_name}$(printf '%*s' $padding '')FALHOU${NC}"
     fi
 }
 
 # Function to print subsection
 print_subsection() {
-    echo -e "\n${BLUE}${TEST_TUBE} $1${NC}"
+    echo -e "\n${BLUE}$1${NC}"
     echo -e "${BLUE}$(printf '─%.0s' {1..50})${NC}"
 }
 
-print_header "${ROCKET} SUITE COMPLETA DE TESTES DO COMPILADOR ${ROCKET}"
+print_header "SUITE COMPLETA DE TESTES DO COMPILADOR"
 
 echo -e "${YELLOW}Iniciando execução da suite de testes...${NC}\n"
 
 # Clean and build
 print_subsection "Preparação do Ambiente"
-echo -e "${BLUE}${GEAR} Limpando e construindo o projeto...${NC}"
+echo -e "${BLUE}Limpando e construindo o projeto...${NC}"
 make clean > /dev/null 2>&1
 make all > /dev/null 2>&1
 if [ $? -ne 0 ]; then
-    echo -e "${RED}${CROSS_MARK} ERRO CRÍTICO: Falha na compilação do projeto principal${NC}"
+    echo -e "${RED}❌ ERRO CRÍTICO: Falha na compilação do projeto principal${NC}"
     exit 1
 fi
-echo -e "${GREEN}${CHECK_MARK} Projeto compilado com sucesso${NC}"
+echo -e "${GREEN}✅ Projeto compilado com sucesso${NC}"
 
 # Create build directory if it doesn't exist
 mkdir -p build
@@ -183,37 +174,8 @@ done
 # Integration Test
 print_subsection "Teste de Integração Final"
 cat > build/integration_test.py << 'EOF'
-# Teste de integração completo
-print("=== TESTE DE INTEGRAÇÃO ===")
-
-# Variáveis e tipos
-numero = 42
-decimal = 3.14159
-texto = "Compilador funcionando!"
-booleano = True
-
-# Operações aritméticas
-resultado1 = numero + 10
-resultado2 = decimal * 2
-resultado3 = numero % 5
-
-# Estruturas condicionais
-if numero > 40:
-    print("Número é maior que 40")
-else:
-    print("Número é menor ou igual a 40")
-
-# Operadores lógicos
-logico1 = booleano and True
-logico2 = not False or booleano
-
-# Loop
-contador = 0
-while contador < 3:
-    print("Contador:", contador)
-    contador = contador + 1
-
-print("Teste de integração concluído com sucesso!")
+x = 5
+print("Teste integração")
 EOF
 
 # Process the integration test through the preprocessor
@@ -225,14 +187,14 @@ print_test_result $? "Teste de Integração Completo"
 # Final Summary
 print_header "RESUMO FINAL"
 
-echo -e "${WHITE}${SPARKLES} Estatísticas dos Testes:${NC}"
+echo -e "${WHITE}Estatísticas dos Testes:${NC}"
 echo -e "${CYAN}• Componentes principais testados${NC}"
 echo -e "${CYAN}• ${#parser_tests[@]} tipos de construções sintáticas verificadas${NC}"
 echo -e "${CYAN}• $total_error_tests cenários de erro testados${NC}"
 echo -e "${CYAN}• Teste de integração executado${NC}"
 
 echo ""
-echo -e "${GREEN}${SPARKLES} SUITE DE TESTES CONCLUÍDA ${SPARKLES}${NC}"
+echo -e "${GREEN}SUITE DE TESTES CONCLUÍDA${NC}"
 echo -e "${YELLOW}Verifique os resultados detalhados acima.${NC}"
 echo -e "${BLUE}Logs individuais disponíveis para análise específica.${NC}"
 

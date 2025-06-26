@@ -1,2 +1,2 @@
-# Teste: Variável não definida
-print(x)  # x não foi definida 
+# Teste simples - variavel nao definida
+print(x)
