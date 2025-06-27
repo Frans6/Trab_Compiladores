@@ -1,7 +1,8 @@
 # Escopo do Projeto
 
-### Objetivo:
-Desenvolver um interpretador simplificado para um subconjunto da linguagem Python, utilizando **Flex** para análise léxica e **Bison** para análise sintática. O interpretador será capaz de executar operações básicas como atribuições de variáveis, expressões aritméticas e controle de fluxo com estruturas condicionais.
+### Objetivo: 
+
+ Desenvolver um interpretador simplificado para um subconjunto da linguagem Python, utilizando **Flex** para análise léxica e **Bison** para análise sintática. O interpretador será capaz de executar operações básicas como atribuições de variáveis, expressões aritméticas e controle de fluxo com estruturas condicionais.
 
 ### Ferramentas Utilizadas:
 - **Flex**: Para gerar o analisador léxico, que identificará e classificará os tokens no código Python.
@@ -57,14 +58,15 @@ Desenvolver um interpretador simplificado para um subconjunto da linguagem Pytho
 - **Erros e Depuração**: Melhorias no tratamento de erros e na geração de mensagens de depuração.
 
 ### Conclusão:
+
 <p align="justify"> &emsp;&emsp;Este projeto oferece uma excelente oportunidade para aprender sobre os fundamentos da construção de compiladores e interpretadores, utilizando ferramentas como Flex e Bison. O interpretador construído permitirá a execução de um código Python simplificado, com uma estrutura que pode ser expandida para incluir funcionalidades mais complexas no futuro.</p>
 
----
+<br>
 
 ## Histórico de Versão
 
 | Versão | Data          | Descrição                          | Autor(es)     |
 | ------ | ------------- | ---------------------------------- | ------------- |
-| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
-| `1.0`  |  27/04/2025 |  Criação da página "Escopo" contendo informações sobre o escopo do projeto | Letícia |
-| `1.1`  |  28/04/2025 |  Ajustes e correções em inconsistências no documento | Arthur |
+| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | [Jefferson](https://github.com/Frans6) |
+| `1.0`  |  27/04/2025 |  Criação da página "Escopo" contendo informações sobre o escopo do projeto |[Letícia Resende](https://github.com/LeticiaResende23)|
+| `1.1`  |  28/04/2025 |  Ajustes e correções em inconsistências no documento | [Arthur Evangelista](https://github.com/arthurevg) |

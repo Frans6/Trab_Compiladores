@@ -7,13 +7,13 @@ Neste documento, será apresentada a metodologia adotada para o desenvolvimento 
 
 ##  Abordagem Metodológica
 
-A metodologia utilizada no desenvolvimento do projeto foi baseada em práticas ágeis como o Scrum e adaptada para a rotina dos membros do grupo, visando uma flexibilidade de horários adequada ao desenvolvimento do projeto enquanto se mantém um controle rigoroso sobre os processos críticos. 
+<p align="justify"> &emsp;&emsp;A metodologia utilizada no desenvolvimento do projeto foi baseada em práticas ágeis como o Scrum e adaptada para a rotina dos membros do grupo, visando uma flexibilidade de horários adequada ao desenvolvimento do projeto enquanto se mantém um controle rigoroso sobre os processos críticos.</p>
 
 O processo de trabalho foi dividido nas seguintes etapas:
 
 ### Planejamento
 
-O planejamento inicial foi essencial para definir os objetivos do projeto, os recursos necessários e as expectativas de todas as partes envolvidas. Durante esta fase, foram realizadas as seguintes atividades:
+<p align="justify"> &emsp;&emsp;O planejamento inicial foi essencial para definir os objetivos do projeto, os recursos necessários e as expectativas de todas as partes envolvidas. Durante esta fase, foram realizadas as seguintes atividades:</p>
 
 - **Levantamento dos requisitos do projeto**: Definição das funcionalidades do interpretador, como análise léxica, sintática e execução de código Python.
 - **Análise de viabilidade técnica**: Avaliação da utilização de ferramentas como Flex e Bison para análise léxica e sintática, e da viabilidade de implementação do interpretador em C.
@@ -37,7 +37,7 @@ O projeto utiliza uma série de ferramentas e tecnologias para garantir a efici�
 
 ## 4. Conclusão
 
-A metodologia adotada tem sido essencial para o progresso do projeto, permitindo que os objetivos sejam alcançados de forma incremental. Apesar de ainda estarmos na fase de desenvolvimento, os resultados obtidos até agora indicam que estamos no caminho certo para cumprir os objetivos dentro do prazo estabelecido.
+<p align="justify"> &emsp;&emsp;A metodologia adotada tem sido essencial para o progresso do projeto, permitindo que os objetivos sejam alcançados de forma incremental. Apesar de ainda estarmos na fase de desenvolvimento, os resultados obtidos até agora indicam que estamos no caminho certo para cumprir os objetivos dentro do prazo estabelecido.</p>
 
 ---
 
@@ -45,6 +45,6 @@ A metodologia adotada tem sido essencial para o progresso do projeto, permitindo
 
 | Versão | Data          | Descrição                          | Autor(es)     |
 | ------ | ------------- | ---------------------------------- | ------------- |
-| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
-| `1.0`  |  27/04/2025 |  Criação da página "Metodologia" contendo informações sobre a metodologia utilizada | Carolina |
-| `1.1`  |  28/04/2025 |  Atualização de informações no documento | Arthur |
+| `1.0`  |  27/04/2025 |  Criação do GitPages do grupo | [Jefferson](https://github.com/Frans6) |
+| `1.1`  |  27/04/2025 |  Criação da página "Metodologia" contendo informações sobre a metodologia utilizada | [Carolina](https://github.com/CarolinaBarb) |
+| `1.2`  |  28/04/2025 |  Atualização de informações no documento | [Arthur Evangelista](https://github.com/arthurevg) |

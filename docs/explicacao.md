@@ -35,6 +35,6 @@ O projeto visa criar um **interpretador de uma versão simplificada da linguagem
 
 | Versão | Data          | Descrição                          | Autor(es)     |
 | ------ | ------------- | ---------------------------------- | ------------- |
-| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
-| `1.0`  |  27/04/2025 |  Criação da página "Explicação do projeto" contendo informações sobre o projeto | Letícia |
-| `1.01`  |  28/04/2025 | Pequenos ajustes no documento | Arthur |
+| `1.0`  |  27/04/2025 |  Criação do GitPages do grupo | [Jefferson](https://github.com/Frans6)  |
+| `1.1`  |  27/04/2025 |  Criação da página "Explicação do projeto" contendo informações sobre o projeto | [Letícia Resende](https://github.com/LeticiaResende23) |
+| `1.2`  |  28/04/2025 | Pequenos ajustes no documento | [Arthur Evangelista](https://github.com/arthurevg) |
