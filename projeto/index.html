@@ -1,0 +1,1941 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/projeto/">
+      
+      
+        <link rel="prev" href="../escopo/">
+      
+      
+        <link rel="next" href="../instalacao/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Sobre o Projeto - Compiladores</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacao-do-projeto" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Compiladores" class="md-header__button md-logo" aria-label="Compiladores" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Compiladores
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sobre o Projeto
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../cronograma/" class="md-tabs__link">
+          
+  
+  
+  Planejamento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../explicacao/" class="md-tabs__link">
+          
+  
+  
+  Visão Geral
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../instalacao/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Instalação
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../uso/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Uso
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../desenvolvimento/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Desenvolvimento
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../testes/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Testes
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Compiladores" class="md-nav__button md-logo" aria-label="Compiladores" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Compiladores
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Planejamento
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Planejamento
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronograma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metodologia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metodologia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Visão Geral
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Visão Geral
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explicacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explicação do Projeto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../escopo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Escopo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Sobre o Projeto
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sobre o Projeto
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo Geral
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-detalhada-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura Detalhada do Projeto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estrutura Detalhada do Projeto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivos-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivos Principais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquivos Principais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mainc" class="md-nav__link">
+    <span class="md-ellipsis">
+      main.c
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Makefile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indent_preprocpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      indent_preproc.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-lexer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta lexer/
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pasta lexer/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lexerl" class="md-nav__link">
+    <span class="md-ellipsis">
+      lexer.l
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta parser/
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pasta parser/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parsery" class="md-nav__link">
+    <span class="md-ellipsis">
+      parser.y
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asth-e-astc" class="md-nav__link">
+    <span class="md-ellipsis">
+      ast.h e ast.c
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      types.h
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabelah-e-tabelac" class="md-nav__link">
+    <span class="md-ellipsis">
+      tabela.h e tabela.c
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretadorh-e-interpretadorc" class="md-nav__link">
+    <span class="md-ellipsis">
+      interpretador.h e interpretador.c
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta tests/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta scripts/
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes do Sistema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Componentes do Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pre-processador-indent_preprocpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Pré-processador (indent_preproc.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-analisador-lexico-lexerl" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Analisador Léxico (lexer.l)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-analisador-sintatico-parsery" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Analisador Sintático (parser.y)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-arvore-sintatica-abstrata-ast" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Árvore Sintática Abstrata (AST)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-interpretador-interpretadorc" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Interpretador (interpretador.c)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-tabela-de-simbolos-tabelac" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Tabela de Símbolos (tabela.c)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionalidades Implementadas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidades Implementadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Dados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estruturas-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estruturas de Controle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcoes-built-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funções Built-in
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tratamento de Erros
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo de Dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compilação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desenvolvimento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Desenvolvimento
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo Geral
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-detalhada-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estrutura Detalhada do Projeto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estrutura Detalhada do Projeto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivos-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivos Principais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arquivos Principais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mainc" class="md-nav__link">
+    <span class="md-ellipsis">
+      main.c
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#makefile" class="md-nav__link">
+    <span class="md-ellipsis">
+      Makefile
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indent_preprocpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      indent_preproc.py
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-lexer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta lexer/
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pasta lexer/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lexerl" class="md-nav__link">
+    <span class="md-ellipsis">
+      lexer.l
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta parser/
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pasta parser/">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parsery" class="md-nav__link">
+    <span class="md-ellipsis">
+      parser.y
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asth-e-astc" class="md-nav__link">
+    <span class="md-ellipsis">
+      ast.h e ast.c
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typesh" class="md-nav__link">
+    <span class="md-ellipsis">
+      types.h
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabelah-e-tabelac" class="md-nav__link">
+    <span class="md-ellipsis">
+      tabela.h e tabela.c
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretadorh-e-interpretadorc" class="md-nav__link">
+    <span class="md-ellipsis">
+      interpretador.h e interpretador.c
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta tests/
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasta-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasta scripts/
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes do Sistema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Componentes do Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-pre-processador-indent_preprocpy" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Pré-processador (indent_preproc.py)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-analisador-lexico-lexerl" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Analisador Léxico (lexer.l)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-analisador-sintatico-parsery" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Analisador Sintático (parser.y)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-arvore-sintatica-abstrata-ast" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Árvore Sintática Abstrata (AST)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-interpretador-interpretadorc" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Interpretador (interpretador.c)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-tabela-de-simbolos-tabelac" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Tabela de Símbolos (tabela.c)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidades-implementadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionalidades Implementadas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidades Implementadas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipos de Dados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      Operadores
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estruturas-de-controle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Estruturas de Controle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#funcoes-built-in" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funções Built-in
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tratamento de Erros
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fluxo-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fluxo de Dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fluxo de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-compilacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Compilação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Execução
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="documentacao-do-projeto">Documentação do Projeto</h1>
+<p>Esta seção contém a documentação técnica detalhada do interpretador Python, incluindo estrutura de arquivos e componentes do sistema.</p>
+<h2 id="fluxo-geral">Fluxo Geral</h2>
+<p>O interpretador Python segue um fluxo clássico de compiladores com as seguintes fases:</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span>
+<span class="normal"><a href="#__codelineno-0-38">38</a></span>
+<span class="normal"><a href="#__codelineno-0-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>CÓDIGO PYTHON (entrada)
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>           |
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>           v
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>    PRÉ-PROCESSADOR
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>    (indent_preproc.py)
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>    • Converte indentação em tokens @INDENT@/@DEDENT@
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>    • Remove comentários
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>    • Normaliza quebras de linha
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>           |
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>           v
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>    ANALISADOR LÉXICO
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>    (Flex/lexer.l)
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a>    • Identifica tokens (palavras-chave, operadores, etc.)
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    • Converte texto em sequência de tokens
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a>    • Detecta erros léxicos
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a>           |
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a>           v
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>    ANALISADOR SINTÁTICO
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a>    (Bison/parser.y)
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a>    • Verifica estrutura gramatical
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    • Constrói a Árvore Sintática Abstrata (AST)
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>    • Detecta erros sintáticos
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a>           |
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a>           v
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>    ÁRVORE SINTÁTICA ABSTRATA (AST)
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a>    • Representação hierárquica do código
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a>    • Estrutura de dados em árvore
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a>    • Nós para cada tipo de instrução
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a>           |
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a>           v
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    INTERPRETADOR
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a>    (interpretador.c)
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a>    • Percorre a AST recursivamente
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    • Executa instruções
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a>    • Gerencia tabela de símbolos
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a>    • Trata erros de execução
+<a id="__codelineno-0-37" name="__codelineno-0-37"></a>           |
+<a id="__codelineno-0-38" name="__codelineno-0-38"></a>           v
+<a id="__codelineno-0-39" name="__codelineno-0-39"></a>    RESULTADO (saída)
+</code></pre></div></td></tr></table></div>
+<h2 id="estrutura-detalhada-do-projeto">Estrutura Detalhada do Projeto</h2>
+<h3 id="arquivos-principais">Arquivos Principais</h3>
+<h4 id="mainc">main.c</h4>
+<p><strong>Função</strong>: Ponto de entrada do programa</p>
+<p><strong>Responsabilidades</strong>:
+- Inicialização do sistema
+- Abertura e validação do arquivo de entrada
+- Chamada do parser (yyparse)
+- Execução do interpretador
+- Tratamento de erros de alto nível</p>
+<p><strong>Fluxo principal</strong>:
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span>
+<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="mf">1.</span><span class="w"> </span><span class="n">Validar</span><span class="w"> </span><span class="n">argumentos</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">linha</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">comando</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="mf">2.</span><span class="w"> </span><span class="n">Abrir</span><span class="w"> </span><span class="n">arquivo</span><span class="w"> </span><span class="n">Python</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">entrada</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="mf">3.</span><span class="w"> </span><span class="n">Configurar</span><span class="w"> </span><span class="n">entrada</span><span class="w"> </span><span class="n">para</span><span class="w"> </span><span class="n">o</span><span class="w"> </span><span class="n">lexer</span><span class="w"> </span><span class="p">(</span><span class="n">yyin</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="mf">4.</span><span class="w"> </span><span class="n">Executar</span><span class="w"> </span><span class="n">análise</span><span class="w"> </span><span class="n">sintática</span><span class="w"> </span><span class="p">(</span><span class="n">yyparse</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="mf">5.</span><span class="w"> </span><span class="n">Verificar</span><span class="w"> </span><span class="n">se</span><span class="w"> </span><span class="n">AST</span><span class="w"> </span><span class="n">foi</span><span class="w"> </span><span class="n">criada</span><span class="w"> </span><span class="n">com</span><span class="w"> </span><span class="n">sucesso</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="mf">6.</span><span class="w"> </span><span class="n">Executar</span><span class="w"> </span><span class="n">interpretador</span><span class="w"> </span><span class="n">na</span><span class="w"> </span><span class="n">AST</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="mf">7.</span><span class="w"> </span><span class="n">Limpar</span><span class="w"> </span><span class="n">recursos</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="n">finalizar</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="makefile">Makefile</h4>
+<p><strong>Função</strong>: Sistema de build automatizado</p>
+<p><strong>Responsabilidades</strong>:
+- Compilação do projeto
+- Geração de arquivos Flex/Bison
+- Execução de testes
+- Limpeza de arquivos temporários</p>
+<p><strong>Alvos principais</strong>:
+- <code>make</code> - Compila o projeto
+- <code>make clean</code> - Remove arquivos compilados
+- <code>make run</code> - Compila e executa
+- <code>make test</code> - Executa suite de testes
+- <code>make test-complete</code> - Executa todos os testes</p>
+<h4 id="indent_preprocpy">indent_preproc.py</h4>
+<p><strong>Função</strong>: Pré-processador de indentação Python</p>
+<p><strong>Responsabilidades</strong>:
+- Converter espaços/tabs em tokens <code>@INDENT@</code> e <code>@DEDENT@</code>
+- Remover comentários (linhas começando com <code>#</code>)
+- Normalizar quebras de linha
+- Detectar erros de indentação inconsistente</p>
+<p><strong>Algoritmo</strong>:
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span>
+<span class="normal"><a href="#__codelineno-2-4">4</a></span>
+<span class="normal"><a href="#__codelineno-2-5">5</a></span>
+<span class="normal"><a href="#__codelineno-2-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="mf">1.</span> <span class="n">Ler</span> <span class="n">arquivo</span> <span class="n">linha</span> <span class="n">por</span> <span class="n">linha</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="mf">2.</span> <span class="n">Calcular</span> <span class="n">nível</span> <span class="n">de</span> <span class="n">indentação</span> <span class="n">atual</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="mf">3.</span> <span class="n">Comparar</span> <span class="n">com</span> <span class="n">nível</span> <span class="n">anterior</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="mf">4.</span> <span class="n">Gerar</span> <span class="n">tokens</span> <span class="nd">@INDENT</span><span class="o">@</span> <span class="n">ou</span> <span class="nd">@DEDENT</span><span class="o">@</span> <span class="n">conforme</span> <span class="n">necessário</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="mf">5.</span> <span class="n">Remover</span> <span class="n">comentários</span> <span class="n">e</span> <span class="n">espaços</span> <span class="n">em</span> <span class="n">branco</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="mf">6.</span> <span class="n">Validar</span> <span class="n">consistência</span> <span class="n">da</span> <span class="n">indentação</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="pasta-lexer">Pasta lexer/</h3>
+<h4 id="lexerl">lexer.l</h4>
+<p><strong>Função</strong>: Especificação do analisador léxico (Flex)</p>
+<p><strong>Responsabilidades</strong>:
+- Reconhecimento de tokens Python
+- Conversão de texto em sequência de tokens
+- Detecção de erros léxicos</p>
+<p><strong>Tokens reconhecidos</strong>:
+- <strong>Palavras-chave</strong>: <code>if</code>, <code>else</code>, <code>while</code>, <code>break</code>, <code>continue</code>, <code>and</code>, <code>or</code>, <code>not</code>, <code>True</code>, <code>False</code>, <code>print</code>, <code>input</code>
+- <strong>Operadores</strong>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code>, <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>=</code>
+- <strong>Literais</strong>: Inteiros, floats, strings, booleanos
+- <strong>Identificadores</strong>: Nomes de variáveis e funções
+- <strong>Especiais</strong>: <code>@INDENT@</code>, <code>@DEDENT@</code>, <code>:</code>, <code>,</code>, <code>(</code>, <code>)</code>, <code>\n</code></p>
+<h3 id="pasta-parser">Pasta parser/</h3>
+<h4 id="parsery">parser.y</h4>
+<p><strong>Função</strong>: Gramática do analisador sintático (Bison)</p>
+<p><strong>Responsabilidades</strong>:
+- Definição da gramática Python simplificada
+- Construção da Árvore Sintática Abstrata (AST)
+- Detecção de erros sintáticos
+- Gerenciamento de precedência de operadores</p>
+<p><strong>Regras gramaticais principais</strong>:
+<div class="language-text highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Text Only</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
+<span class="normal"><a href="#__codelineno-3-2">2</a></span>
+<span class="normal"><a href="#__codelineno-3-3">3</a></span>
+<span class="normal"><a href="#__codelineno-3-4">4</a></span>
+<span class="normal"><a href="#__codelineno-3-5">5</a></span>
+<span class="normal"><a href="#__codelineno-3-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>programa: statement_list
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>statement: simple_stmt | compound_stmt
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>simple_stmt: atribuicao | chamada_funcao | BREAK | CONTINUE
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>compound_stmt: condicional | loop
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>expressao: termo | expressao ADD termo | expressao SUB termo
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>termo: fator | termo MUL fator | termo DIV fator
+</code></pre></div></td></tr></table></div></p>
+<h4 id="asth-e-astc">ast.h e ast.c</h4>
+<p><strong>Função</strong>: Definição e implementação da Árvore Sintática Abstrata</p>
+<p><strong>Responsabilidades</strong>:
+- Estrutura de dados para representar o código
+- Funções de criação e destruição de nós
+- Diferentes tipos de nós (operações, valores, estruturas de controle)</p>
+<p><strong>Tipos de nós</strong>:
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="n">NODO_OPERACAO</span><span class="p">,</span><span class="w">      </span><span class="c1">// Operações binárias (+, -, *, /, etc.)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="n">NODO_VALOR</span><span class="p">,</span><span class="w">         </span><span class="c1">// Valores literais (42, &quot;texto&quot;, True)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="n">NODO_IDENTIFICADOR</span><span class="p">,</span><span class="w"> </span><span class="c1">// Nomes de variáveis</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span><span class="n">NODO_ATRIBUICAO</span><span class="p">,</span><span class="w">    </span><span class="c1">// Atribuições (x = 10)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="n">NODO_CHAMADA_FUNCAO</span><span class="p">,</span><span class="c1">// Chamadas de função (print(x))</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">NODO_CONDICIONAL</span><span class="p">,</span><span class="w">   </span><span class="c1">// Estruturas if/else</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">    </span><span class="n">NODO_LOOP</span><span class="p">,</span><span class="w">          </span><span class="c1">// Loops while</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">    </span><span class="n">NODO_BLOCO</span><span class="p">,</span><span class="w">         </span><span class="c1">// Blocos de código</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">    </span><span class="n">NODO_BREAK</span><span class="p">,</span><span class="w">         </span><span class="c1">// Instrução break</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">    </span><span class="n">NODO_CONTINUE</span><span class="w">       </span><span class="c1">// Instrução continue</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="p">}</span><span class="w"> </span><span class="n">TipoNo</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="typesh">types.h</h4>
+<p><strong>Função</strong>: Definições de tipos de dados do sistema</p>
+<p><strong>Responsabilidades</strong>:
+- Tipos de dados suportados (int, float, string, bool)
+- Estruturas para resultados de expressões
+- Definições de operadores</p>
+<p><strong>Tipos principais</strong>:
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span>
+<span class="normal"><a href="#__codelineno-5-4">4</a></span>
+<span class="normal"><a href="#__codelineno-5-5">5</a></span>
+<span class="normal"><a href="#__codelineno-5-6">6</a></span>
+<span class="normal"><a href="#__codelineno-5-7">7</a></span>
+<span class="normal"><a href="#__codelineno-5-8">8</a></span>
+<span class="normal"><a href="#__codelineno-5-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">    </span><span class="n">TIPO_INT</span><span class="p">,</span><span class="w"> </span><span class="n">TIPO_FLOAT</span><span class="p">,</span><span class="w"> </span><span class="n">TIPO_STRING</span><span class="p">,</span><span class="w"> </span><span class="n">TIPO_BOOL</span><span class="p">,</span><span class="w"> </span><span class="n">TIPO_NULO</span><span class="w"> </span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="p">}</span><span class="w"> </span><span class="n">TipoDado</span><span class="p">;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="n">ADICAO</span><span class="p">,</span><span class="w"> </span><span class="n">SUBTRACAO</span><span class="p">,</span><span class="w"> </span><span class="n">MULTIPLICACAO</span><span class="p">,</span><span class="w"> </span><span class="n">DIVISAO</span><span class="p">,</span><span class="w"> </span><span class="n">MODULO</span><span class="p">,</span><span class="w"> </span><span class="n">POTENCIA</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">IGUAL</span><span class="p">,</span><span class="w"> </span><span class="n">DIFERENTE</span><span class="p">,</span><span class="w"> </span><span class="n">MENOR</span><span class="p">,</span><span class="w"> </span><span class="n">MENOR_IGUAL</span><span class="p">,</span><span class="w"> </span><span class="n">MAIOR</span><span class="p">,</span><span class="w"> </span><span class="n">MAIOR_IGUAL</span><span class="p">,</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a><span class="w">    </span><span class="n">E_LOGICO</span><span class="p">,</span><span class="w"> </span><span class="n">OU_LOGICO</span><span class="p">,</span><span class="w"> </span><span class="n">NAO_LOGICO</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="p">}</span><span class="w"> </span><span class="n">TipoOperador</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="tabelah-e-tabelac">tabela.h e tabela.c</h4>
+<p><strong>Função</strong>: Tabela de símbolos para gerenciamento de variáveis</p>
+<p><strong>Responsabilidades</strong>:
+- Armazenamento de variáveis e seus valores
+- Busca e inserção de símbolos
+- Gerenciamento de escopo (simplificado)</p>
+<p><strong>Estrutura</strong>:
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">nome</span><span class="p">;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="n">Resultado</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="p">}</span><span class="w"> </span><span class="n">Simbolo</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="n">Simbolo</span><span class="w"> </span><span class="o">*</span><span class="n">simbolos</span><span class="p">;</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">tamanho</span><span class="p">;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">capacidade</span><span class="p">;</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="p">}</span><span class="w"> </span><span class="n">TabelaSimbolos</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<h4 id="interpretadorh-e-interpretadorc">interpretador.h e interpretador.c</h4>
+<p><strong>Função</strong>: Motor de execução do interpretador</p>
+<p><strong>Responsabilidades</strong>:
+- Interpretação da AST
+- Execução de instruções
+- Gerenciamento da tabela de símbolos
+- Tratamento de erros de execução</p>
+<p><strong>Funções principais</strong>:
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kt">void</span><span class="w"> </span><span class="nf">interpretar</span><span class="p">(</span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">no</span><span class="p">);</span><span class="w">                    </span><span class="c1">// Função principal</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">Resultado</span><span class="w"> </span><span class="nf">interpretar_expressao</span><span class="p">(</span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">no</span><span class="p">);</span><span class="w">     </span><span class="c1">// Avalia expressões</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">interpretar_atribuicao</span><span class="p">(</span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">no</span><span class="p">);</span><span class="w">         </span><span class="c1">// Executa atribuições</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="kt">void</span><span class="w"> </span><span class="nf">interpretar_condicional</span><span class="p">(</span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">no</span><span class="p">);</span><span class="w">        </span><span class="c1">// Executa if/else</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="kt">void</span><span class="w"> </span><span class="nf">interpretar_loop</span><span class="p">(</span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">no</span><span class="p">);</span><span class="w">               </span><span class="c1">// Executa while</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="pasta-tests">Pasta tests/</h3>
+<p><strong>Função</strong>: Suite completa de testes do sistema</p>
+<p><strong>Organização</strong>:
+- <strong><code>test_*.py</code></strong> - Testes de funcionalidade (código Python)
+- <strong><code>test_*.c</code></strong> - Testes unitários (componentes C)
+- <strong><code>test_erro_*.py</code></strong> - Testes de tratamento de erros</p>
+<p><strong>Principais categorias</strong>:
+1. <strong>Testes de Expressões</strong> - Operações aritméticas e lógicas
+2. <strong>Testes de Estruturas</strong> - Condicionais, loops, funções
+3. <strong>Testes de Tipos</strong> - Inteiros, floats, strings, booleanos
+4. <strong>Testes de Erro</strong> - Tratamento de exceções e erros
+5. <strong>Testes Unitários</strong> - Componentes individuais</p>
+<h3 id="pasta-scripts">Pasta scripts/</h3>
+<p><strong>Função</strong>: Scripts de automação e teste</p>
+<p><strong>Scripts principais</strong>:
+- <strong><code>run_tests.sh</code></strong> - Suite completa de testes
+- <strong><code>test_resultados.sh</code></strong> - Verificação de resultados
+- <strong><code>test_erros.sh</code></strong> - Testes de tratamento de erros
+- <strong><code>quick_test.sh</code></strong> - Teste rápido</p>
+<h2 id="componentes-do-sistema">Componentes do Sistema</h2>
+<h3 id="1-pre-processador-indent_preprocpy">1. Pré-processador (indent_preproc.py)</h3>
+<p>O pré-processador resolve um dos maiores desafios da linguagem Python: a indentação. Ele converte a indentação baseada em espaços em tokens explícitos que podem ser processados pelo lexer.</p>
+<p><strong>Desafios resolvidos</strong>:
+- Detecção de níveis de indentação
+- Validação de consistência
+- Geração de tokens <code>@INDENT@</code> e <code>@DEDENT@</code></p>
+<h3 id="2-analisador-lexico-lexerl">2. Analisador Léxico (lexer.l)</h3>
+<p>O lexer identifica e categoriza os elementos básicos da linguagem Python.</p>
+<p><strong>Características</strong>:
+- Reconhecimento de todos os tokens Python básicos
+- Tratamento de strings com aspas simples e duplas
+- Suporte a números inteiros, floats e notação científica
+- Detecção de palavras-chave e identificadores</p>
+<h3 id="3-analisador-sintatico-parsery">3. Analisador Sintático (parser.y)</h3>
+<p>O parser verifica a estrutura gramatical e constrói a AST.</p>
+<p><strong>Funcionalidades</strong>:
+- Gramática Python simplificada mas completa
+- Precedência de operadores correta
+- Construção hierárquica da AST
+- Detecção de erros sintáticos</p>
+<h3 id="4-arvore-sintatica-abstrata-ast">4. Árvore Sintática Abstrata (AST)</h3>
+<p>A AST é a representação intermediária do código fonte.</p>
+<p><strong>Vantagens</strong>:
+- Estrutura hierárquica clara
+- Fácil navegação e interpretação
+- Separação entre análise e execução
+- Base para otimizações futuras</p>
+<h3 id="5-interpretador-interpretadorc">5. Interpretador (interpretador.c)</h3>
+<p>O interpretador executa o código representado pela AST.</p>
+<p><strong>Capacidades</strong>:
+- Execução de expressões aritméticas e lógicas
+- Controle de fluxo (if/else, while)
+- Gerenciamento de variáveis
+- Funções built-in (print)</p>
+<h3 id="6-tabela-de-simbolos-tabelac">6. Tabela de Símbolos (tabela.c)</h3>
+<p>Gerencia o armazenamento e acesso a variáveis.</p>
+<p><strong>Funcionalidades</strong>:
+- Inserção e busca eficiente de símbolos
+- Armazenamento de diferentes tipos de dados
+- Gerenciamento de memória automático</p>
+<h2 id="funcionalidades-implementadas">Funcionalidades Implementadas</h2>
+<h3 id="tipos-de-dados">Tipos de Dados</h3>
+<ul>
+<li><strong>Inteiros</strong>: Suporte completo a números inteiros positivos e negativos</li>
+<li><strong>Ponto Flutuante</strong>: Números decimais e notação científica</li>
+<li><strong>Strings</strong>: Texto entre aspas simples ou duplas</li>
+<li><strong>Booleanos</strong>: Valores <code>True</code> e <code>False</code></li>
+</ul>
+<h3 id="operadores">Operadores</h3>
+<ul>
+<li><strong>Aritméticos</strong>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, <code>**</code></li>
+<li><strong>Comparação</strong>: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+<li><strong>Lógicos</strong>: <code>and</code>, <code>or</code>, <code>not</code></li>
+</ul>
+<h3 id="estruturas-de-controle">Estruturas de Controle</h3>
+<ul>
+<li><strong>Condicionais</strong>: <code>if</code>/<code>else</code> com suporte a blocos aninhados</li>
+<li><strong>Loops</strong>: <code>while</code> com suporte a <code>break</code> e <code>continue</code></li>
+<li><strong>Blocos</strong>: Indentação Python completa</li>
+</ul>
+<h3 id="funcoes-built-in">Funções Built-in</h3>
+<ul>
+<li><strong><code>print()</code></strong>: Saída formatada com múltiplos argumentos</li>
+</ul>
+<h3 id="tratamento-de-erros">Tratamento de Erros</h3>
+<ul>
+<li><strong>Erros léxicos</strong>: Caracteres inválidos</li>
+<li><strong>Erros sintáticos</strong>: Estrutura gramatical incorreta</li>
+<li><strong>Erros semânticos</strong>: Variáveis não definidas, divisão por zero</li>
+<li><strong>Erros de indentação</strong>: Inconsistência na indentação</li>
+</ul>
+<h2 id="fluxo-de-dados">Fluxo de Dados</h2>
+<h3 id="1-compilacao">1. Compilação</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span>
+<span class="normal"><a href="#__codelineno-8-6">6</a></span>
+<span class="normal"><a href="#__codelineno-8-7">7</a></span>
+<span class="normal"><a href="#__codelineno-8-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># Flex gera lexer.c</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a>flex<span class="w"> </span>-o<span class="w"> </span>build/lexer.c<span class="w"> </span>lexer/lexer.l
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1"># Bison gera parser.tab.c e parser.tab.h</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>bison<span class="w"> </span>-d<span class="w"> </span>-t<span class="w"> </span>-o<span class="w"> </span>parser/parser.tab.c<span class="w"> </span>parser/parser.y
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1"># GCC compila todos os arquivos</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a>gcc<span class="w"> </span>-Iparser<span class="w"> </span>-Wall<span class="w"> </span>-Wextra<span class="w"> </span>-g<span class="w"> </span>*.c<span class="w"> </span>parser/*.c<span class="w"> </span>build/*.c<span class="w"> </span>-o<span class="w"> </span>interpretador<span class="w"> </span>-lfl<span class="w"> </span>-lm
+</code></pre></div></td></tr></table></div>
+<h3 id="2-execucao">2. Execução</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span>
+<span class="normal"><a href="#__codelineno-9-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1"># 1. Pré-processamento</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a>python3<span class="w"> </span>indent_preproc.py<span class="w"> </span>arquivo.py<span class="w"> </span>&gt;<span class="w"> </span>build/processed.py
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="c1"># 2. Análise léxica e sintática</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>./interpretador<span class="w"> </span>build/processed.py
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1"># 3. Interpretação</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="c1"># O interpretador percorre a AST e executa as instruções</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="historico-de-versao">Histórico de Versão</h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1.0</code></td>
+<td>27/06/2025</td>
+<td>Criação do documento</td>
+<td><a href="https://github.com/arthurevg">Arthur Evangelista</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Esta documentação técnica fornece uma visão completa da arquitetura e implementação do interpretador Python.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

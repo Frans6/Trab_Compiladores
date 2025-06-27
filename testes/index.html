@@ -1,0 +1,2465 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/testes/">
+      
+      
+        <link rel="prev" href="../desenvolvimento/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Testes - Compiladores</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacao-dos-testes" class="md-skip">
+          Pular para conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Compiladores" class="md-header__button md-logo" aria-label="Compiladores" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Compiladores
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando busca
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../cronograma/" class="md-tabs__link">
+          
+  
+  
+  Planejamento
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../explicacao/" class="md-tabs__link">
+          
+  
+  
+  Visão Geral
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../instalacao/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Instalação
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../uso/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Uso
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../desenvolvimento/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Desenvolvimento
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Testes
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Compiladores" class="md-nav__button md-logo" aria-label="Compiladores" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Compiladores
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Planejamento
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Planejamento
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronograma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../metodologia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Metodologia
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Visão Geral
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Visão Geral
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explicacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explicação do Projeto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../escopo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Escopo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../projeto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sobre o Projeto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../instalacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Instalação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uso/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uso
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../desenvolvimento/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Desenvolvimento
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Testes
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Testes
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Visão Geral dos Testes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execucao-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Execução dos Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Execução dos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comandos-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Principais
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atencao-para-usuarios-windowswsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Atenção para Usuários Windows/WSL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Atenção para Usuários Windows/WSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-individuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes Individuais
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Estrutura dos Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 Estrutura dos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-unitarios-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes Unitários (C)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes Unitários (C)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test_astc-testes-da-arvore-sintatica-abstrata" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_ast.c - Testes da Árvore Sintática Abstrata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_tabelac-testes-da-tabela-de-simbolos" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_tabela.c - Testes da Tabela de Símbolos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_lexerc-testes-do-analisador-lexico" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_lexer.c - Testes do Analisador Léxico
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-de-funcionalidade-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes de Funcionalidade (Python)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes de Funcionalidade (Python)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test_expressoespy-testes-de-expressoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_expressoes.py - Testes de Expressões
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_condicionaispy-testes-de-estruturas-condicionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_condicionais.py - Testes de Estruturas Condicionais
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_loopspy-testes-de-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_loops.py - Testes de Loops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_tipos_dadospy-testes-de-tipos-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_tipos_dados.py - Testes de Tipos de Dados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes de Erro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes de Erro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_sintaxepy-testes-de-erro-sintatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_sintaxe.py - Testes de Erro Sintático
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_variavel_nao_definidapy-testes-de-variavel-nao-definida" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_variavel_nao_definida.py - Testes de Variável Não Definida
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_divisao_zeropy-testes-de-divisao-por-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_divisao_zero.py - Testes de Divisão por Zero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_indentacaopy-testes-de-erro-de-indentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_indentacao.py - Testes de Erro de Indentação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-de-automacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Scripts de Automação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Scripts de Automação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scriptsrun_testssh-script-principal-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      scripts/run_tests.sh - Script Principal de Testes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptstest_errossh-testes-de-tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      scripts/test_erros.sh - Testes de Tratamento de Erros
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptstest_resultadossh-testes-de-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      scripts/test_resultados.sh - Testes de Resultados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretacao-dos-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Interpretação dos Resultados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Interpretação dos Resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saida-de-testes-bem-sucedidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saída de Testes Bem-sucedidos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saida-de-testes-com-falha" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saída de Testes com Falha
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🐛 Debugging de Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Debugging de Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-gdb-para-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usando GDB para Debugging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-detalhados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs Detalhados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cobertura-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Cobertura de Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Cobertura de Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionalidades-testadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionalidades Testadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#componentes-testados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes Testados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensagens-de-erro-testadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensagens de Erro Testadas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-novos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Adicionando Novos Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Adicionando Novos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-teste-de-funcionalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando Teste de Funcionalidade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-teste-unitario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando Teste Unitário
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#visao-geral-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Visão Geral dos Testes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execucao-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Execução dos Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Execução dos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comandos-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos Principais
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atencao-para-usuarios-windowswsl" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚠️ Atenção para Usuários Windows/WSL
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚠️ Atenção para Usuários Windows/WSL">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-individuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes Individuais
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estrutura-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📁 Estrutura dos Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📁 Estrutura dos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-unitarios-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes Unitários (C)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes Unitários (C)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test_astc-testes-da-arvore-sintatica-abstrata" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_ast.c - Testes da Árvore Sintática Abstrata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_tabelac-testes-da-tabela-de-simbolos" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_tabela.c - Testes da Tabela de Símbolos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_lexerc-testes-do-analisador-lexico" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_lexer.c - Testes do Analisador Léxico
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-de-funcionalidade-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes de Funcionalidade (Python)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes de Funcionalidade (Python)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test_expressoespy-testes-de-expressoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_expressoes.py - Testes de Expressões
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_condicionaispy-testes-de-estruturas-condicionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_condicionais.py - Testes de Estruturas Condicionais
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_loopspy-testes-de-loops" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_loops.py - Testes de Loops
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_tipos_dadospy-testes-de-tipos-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_tipos_dados.py - Testes de Tipos de Dados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-de-erro" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testes de Erro
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes de Erro">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_sintaxepy-testes-de-erro-sintatico" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_sintaxe.py - Testes de Erro Sintático
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_variavel_nao_definidapy-testes-de-variavel-nao-definida" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_variavel_nao_definida.py - Testes de Variável Não Definida
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_divisao_zeropy-testes-de-divisao-por-zero" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_divisao_zero.py - Testes de Divisão por Zero
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test_erro_indentacaopy-testes-de-erro-de-indentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      test_erro_indentacao.py - Testes de Erro de Indentação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#scripts-de-automacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Scripts de Automação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Scripts de Automação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scriptsrun_testssh-script-principal-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      scripts/run_tests.sh - Script Principal de Testes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptstest_errossh-testes-de-tratamento-de-erros" class="md-nav__link">
+    <span class="md-ellipsis">
+      scripts/test_erros.sh - Testes de Tratamento de Erros
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptstest_resultadossh-testes-de-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      scripts/test_resultados.sh - Testes de Resultados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interpretacao-dos-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      📊 Interpretação dos Resultados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📊 Interpretação dos Resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#saida-de-testes-bem-sucedidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saída de Testes Bem-sucedidos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saida-de-testes-com-falha" class="md-nav__link">
+    <span class="md-ellipsis">
+      Saída de Testes com Falha
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debugging-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🐛 Debugging de Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🐛 Debugging de Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#usando-gdb-para-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usando GDB para Debugging
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logs-detalhados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs Detalhados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cobertura-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      📈 Cobertura de Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📈 Cobertura de Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionalidades-testadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionalidades Testadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#componentes-testados" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes Testados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mensagens-de-erro-testadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mensagens de Erro Testadas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adicionando-novos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Adicionando Novos Testes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Adicionando Novos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-teste-de-funcionalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando Teste de Funcionalidade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#criando-teste-unitario" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando Teste Unitário
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="documentacao-dos-testes">🧪 Documentação dos Testes</h1>
+<p>Esta seção descreve a suite completa de testes do interpretador Python, incluindo como executá-los e entender seus resultados.</p>
+<h2 id="visao-geral-dos-testes">📋 Visão Geral dos Testes</h2>
+<p>O projeto inclui uma suite abrangente de testes que cobre:</p>
+<ul>
+<li>✅ <strong>Testes unitários</strong>: Componentes individuais (AST, tabela de símbolos)</li>
+<li>✅ <strong>Testes de integração</strong>: Funcionalidades completas</li>
+<li>✅ <strong>Testes de erro</strong>: Tratamento de exceções e erros</li>
+<li>✅ <strong>Testes de funcionalidade</strong>: Recursos específicos do Python</li>
+<li>✅ <strong>Testes de casos extremos</strong>: Cenários limite</li>
+</ul>
+<h2 id="execucao-dos-testes">🚀 Execução dos Testes</h2>
+<h3 id="comandos-principais">Comandos Principais</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Executar todos os testes</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>make<span class="w"> </span>test-complete
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Executar testes específicos</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>make<span class="w"> </span>test-expressoes
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a>make<span class="w"> </span>test-condicionais
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>make<span class="w"> </span>test-loops
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>make<span class="w"> </span>test-erros
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>make<span class="w"> </span>test-tipos
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>make<span class="w"> </span>test-lexer
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a>...
+</code></pre></div></td></tr></table></div>
+<h2 id="atencao-para-usuarios-windowswsl">⚠️ Atenção para Usuários Windows/WSL</h2>
+<p>Se você está utilizando o Windows com WSL (Windows Subsystem for Linux):</p>
+<ul>
+<li><strong>Sempre execute os comandos de compilação e testes pelo terminal do WSL</strong> (Ubuntu, por exemplo), e não pelo CMD ou PowerShell do Windows.</li>
+<li>Antes de rodar os scripts <code>.sh</code>, converta os finais de linha dos arquivos para o formato Unix e dê permissão de execução:</li>
+</ul>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>Trab_Compiladores
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a>dos2unix<span class="w"> </span>scripts/*.sh
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>chmod<span class="w"> </span>+x<span class="w"> </span>scripts/*.sh
+</code></pre></div></td></tr></table></div>
+<ul>
+<li>Depois disso, rode normalmente os comandos:
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>make
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>make<span class="w"> </span>run
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>make<span class="w"> </span>test-resultados
+</code></pre></div></td></tr></table></div></li>
+</ul>
+<p>Se não fizer isso, você pode receber erros como “cannot execute: required file not found” ou “not found”.</p>
+<h3 id="testes-individuais">Testes Individuais</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># Testes de componentes</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a>make<span class="w"> </span>test-tabela
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>make<span class="w"> </span>test-ast
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a>make<span class="w"> </span>test-integrado
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>make<span class="w"> </span>test-lexer
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="c1"># Testes de funcionalidade</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>make<span class="w"> </span>test-expressoes
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>make<span class="w"> </span>test-condicionais
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a>make<span class="w"> </span>test-loops
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>make<span class="w"> </span>test-tipos
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a>make<span class="w"> </span>test-comparacoes
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a>make<span class="w"> </span>test-casos-extremos
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>make<span class="w"> </span>test-funcoes-builtin
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>make<span class="w"> </span>test-operadores-logicos
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a>make<span class="w"> </span>test-precedencia-operadores
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="c1"># Testes de erro</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a>make<span class="w"> </span>test-erros
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a>make<span class="w"> </span>test-resultados
+</code></pre></div></td></tr></table></div>
+<h2 id="estrutura-dos-testes">📁 Estrutura dos Testes</h2>
+<h3 id="testes-unitarios-c">Testes Unitários (C)</h3>
+<h4 id="test_astc-testes-da-arvore-sintatica-abstrata"><code>test_ast.c</code> - Testes da Árvore Sintática Abstrata</h4>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1">// Testa criação de nós</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test_criar_no_valor_int</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">no</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criar_no_valor_int</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">no</span><span class="o">-&gt;</span><span class="n">tipo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NODO_VALOR</span><span class="p">);</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">no</span><span class="o">-&gt;</span><span class="n">dados</span><span class="p">.</span><span class="n">literal</span><span class="p">.</span><span class="n">tipo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TIPO_INT</span><span class="p">);</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">no</span><span class="o">-&gt;</span><span class="n">dados</span><span class="p">.</span><span class="n">literal</span><span class="p">.</span><span class="n">valor</span><span class="p">.</span><span class="n">int_val</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">    </span><span class="n">destruir_ast</span><span class="p">(</span><span class="n">no</span><span class="p">);</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="p">}</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="c1">// Testa operações</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test_criar_no_operacao</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">    </span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">esq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criar_no_valor_int</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">    </span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criar_no_valor_int</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">    </span><span class="n">NoAst</span><span class="w"> </span><span class="o">*</span><span class="n">op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criar_no_operacao</span><span class="p">(</span><span class="n">ADICAO</span><span class="p">,</span><span class="w"> </span><span class="n">esq</span><span class="p">,</span><span class="w"> </span><span class="n">dir</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">op</span><span class="o">-&gt;</span><span class="n">tipo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">NODO_OPERACAO</span><span class="p">);</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">op</span><span class="o">-&gt;</span><span class="n">dados</span><span class="p">.</span><span class="n">operacao</span><span class="p">.</span><span class="n">operador</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ADICAO</span><span class="p">);</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">    </span><span class="n">destruir_ast</span><span class="p">(</span><span class="n">op</span><span class="p">);</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_tabelac-testes-da-tabela-de-simbolos"><code>test_tabela.c</code> - Testes da Tabela de Símbolos</h4>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1">// Testa inserção e busca</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test_inserir_buscar_simbolo</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="n">TabelaSimbolos</span><span class="w"> </span><span class="o">*</span><span class="n">tabela</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">criar_tabela_simbolos</span><span class="p">();</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="n">Resultado</span><span class="w"> </span><span class="n">valor</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="n">valor</span><span class="p">.</span><span class="n">tipo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TIPO_INT</span><span class="p">;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">valor</span><span class="p">.</span><span class="n">valor</span><span class="p">.</span><span class="n">int_val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="n">inserir_simbolo</span><span class="p">(</span><span class="n">tabela</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">valor</span><span class="p">);</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="w">    </span><span class="n">Resultado</span><span class="w"> </span><span class="o">*</span><span class="n">encontrado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">buscar_simbolo</span><span class="p">(</span><span class="n">tabela</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">);</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">encontrado</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">encontrado</span><span class="o">-&gt;</span><span class="n">tipo</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TIPO_INT</span><span class="p">);</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">encontrado</span><span class="o">-&gt;</span><span class="n">valor</span><span class="p">.</span><span class="n">int_val</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">    </span><span class="n">destruir_tabela_simbolos</span><span class="p">(</span><span class="n">tabela</span><span class="p">);</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_lexerc-testes-do-analisador-lexico"><code>test_lexer.c</code> - Testes do Analisador Léxico</h4>
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1">// Testa reconhecimento de tokens</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test_tokens_basicos</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">&quot;test1.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;r&quot;</span><span class="p">);</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">    </span><span class="n">yyin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="p">;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yylex</span><span class="p">();</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ID</span><span class="p">);</span><span class="w"> </span><span class="c1">// Primeiro token deve ser um identificador</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="w">    </span><span class="n">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">yylex</span><span class="p">();</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">token</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ASSIGN</span><span class="p">);</span><span class="w"> </span><span class="c1">// Segundo token deve ser atribuição</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="n">fclose</span><span class="p">(</span><span class="n">file</span><span class="p">);</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="testes-de-funcionalidade-python">Testes de Funcionalidade (Python)</h3>
+<h4 id="test_expressoespy-testes-de-expressoes"><code>test_expressoes.py</code> - Testes de Expressões</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span>
+<span class="normal"><a href="#__codelineno-7-5">5</a></span>
+<span class="normal"><a href="#__codelineno-7-6">6</a></span>
+<span class="normal"><a href="#__codelineno-7-7">7</a></span>
+<span class="normal"><a href="#__codelineno-7-8">8</a></span>
+<span class="normal"><a href="#__codelineno-7-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># Testa operações aritméticas básicas</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soma:&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Subtração:&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multiplicação:&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Divisão:&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Módulo:&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">%</span> <span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Potência:&quot;</span><span class="p">,</span> <span class="n">x</span> <span class="o">**</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_condicionaispy-testes-de-estruturas-condicionais"><code>test_condicionais.py</code> - Testes de Estruturas Condicionais</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># Testa if/else básico</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é maior que 5&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é menor ou igual a 5&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="c1"># Testa condicionais aninhadas</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é muito grande&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é grande&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é médio&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x é pequeno&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_loopspy-testes-de-loops"><code>test_loops.py</code> - Testes de Loops</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1"># Testa loop while básico</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">contador</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="k">while</span> <span class="n">contador</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contador:&quot;</span><span class="p">,</span> <span class="n">contador</span><span class="p">)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a>    <span class="n">contador</span> <span class="o">=</span> <span class="n">contador</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1"># Testa break</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>        <span class="k">break</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;i =&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="c1"># Testa continue</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>    <span class="k">if</span> <span class="n">j</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a>        <span class="k">continue</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ímpar:&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_tipos_dadospy-testes-de-tipos-de-dados"><code>test_tipos_dados.py</code> - Testes de Tipos de Dados</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># Testa todos os tipos suportados</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">inteiro</span> <span class="o">=</span> <span class="mi">42</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">float_num</span> <span class="o">=</span> <span class="mf">3.14</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="n">string_texto</span> <span class="o">=</span> <span class="s2">&quot;Hello, World!&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">booleano</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inteiro:&quot;</span><span class="p">,</span> <span class="n">inteiro</span><span class="p">)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Float:&quot;</span><span class="p">,</span> <span class="n">float_num</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;String:&quot;</span><span class="p">,</span> <span class="n">string_texto</span><span class="p">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Booleano:&quot;</span><span class="p">,</span> <span class="n">booleano</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="c1"># Testa operações entre tipos</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="n">resultado</span> <span class="o">=</span> <span class="n">inteiro</span> <span class="o">+</span> <span class="n">float_num</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soma int + float:&quot;</span><span class="p">,</span> <span class="n">resultado</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="testes-de-erro">Testes de Erro</h3>
+<h4 id="test_erro_sintaxepy-testes-de-erro-sintatico"><code>test_erro_sintaxe.py</code> - Testes de Erro Sintático</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1"># Código com erro de sintaxe</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">y</span> <span class="o">=</span>  <span class="c1"># Erro: valor faltando</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_erro_variavel_nao_definidapy-testes-de-variavel-nao-definida"><code>test_erro_variavel_nao_definida.py</code> - Testes de Variável Não Definida</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># Tenta usar variável não definida</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># x não foi definida</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_erro_divisao_zeropy-testes-de-divisao-por-zero"><code>test_erro_divisao_zero.py</code> - Testes de Divisão por Zero</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="c1"># Tenta dividir por zero</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="n">resultado</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="test_erro_indentacaopy-testes-de-erro-de-indentacao"><code>test_erro_indentacao.py</code> - Testes de Erro de Indentação</h4>
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span>
+<span class="normal"><a href="#__codelineno-14-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="c1"># Código com indentação inconsistente</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="k">if</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Correto&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Indentação errada&quot;</span><span class="p">)</span>  <span class="c1"># Erro de indentação</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="scripts-de-automacao">🔧 Scripts de Automação</h2>
+<h3 id="scriptsrun_testssh-script-principal-de-testes"><code>scripts/run_tests.sh</code> - Script Principal de Testes</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span>
+<span class="normal"><a href="#__codelineno-15-14">14</a></span>
+<span class="normal"><a href="#__codelineno-15-15">15</a></span>
+<span class="normal"><a href="#__codelineno-15-16">16</a></span>
+<span class="normal"><a href="#__codelineno-15-17">17</a></span>
+<span class="normal"><a href="#__codelineno-15-18">18</a></span>
+<span class="normal"><a href="#__codelineno-15-19">19</a></span>
+<span class="normal"><a href="#__codelineno-15-20">20</a></span>
+<span class="normal"><a href="#__codelineno-15-21">21</a></span>
+<span class="normal"><a href="#__codelineno-15-22">22</a></span>
+<span class="normal"><a href="#__codelineno-15-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="c1"># Executa todos os testes do projeto</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🧪 Executando suite completa de testes...&quot;</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="c1"># Testes unitários</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;📋 Testes unitários...&quot;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a>make<span class="w"> </span>test-tabela
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a>make<span class="w"> </span>test-ast
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a>make<span class="w"> </span>test-integrado
+<a id="__codelineno-15-11" name="__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="c1"># Testes de funcionalidade</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;🔧 Testes de funcionalidade...&quot;</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a>make<span class="w"> </span>test-expressoes
+<a id="__codelineno-15-15" name="__codelineno-15-15"></a>make<span class="w"> </span>test-condicionais
+<a id="__codelineno-15-16" name="__codelineno-15-16"></a>make<span class="w"> </span>test-loops
+<a id="__codelineno-15-17" name="__codelineno-15-17"></a>make<span class="w"> </span>test-tipos
+<a id="__codelineno-15-18" name="__codelineno-15-18"></a>
+<a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="c1"># Testes de erro</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;⚠️ Testes de erro...&quot;</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21"></a>make<span class="w"> </span>test-erros
+<a id="__codelineno-15-22" name="__codelineno-15-22"></a>
+<a id="__codelineno-15-23" name="__codelineno-15-23"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Todos os testes concluídos!&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="scriptstest_errossh-testes-de-tratamento-de-erros"><code>scripts/test_erros.sh</code> - Testes de Tratamento de Erros</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span>
+<span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="c1"># Testa o tratamento de erros do interpretador</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;⚠️ Testando tratamento de erros...&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="c1"># Testa erro de sintaxe</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testando erro de sintaxe...&quot;</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a>./interpretador<span class="w"> </span>tests/test_erro_sintaxe.py<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;ERRO&quot;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="c1"># Testa variável não definida</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testando variável não definida...&quot;</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a>./interpretador<span class="w"> </span>tests/test_erro_variavel_nao_definida.py<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;não definida&quot;</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13"></a>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="c1"># Testa divisão por zero</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testando divisão por zero...&quot;</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a>./interpretador<span class="w"> </span>tests/test_erro_divisao_zero.py<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;Divisão por zero&quot;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="scriptstest_resultadossh-testes-de-resultados"><code>scripts/test_resultados.sh</code> - Testes de Resultados</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-17-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-17-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-17-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-17-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-17-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-17-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-17-10">10</a></span>
+<span class="normal"><a href="#__codelineno-17-11">11</a></span>
+<span class="normal"><a href="#__codelineno-17-12">12</a></span>
+<span class="normal"><a href="#__codelineno-17-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="c1"># Testa se os resultados estão corretos</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;📊 Testando resultados...&quot;</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5"></a>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="c1"># Testa operações aritméticas</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Testando operações aritméticas...&quot;</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="nv">resultado</span><span class="o">=</span><span class="k">$(</span>./interpretador<span class="w"> </span>tests/test_expressoes.py<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Soma:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f2<span class="k">)</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$resultado</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;15&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Operações aritméticas OK&quot;</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11"></a><span class="k">else</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12"></a><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;❌ Erro nas operações aritméticas&quot;</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13"></a><span class="k">fi</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="interpretacao-dos-resultados">📊 Interpretação dos Resultados</h2>
+<h3 id="saida-de-testes-bem-sucedidos">Saída de Testes Bem-sucedidos</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-18-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-18-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-18-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-18-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-18-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-18-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-18-10">10</a></span>
+<span class="normal"><a href="#__codelineno-18-11">11</a></span>
+<span class="normal"><a href="#__codelineno-18-12">12</a></span>
+<span class="normal"><a href="#__codelineno-18-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a>📋<span class="w"> </span>Testes<span class="w"> </span>unitários...
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a>✅<span class="w"> </span>Testes<span class="w"> </span>da<span class="w"> </span>tabela<span class="w"> </span>de<span class="w"> </span>símbolos
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a>✅<span class="w"> </span>Testes<span class="w"> </span>da<span class="w"> </span>AST
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a>✅<span class="w"> </span>Testes<span class="w"> </span>de<span class="w"> </span>integração
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a>🔧<span class="w"> </span>Testes<span class="w"> </span>de<span class="w"> </span>funcionalidade...
+<a id="__codelineno-18-7" name="__codelineno-18-7"></a>✅<span class="w"> </span>test-expressoes
+<a id="__codelineno-18-8" name="__codelineno-18-8"></a>✅<span class="w"> </span>test-condicionais
+<a id="__codelineno-18-9" name="__codelineno-18-9"></a>✅<span class="w"> </span>test-loops
+<a id="__codelineno-18-10" name="__codelineno-18-10"></a>✅<span class="w"> </span>test-tipos
+<a id="__codelineno-18-11" name="__codelineno-18-11"></a>⚠️<span class="w"> </span>Testes<span class="w"> </span>de<span class="w"> </span>erro...
+<a id="__codelineno-18-12" name="__codelineno-18-12"></a>✅<span class="w"> </span>test-erros
+<a id="__codelineno-18-13" name="__codelineno-18-13"></a>✅<span class="w"> </span>Todos<span class="w"> </span>os<span class="w"> </span>testes<span class="w"> </span>foram<span class="w"> </span>executados!
+</code></pre></div></td></tr></table></div>
+<h3 id="saida-de-testes-com-falha">Saída de Testes com Falha</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-19-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-19-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-19-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-19-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-19-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-19-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-19-10">10</a></span>
+<span class="normal"><a href="#__codelineno-19-11">11</a></span>
+<span class="normal"><a href="#__codelineno-19-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a>$<span class="w"> </span>make<span class="w"> </span><span class="nb">test</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a>📋<span class="w"> </span>Testes<span class="w"> </span>unitários...
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a>❌<span class="w"> </span>Testes<span class="w"> </span>da<span class="w"> </span>tabela<span class="w"> </span>de<span class="w"> </span>símbolos
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a>✅<span class="w"> </span>Testes<span class="w"> </span>da<span class="w"> </span>AST
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a>✅<span class="w"> </span>Testes<span class="w"> </span>de<span class="w"> </span>integração
+<a id="__codelineno-19-6" name="__codelineno-19-6"></a>🔧<span class="w"> </span>Testes<span class="w"> </span>de<span class="w"> </span>funcionalidade...
+<a id="__codelineno-19-7" name="__codelineno-19-7"></a>❌<span class="w"> </span>test-expressoes
+<a id="__codelineno-19-8" name="__codelineno-19-8"></a>✅<span class="w"> </span>test-condicionais
+<a id="__codelineno-19-9" name="__codelineno-19-9"></a>✅<span class="w"> </span>test-loops
+<a id="__codelineno-19-10" name="__codelineno-19-10"></a>✅<span class="w"> </span>test-tipos
+<a id="__codelineno-19-11" name="__codelineno-19-11"></a>⚠️<span class="w"> </span>Testes<span class="w"> </span>de<span class="w"> </span>erro...
+<a id="__codelineno-19-12" name="__codelineno-19-12"></a>✅<span class="w"> </span>test-erros
+</code></pre></div></td></tr></table></div>
+<h2 id="debugging-de-testes">🐛 Debugging de Testes</h2>
+<h3 id="usando-gdb-para-debugging">Usando GDB para Debugging</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-20-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1"># Compilar com debug</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a>make<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>make
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="c1"># Executar teste específico com GDB</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5"></a>gdb<span class="w"> </span>--args<span class="w"> </span>./interpretador<span class="w"> </span>tests/test_expressoes.py
+<a id="__codelineno-20-6" name="__codelineno-20-6"></a>
+<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="c1"># Dentro do GDB</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>run
+<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>bt<span class="w">  </span><span class="c1"># Se houver crash</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="o">(</span>gdb<span class="o">)</span><span class="w"> </span>info<span class="w"> </span>locals<span class="w">  </span><span class="c1"># Ver variáveis locais</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="logs-detalhados">Logs Detalhados</h3>
+<div class="language-bash highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Bash</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span>
+<span class="normal"><a href="#__codelineno-21-5">5</a></span>
+<span class="normal"><a href="#__codelineno-21-6">6</a></span>
+<span class="normal"><a href="#__codelineno-21-7">7</a></span>
+<span class="normal"><a href="#__codelineno-21-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="c1"># Executar com output detalhado</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a>make<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>test_log.txt
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="c1"># Ver apenas erros</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5"></a>make<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>error
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a>
+<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="c1"># Ver apenas warnings</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8"></a>make<span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>warning
+</code></pre></div></td></tr></table></div>
+<h2 id="cobertura-de-testes">📈 Cobertura de Testes</h2>
+<h3 id="funcionalidades-testadas">Funcionalidades Testadas</h3>
+<table>
+<thead>
+<tr>
+<th>Funcionalidade</th>
+<th>Testes</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operações Aritméticas</strong></td>
+<td><code>test_expressoes.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Estruturas Condicionais</strong></td>
+<td><code>test_condicionais.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Loops</strong></td>
+<td><code>test_loops.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Tipos de Dados</strong></td>
+<td><code>test_tipos_dados.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Operadores Lógicos</strong></td>
+<td><code>test_operadores_logicos.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Precedência de Operadores</strong></td>
+<td><code>test_precedencia_operadores.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Funções Built-in</strong></td>
+<td><code>test_funcoes_builtin.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Tratamento de Erros</strong></td>
+<td><code>test_erro_*.py</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Casos Extremos</strong></td>
+<td><code>test_casos_extremos.py</code></td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="componentes-testados">Componentes Testados</h3>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Teste</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AST</strong></td>
+<td><code>test_ast.c</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Tabela de Símbolos</strong></td>
+<td><code>test_tabela.c</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Lexer</strong></td>
+<td><code>test_lexer.c</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Parser</strong></td>
+<td><code>test_parser.c</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Interpretador</strong></td>
+<td>Testes de integração</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mensagens-de-erro-testadas">Mensagens de Erro Testadas</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de Erro</th>
+<th>Arquivo de Teste</th>
+<th>Mensagem Esperada</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Divisão por Zero</strong></td>
+<td><code>test_erro_divisao_zero.py</code></td>
+<td><code>"Divisão por zero"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Módulo por Zero</strong></td>
+<td><code>test_erro_modulo_zero.py</code></td>
+<td><code>"Módulo por zero"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Variável Não Definida</strong></td>
+<td><code>test_erro_variavel_nao_definida.py</code></td>
+<td><code>"Variável 'x' não definida"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Função Não Definida</strong></td>
+<td><code>test_erro_funcao_nao_definida.py</code></td>
+<td><code>"Função 'add' não definida"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Erro de Sintaxe</strong></td>
+<td><code>test_erro_sintaxe.py</code></td>
+<td><code>"syntax error"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Erro de Indentação</strong></td>
+<td><code>test_erro_indentacao.py</code></td>
+<td><code>"Indentação inconsistente na linha"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Caractere Inválido</strong></td>
+<td><code>test_erro_caractere_invalido.py</code></td>
+<td><code>"Caractere inválido '@'"</code></td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>Arquivo Inexistente</strong></td>
+<td><code>test_erro_arquivo_inexistente.py</code></td>
+<td><code>"Não foi possível abrir o arquivo"</code></td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h2 id="adicionando-novos-testes">🔄 Adicionando Novos Testes</h2>
+<h3 id="criando-teste-de-funcionalidade">Criando Teste de Funcionalidade</h3>
+<ol>
+<li>
+<p><strong>Criar arquivo Python</strong> em <code>tests/</code>:
+<div class="language-python highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Python</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span>
+<span class="normal"><a href="#__codelineno-22-4">4</a></span>
+<span class="normal"><a href="#__codelineno-22-5">5</a></span>
+<span class="normal"><a href="#__codelineno-22-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="c1"># tests/test_nova_funcionalidade.py</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="c1"># Testa nova funcionalidade</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">20</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="n">resultado</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resultado:&quot;</span><span class="p">,</span> <span class="n">resultado</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Adicionar ao Makefile</strong>:
+<div class="language-makefile highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Makefile</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nf">test-nova-funcionalidade</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">TARGET</span><span class="k">)</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span>@if<span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>TESTS_DIR<span class="k">)</span><span class="s2">/test_nova_funcionalidade.py&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="c">        # ... lógica do teste</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">    </span><span class="k">fi</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h3 id="criando-teste-unitario">Criando Teste Unitário</h3>
+<ol>
+<li>
+<p><strong>Criar arquivo C</strong> em <code>tests/</code>:
+<div class="language-c highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">C</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-24-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-24-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-24-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-24-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-24-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-24-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-24-10">10</a></span>
+<span class="normal"><a href="#__codelineno-24-11">11</a></span>
+<span class="normal"><a href="#__codelineno-24-12">12</a></span>
+<span class="normal"><a href="#__codelineno-24-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="c1">// tests/test_novo_componente.c</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;assert.h&gt;</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;../parser/novo_componente.h&quot;</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="kt">void</span><span class="w"> </span><span class="nf">test_nova_funcionalidade</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6"></a><span class="w">    </span><span class="c1">// Teste da nova funcionalidade</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7"></a><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="c1">// Placeholder</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8"></a><span class="p">}</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9"></a>
+<a id="__codelineno-24-10" name="__codelineno-24-10"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-11" name="__codelineno-24-11"></a><span class="w">    </span><span class="n">test_nova_funcionalidade</span><span class="p">();</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p><strong>Adicionar ao Makefile</strong>:
+<div class="language-makefile highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Makefile</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span>
+<span class="normal"><a href="#__codelineno-25-4">4</a></span>
+<span class="normal"><a href="#__codelineno-25-5">5</a></span>
+<span class="normal"><a href="#__codelineno-25-6">6</a></span>
+<span class="normal"><a href="#__codelineno-25-7">7</a></span>
+<span class="normal"><a href="#__codelineno-25-8">8</a></span>
+<span class="normal"><a href="#__codelineno-25-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="nf">test-novo-componente</span><span class="o">:</span><span class="w"> </span><span class="k">$(</span><span class="nv">BUILD_DIR</span><span class="k">)</span>/<span class="n">test_novo_componente</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="w">    </span>@if<span class="w"> </span>./$&lt;<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;✅ Testes do novo componente&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="cp">    else \</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5"></a><span class="cp">        echo &quot;❌ Testes do novo componente&quot;; \</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="cp">    fi</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7"></a>
+<a id="__codelineno-25-8" name="__codelineno-25-8"></a><span class="nf">$(BUILD_DIR)/test_novo_componente</span><span class="o">:</span><span class="w"> </span><span class="n">test_novo_componente</span>.<span class="n">c</span> <span class="k">$(</span><span class="nv">BUILD_DIR</span><span class="k">)</span>/<span class="n">novo_componente</span>.<span class="n">o</span> <span class="p">|</span> <span class="k">$(</span><span class="nv">BUILD_DIR</span><span class="k">)</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9"></a><span class="w">    </span><span class="k">$(</span>CC<span class="k">)</span><span class="w"> </span><span class="k">$(</span>CFLAGS<span class="k">)</span><span class="w"> </span>$^<span class="w"> </span>-o<span class="w"> </span><span class="nv">$@</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+</ol>
+<h2 id="historico-de-versao">Histórico de Versão</h2>
+<table>
+<thead>
+<tr>
+<th>Versão</th>
+<th>Data</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1.0</code></td>
+<td>27/06/2025</td>
+<td>Criação do documento</td>
+<td><a href="https://github.com/arthurevg">Arthur Evangelista</a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Os testes garantem que o interpretador funcione corretamente e ajudam a detectar regressões durante o desenvolvimento.</em> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
