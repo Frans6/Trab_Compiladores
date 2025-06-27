@@ -2,6 +2,7 @@
 x = 10
 y = 3.5
 nome = "Teste"
+print("seu nome é: ", nome)
 
 print("Valores iniciais:")
 print(x)

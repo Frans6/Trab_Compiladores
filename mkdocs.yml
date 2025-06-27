@@ -35,22 +35,14 @@ markdown_extensions:
     
 nav:
   - Início: index.md
-  - Cronograma: cronograma.md
-  - Metodologia: metodologia.md
-  - Escopo: escopo.md
-  - Explicação do Projeto: explicacao.md
-  # Exemplo de organização de pastas e arquivos
-  # pastas e arquivos que quiserem que apareçam na documentação precisam estar dentro da pasta docs
-  # - Modelagem:
-  #   - Dicionário de dados: modelagem/dicionario_dados.md
-  #   - Modelo Entidade-Relacionamento: modelagem/modelo-entidade-relacionamento.md
-  #   - Diagrama Entidade-Relacionamento: modelagem/diagrama-entidade-relacionamento.md
-  # - SQL:
-  #   - DDL: sql/ddl/ddl.md
-  #   - DML: sql/dml/dml.md
-  #   - DQL: sql/dql/dql.md
-  #   - Trigger: sql/trigger_procedure/trigger.md
-  # - Apresentações:
-  #   - Apresentação 1: entregas/modulo1/apresentacao_1.md
-  #   - Apresentação 2: entregas/modulo2/apresentacao_2.md
-  #   - Apresentação 3: entregas/modulo3/apresentacao_3.md
+  - Planejamento:
+    - Cronograma: cronograma.md
+    - Metodologia: metodologia.md
+  - Visão Geral:
+    - Explicação do Projeto: explicacao.md
+    - Escopo: escopo.md
+    - Sobre o Projeto: projeto.md
+  - Instalação: instalacao.md
+  - Uso: uso.md
+  - Desenvolvimento: desenvolvimento.md
+  - Testes: testes.md

@@ -17,7 +17,7 @@ O planejamento inicial foi essencial para definir os objetivos do projeto, os re
 
 - **Levantamento dos requisitos do projeto**: Definição das funcionalidades do interpretador, como análise léxica, sintática e execução de código Python.
 - **Análise de viabilidade técnica**: Avaliação da utilização de ferramentas como Flex e Bison para análise léxica e sintática, e da viabilidade de implementação do interpretador em C.
-- **Definição de cronograma e alocação de recursos**: Planejamento do tempo e das ferramentas necessárias, além da distribuição de tarefas entre os membros da equipe.
+- **Definição de [cronograma](cronograma.md) e alocação de recursos**: Planejamento do tempo e das ferramentas necessárias, além da distribuição de tarefas entre os membros da equipe.
 
 ### Desenvolvimento
 

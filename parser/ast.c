@@ -142,25 +142,25 @@ void destruir_ast(NoAst* no) {
             
         case NODO_IDENTIFICADOR:
             if (no->dados.identificador != NULL) {
-                free(no->dados.identificador);
+            free(no->dados.identificador);
             }
             break;
             
         case NODO_ATRIBUICAO:
             if (no->dados.atribuicao.nome != NULL) {
-                free(no->dados.atribuicao.nome);
+            free(no->dados.atribuicao.nome);
             }
             destruir_ast(no->dados.atribuicao.valor);
             break;
             
         case NODO_CHAMADA_FUNCAO:
             if (no->dados.chamada_funcao.nome_funcao != NULL) {
-                free(no->dados.chamada_funcao.nome_funcao);
+            free(no->dados.chamada_funcao.nome_funcao);
             }
             if (no->dados.chamada_funcao.argumentos != NULL) {
-                for (int i = 0; i < no->dados.chamada_funcao.num_argumentos; i++) {
+            for (int i = 0; i < no->dados.chamada_funcao.num_argumentos; i++) {
                     if (no->dados.chamada_funcao.argumentos[i] != NULL) {
-                        destruir_ast(no->dados.chamada_funcao.argumentos[i]);
+                destruir_ast(no->dados.chamada_funcao.argumentos[i]);
                     }
                 }
                 free(no->dados.chamada_funcao.argumentos);
@@ -170,25 +170,25 @@ void destruir_ast(NoAst* no) {
         case NODO_CONDICIONAL:
             destruir_ast(no->dados.condicional.condicao);
             if (no->dados.condicional.bloco_if != NULL) {
-                for (int i = 0; i < no->dados.condicional.bloco_if->quantidade; i++) {
+            for (int i = 0; i < no->dados.condicional.bloco_if->quantidade; i++) {
                     if (no->dados.condicional.bloco_if->declaracoes[i] != NULL) {
-                        destruir_ast(no->dados.condicional.bloco_if->declaracoes[i]);
-                    }
+                destruir_ast(no->dados.condicional.bloco_if->declaracoes[i]);
+            }
                 }
                 if (no->dados.condicional.bloco_if->declaracoes != NULL) {
-                    free(no->dados.condicional.bloco_if->declaracoes);
+            free(no->dados.condicional.bloco_if->declaracoes);
                 }
-                free(no->dados.condicional.bloco_if);
+            free(no->dados.condicional.bloco_if);
             }
             
             if (no->dados.condicional.bloco_else != NULL) {
                 for (int i = 0; i < no->dados.condicional.bloco_else->quantidade; i++) {
                     if (no->dados.condicional.bloco_else->declaracoes[i] != NULL) {
-                        destruir_ast(no->dados.condicional.bloco_else->declaracoes[i]);
+                    destruir_ast(no->dados.condicional.bloco_else->declaracoes[i]);
                     }
                 }
                 if (no->dados.condicional.bloco_else->declaracoes != NULL) {
-                    free(no->dados.condicional.bloco_else->declaracoes);
+                free(no->dados.condicional.bloco_else->declaracoes);
                 }
                 free(no->dados.condicional.bloco_else);
             }
@@ -197,29 +197,29 @@ void destruir_ast(NoAst* no) {
         case NODO_LOOP:
             destruir_ast(no->dados.loop.condicao);
             if (no->dados.loop.bloco != NULL) {
-                for (int i = 0; i < no->dados.loop.bloco->quantidade; i++) {
+            for (int i = 0; i < no->dados.loop.bloco->quantidade; i++) {
                     if (no->dados.loop.bloco->declaracoes[i] != NULL) {
-                        destruir_ast(no->dados.loop.bloco->declaracoes[i]);
-                    }
+                destruir_ast(no->dados.loop.bloco->declaracoes[i]);
+            }
                 }
                 if (no->dados.loop.bloco->declaracoes != NULL) {
-                    free(no->dados.loop.bloco->declaracoes);
+            free(no->dados.loop.bloco->declaracoes);
                 }
-                free(no->dados.loop.bloco);
+            free(no->dados.loop.bloco);
             }
             break;
             
         case NODO_BLOCO:
             if (no->dados.bloco != NULL) {
-                for (int i = 0; i < no->dados.bloco->quantidade; i++) {
+            for (int i = 0; i < no->dados.bloco->quantidade; i++) {
                     if (no->dados.bloco->declaracoes[i] != NULL) {
-                        destruir_ast(no->dados.bloco->declaracoes[i]);
-                    }
+                destruir_ast(no->dados.bloco->declaracoes[i]);
+            }
                 }
                 if (no->dados.bloco->declaracoes != NULL) {
-                    free(no->dados.bloco->declaracoes);
+            free(no->dados.bloco->declaracoes);
                 }
-                free(no->dados.bloco);
+            free(no->dados.bloco);
             }
             break;
             
