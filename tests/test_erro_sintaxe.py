@@ -1,4 +1,4 @@
-# Teste: Erro de sintaxe
-x = 10
-if x > 5  # Falta os dois pontos
-    print("x é maior que 5") 
+# Teste: Erro de sintaxe - expressão incompleta
+x = 5
+y = x +
+print("Este print nunca deve ser executado")

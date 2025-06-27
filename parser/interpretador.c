@@ -55,7 +55,7 @@ static Resultado avaliar_expressao(NoAst* no, TabelaSimbolos* tabela) {
             Simbolo* s = buscar_simbolo(tabela, no->dados.identificador);
             if (!s) {
                 fprintf(stderr, "[ERRO] (linha %d): Variável '%s' não definida\n", no->linha, no->dados.identificador);
-                return criar_resultado_vazio();
+                exit(1);
             }
             Resultado resultado = criar_resultado_vazio();
             resultado.tipo = s->tipo;
@@ -219,7 +219,7 @@ static Resultado interpretar_no(NoAst* no, TabelaSimbolos* tabela) {
             
         case NODO_ATRIBUICAO:
             {
-                Resultado res_exp = avaliar_expressao(no->dados.atribuicao.valor, tabela);
+            Resultado res_exp = avaliar_expressao(no->dados.atribuicao.valor, tabela);
                 void* valor_ptr = NULL;
                 
                 switch(res_exp.tipo) {
@@ -252,27 +252,27 @@ static Resultado interpretar_no(NoAst* no, TabelaSimbolos* tabela) {
                         break;
                 }
                 inserir_simbolo(tabela, no->dados.atribuicao.nome, res_exp.tipo, valor_ptr);
-                return criar_resultado_vazio();
-            }
+            return criar_resultado_vazio();
+        }
         
         case NODO_CHAMADA_FUNCAO:
             {
-                if (strcmp(no->dados.chamada_funcao.nome_funcao, "print") == 0) {
-                    for (int i = 0; i < no->dados.chamada_funcao.num_argumentos; i++) {
-                        Resultado res_arg = avaliar_expressao(no->dados.chamada_funcao.argumentos[i], tabela);
-                        switch(res_arg.tipo) {
-                            case TIPO_INT: printf("%d", res_arg.valor.int_val); break;
+            if (strcmp(no->dados.chamada_funcao.nome_funcao, "print") == 0) {
+                for (int i = 0; i < no->dados.chamada_funcao.num_argumentos; i++) {
+                    Resultado res_arg = avaliar_expressao(no->dados.chamada_funcao.argumentos[i], tabela);
+                    switch(res_arg.tipo) {
+                        case TIPO_INT: printf("%d", res_arg.valor.int_val); break;
                             case TIPO_FLOAT: printf("%g", res_arg.valor.float_val); break;
-                            case TIPO_BOOL: printf("%s", res_arg.valor.bool_val ? "True" : "False"); break;
-                            case TIPO_STRING: printf("%s", res_arg.valor.string_val); break;
+                        case TIPO_BOOL: printf("%s", res_arg.valor.bool_val ? "True" : "False"); break;
+                        case TIPO_STRING: printf("%s", res_arg.valor.string_val); break;
                             default:
                                 fprintf(stderr, "[AVISO] (linha %d): Tipo desconhecido no print\n", no->linha);
                                 printf("None");
                                 break;
-                        }
-                        if (i < no->dados.chamada_funcao.num_argumentos - 1) printf(" ");
                     }
-                    printf("\n");
+                    if (i < no->dados.chamada_funcao.num_argumentos - 1) printf(" ");
+                }
+                printf("\n");
                 } else if (strcmp(no->dados.chamada_funcao.nome_funcao, "input") == 0) {
                     // Implementação básica do input
                     char buffer[1024];
@@ -281,11 +281,12 @@ static Resultado interpretar_no(NoAst* no, TabelaSimbolos* tabela) {
                         buffer[strcspn(buffer, "\n")] = 0;
                         printf("Input recebido: %s\n", buffer);
                     }
-                } else {
+            } else {
                     fprintf(stderr, "[ERRO] (linha %d): Função '%s' não definida\n", no->linha, no->dados.chamada_funcao.nome_funcao);
-                }
-                return criar_resultado_vazio();
+                    exit(1);
             }
+            return criar_resultado_vazio();
+        }
         
         case NODO_CONDICIONAL: {
             if (verificar_verdade(avaliar_expressao(no->dados.condicional.condicao, tabela))) {

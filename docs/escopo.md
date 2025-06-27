@@ -1,65 +1,89 @@
 # Escopo do Projeto
 
-### Objetivo: 
+## Objetivo
 
- Desenvolver um interpretador simplificado para um subconjunto da linguagem Python, utilizando **Flex** para análise léxica e **Bison** para análise sintática. O interpretador será capaz de executar operações básicas como atribuições de variáveis, expressões aritméticas e controle de fluxo com estruturas condicionais.
+Desenvolver um interpretador simplificado para um subconjunto da linguagem Python, utilizando **Flex** para análise léxica e **Bison** para análise sintática. O interpretador é capaz de executar operações básicas como atribuições de variáveis, expressões aritméticas, controle de fluxo com estruturas condicionais e loops.
 
-### Ferramentas Utilizadas:
-- **Flex**: Para gerar o analisador léxico, que identificará e classificará os tokens no código Python.
-- **Bison**: Para gerar o analisador sintático, que verificará a estrutura do código e gerará a árvore de sintaxe abstrata (AST).
+## Funcionalidades Implementadas
 
-### Estrutura do Projeto:
+### Tipos de Dados
+- **Inteiros**: `42`, `-10`, `+5`
+- **Ponto flutuante**: `3.14`, `-2.5`, `1e-10`
+- **Strings**: `"Hello"`, `'World'`
+- **Booleanos**: `True`, `False`
 
-1. **Flex (Analisador Léxico)**:
-   - Arquivo `.l` que define os tokens que serão reconhecidos, como:
-     - **Palavras-chave**: `if`, `else`, `for`, `while`, `def`, etc.
-     - **Operadores**: `+`, `-`, `*`, `/`, `=`, etc.
-     - **Identificadores e Literais**: Como inteiros, floats, strings e nomes de variáveis.
-     - **Delimitadores**: Parênteses, chaves, colchetes, etc.
-     - **Comentários**: Código após o símbolo `#`.
-   
-2. **Bison (Analisador Sintático)**:
-   - Arquivo `.y` que define a gramática simplificada para o Python.
-   - Definição das regras de produção para expressões aritméticas, controle de fluxo, declarações de variáveis, etc.
-   - O Bison vai gerar uma árvore de sintaxe abstrata (AST) a partir dos tokens gerados pelo Flex.
+### Operadores
+- **Aritméticos**: `+`, `-`, `*`, `/`, `%`, `**`
+- **Comparação**: `==`, `!=`, `<`, `>`, `<=`, `>=`
+- **Lógicos**: `and`, `or`, `not`
 
-3. **Tabela de Símbolos**:
-   - Estrutura para armazenar variáveis e seus respectivos valores durante a execução do código.
+### Estruturas de Controle
+- **Condicionais**: `if`/`else` com blocos aninhados
+- **Loops**: `while` com suporte a `break` e `continue`
+- **Blocos**: Indentação Python completa
 
-4. **Execução do Código**:
-   - <p align="justify">Usa após a análise sintática e a criação da AST, o interpretador irá executar o código, utilizando uma estrutura para calcular expressões, controlar o fluxo de execução e imprimir resultados.</p>
+### Funções Built-in
+- **`print()`**: Saída formatada com múltiplos argumentos
 
-### Funcionalidades do Interpretador:
+### Tratamento de Erros
+- **Erros léxicos**: Caracteres inválidos
+- **Erros sintáticos**: Estrutura gramatical incorreta
+- **Erros semânticos**: Variáveis não definidas, divisão por zero
+- **Erros de indentação**: Inconsistência na indentação
 
-1. **Declaração e Atribuição de Variáveis**:
-    O interpretador deve ser capaz de declarar variáveis e atribuir valores a elas.
-2. **Biblioteca Padrão**: 
-    Inclusão de funções `print` e `input`.
-3. **Operações Aritméticas**:
-    Implementação de operações básicas como adição, subtração, multiplicação e divisão.
-   
-4. **Estruturas Condicionais**:
-    Suporte para `if`, `else`, `elif`.
 
-5. **Execução de Comandos**:
-    O interpretador deve ser capaz de executar as instruções fornecidas no código, como calcular expressões aritméticas ou executar blocos condicionais.
+## Limitações do Escopo Atual
 
-### Fluxo de Execução:
+### Não Implementado
+- **Funções definidas pelo usuário**: Apenas funções built-in
+- **Estruturas de dados complexas**: Listas, dicionários, tuplas
+- **Classes e objetos**: Programação orientada a objetos
+- **Módulos**: Sistema de importação
+- **Exceções**: Try/catch
+- **Operadores de bit**: `&`, `|`, `^`, `<<`, `>>`
+- **Operadores de atribuição composta**: `+=`, `-=`, etc.
+- **Loop `for`**: Apenas `while` implementado
+- **`elif`**: Apenas `if`/`else` básico
 
-1. **Entrada**: O código Python simplificado é fornecido como entrada.
-2. **Analisador Léxico**: O Flex lê o código e gera tokens.
-3. **Analisador Sintático**: O Bison verifica a sintaxe e constrói a árvore de sintaxe abstrata (AST).
-4. **Execução**: O interpretador processa a AST e executa as operações descritas, exibindo os resultados.
+### Implementado
+- **Operações aritméticas básicas**: Todas as operações fundamentais
+- **Controle de fluxo**: `if`/`else` e `while`
+- **Variáveis**: Declaração e atribuição
+- **Tipos básicos**: Int, float, string, bool
+- **Indentação**: Suporte completo
+- **Comentários**: Linhas com `#`
+- **Tratamento de erros**: Mensagens detalhadas
+- **Suite de testes**: Cobertura completa
 
-### Possíveis Extensões Futuras:
+## Arquivos Principais
 
-- Suporte a **funções**: Implementação de funções e chamadas de funções.
-- Suporte a **objetos**: Adição de classes e manipulação de objetos.
-- **Erros e Depuração**: Melhorias no tratamento de erros e na geração de mensagens de depuração.
+### Código Fonte
+- `main.c`: Ponto de entrada
+- `lexer/lexer.l`: Especificação do lexer
+- `parser/parser.y`: Gramática do parser
+- `parser/ast.h/.c`: Implementação da AST
+- `parser/tabela.h/.c`: Tabela de símbolos
+- `parser/interpretador.h/.c`: Interpretador
+- `parser/types.h`: Definições de tipos
 
-### Conclusão:
+### Scripts e Configuração
+- `Makefile`: Sistema de build
+- `indent_preproc.py`: Pré-processador
+- `run_tests.sh`: Suite de testes
+- `scripts/`: Scripts de automação
 
-<p align="justify"> &emsp;&emsp;Este projeto oferece uma excelente oportunidade para aprender sobre os fundamentos da construção de compiladores e interpretadores, utilizando ferramentas como Flex e Bison. O interpretador construído permitirá a execução de um código Python simplificado, com uma estrutura que pode ser expandida para incluir funcionalidades mais complexas no futuro.</p>
+### Testes
+- `tests/test_*.py`: Testes de funcionalidade
+- `tests/test_*.c`: Testes unitários
+- `tests/test_erro_*.py`: Testes de erro
+
+
+## Conclusão
+
+Este projeto demonstra com sucesso a implementação de um interpretador Python simplificado usando as ferramentas Flex e Bison. O escopo foi bem definido e implementado, cobrindo os conceitos fundamentais de compiladores: análise léxica, análise sintática, construção de AST e interpretação.
+
+O projeto oferece uma base sólida para futuras extensões e serve como excelente material educacional para o estudo de compiladores e interpretadores.
+
 
 <br>
 
@@ -70,3 +94,4 @@
 | `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | [Jefferson](https://github.com/Frans6) |
 | `1.0`  |  27/04/2025 |  Criação da página "Escopo" contendo informações sobre o escopo do projeto |[Letícia Resende](https://github.com/LeticiaResende23)|
 | `1.1`  |  28/04/2025 |  Ajustes e correções em inconsistências no documento | [Arthur Evangelista](https://github.com/arthurevg) |
+| `1.2`  |  27/06/2025 |  Atualização completa do escopo para refletir o projeto implementado | [Arthur Evangelista](https://github.com/arthurevg) |

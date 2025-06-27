@@ -47,9 +47,9 @@ static void liberar_valor_simbolo(Simbolo *simbolo)
             break;
         }
         free(simbolo->valor);
-    }
-    else if (simbolo->tipo != TIPO_NULO)
-    {
+        }
+        else if (simbolo->tipo != TIPO_NULO)
+        {
         // Se não há valor mas o tipo não é nulo, não fazemos nada
         // para evitar double free
     }
@@ -72,18 +72,18 @@ void destruir_tabela(TabelaSimbolos *tabela)
             {
                 liberar_valor_simbolo(temp->simbolo);
                 if (temp->simbolo->nome) {
-                    free(temp->simbolo->nome);
+                free(temp->simbolo->nome);
                 }
                 free(temp->simbolo);
             }
             if (temp->chave) {
-                free(temp->chave);
+            free(temp->chave);
             }
             free(temp);
         }
     }
     if (tabela->entradas) {
-        free(tabela->entradas);
+    free(tabela->entradas);
     }
     free(tabela);
 }

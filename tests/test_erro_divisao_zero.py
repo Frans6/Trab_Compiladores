@@ -1,4 +1,5 @@
 # Teste: Divisão por zero
 x = 10
 y = 0
-resultado = x / y  # Divisão por zero 
+resultado = x / y  # Deve gerar erro de divisão por zero
+print(resultado)

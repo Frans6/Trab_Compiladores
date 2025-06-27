@@ -15,24 +15,26 @@ int main(int argc, char **argv)
 
     for (int i = 1; i < argc; i++)
     {
+        printf("\n=== Teste %d: Executando parser no arquivo '%s' ===\n", i, argv[i]);
         yyin = fopen(argv[i], "r");
         if (!yyin)
         {
-            printf("❌ Erro ao abrir arquivo '%s'\n", argv[i]);
+            perror("ERRO: não foi possível abrir o arquivo\n");
             continue;
         }
 
-        yydebug = 0;
+        yydebug = 1; // Ativa debug do bison
         int result = yyparse();
+
         fclose(yyin);
 
         if (result == 0)
         {
-            printf("✅ %s\n", argv[i]);
+            printf("SUCESSO: parsing concluído sem erros!\n");
         }
         else
         {
-            printf("❌ %s\n", argv[i]);
+            printf("FALHA: erros encontrados durante o parsing\n");
         }
     }
 
