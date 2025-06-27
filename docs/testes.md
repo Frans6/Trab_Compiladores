@@ -27,6 +27,27 @@ make test-loops
 make test-erros
 make test-tipos
 ```
+## ⚠️ Atenção para Usuários Windows/WSL
+
+Se você está utilizando o Windows com WSL (Windows Subsystem for Linux):
+
+- **Sempre execute os comandos de compilação e testes pelo terminal do WSL** (Ubuntu, por exemplo), e não pelo CMD ou PowerShell do Windows.
+- Antes de rodar os scripts `.sh`, converta os finais de linha dos arquivos para o formato Unix e dê permissão de execução:
+
+```bash
+cd /mnt/c/Projetos/compiladores/Trab_Compiladores\ -\ Copia
+dos2unix scripts/*.sh
+chmod +x scripts/*.sh
+```
+
+- Depois disso, rode normalmente os comandos:
+```bash
+make
+make run
+make test-resultados
+```
+
+Se não fizer isso, você pode receber erros como “cannot execute: required file not found” ou “not found”.
 
 ### Testes Individuais
 
