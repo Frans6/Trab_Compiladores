@@ -145,9 +145,9 @@ Trab_Compiladores/
     ├── 📄 index.md             # Esta página
     ├── 📄 instalacao.md        # Guia de instalação
     ├── 📄 uso.md               # Guia de uso
-    ├── 📄 arquitetura.md       # Documentação da arquitetura
     ├── 📄 testes.md            # Documentação dos testes
-    └── 📄 desenvolvimento.md   # Guia para desenvolvedores
+    └──📄 ...                   # Outros arquivos de documentação
+     
 ```
 
 ## 🛠️ Tecnologias Utilizadas
