@@ -84,13 +84,14 @@ Este projeto demonstra com sucesso a implementação de um interpretador Python 
 
 O projeto oferece uma base sólida para futuras extensões e serve como excelente material educacional para o estudo de compiladores e interpretadores.
 
----
+
+<br>
 
 ## Histórico de Versão
 
 | Versão | Data          | Descrição                          | Autor(es)     |
 | ------ | ------------- | ---------------------------------- | ------------- |
-| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | Jefferson |
-| `1.0`  |  27/04/2025 |  Criação da página "Escopo" contendo informações sobre o escopo do projeto | Letícia |
-| `1.1`  |  28/04/2025 |  Ajustes e correções em inconsistências no documento | Arthur |
-| `1.2`  |  27/06/2025 |  Atualização completa do escopo para refletir o projeto implementado | Arthur Evangelista |
+| `0.1`  |  27/04/2025 |  Criação do GitPages do grupo | [Jefferson](https://github.com/Frans6) |
+| `1.0`  |  27/04/2025 |  Criação da página "Escopo" contendo informações sobre o escopo do projeto |[Letícia Resende](https://github.com/LeticiaResende23)|
+| `1.1`  |  28/04/2025 |  Ajustes e correções em inconsistências no documento | [Arthur Evangelista](https://github.com/arthurevg) |
+| `1.2`  |  27/06/2025 |  Atualização completa do escopo para refletir o projeto implementado | [Arthur Evangelista](https://github.com/arthurevg) |

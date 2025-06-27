@@ -2,7 +2,9 @@
 
 ## 📋 Visão Geral
 
-Este projeto implementa um interpretador de Python simplificado desenvolvido como trabalho acadêmico para a disciplina de Compiladores. O interpretador é construído usando as ferramentas **Flex** (analisador léxico) e **Bison** (analisador sintático), demonstrando os conceitos fundamentais de compiladores.
+
+<p align="justify"> &emsp;&emsp;Este projeto consiste na implementação de um interpretador de Python, desenvolvido como trabalho acadêmico para a disciplina de Compiladores. O objetivo principal é aplicar os conceitos estudados ao longo da disciplina, como análise léxica, análise sintática e execução de comandos, utilizando as ferramentas Flex (para o analisador léxico) e Bison (para o analisador sintático).</p>
+
 
 ## Integrantes
 
@@ -174,6 +176,8 @@ Trab_Compiladores/
 | `1.1`  |  27/04/2025 |  Criação da Home do grupo | [Jefferson](https://github.com/Frans6) |
 | `1.2`  |  28/04/2025 |  Atualização da Home no GitPages | [Arthur Evangelista](https://github.com/arthurevg) |
 | `1.3`  |  27/06/2025 |  Adição do fluxo do sistema e funcionalidades implementadas | [Arthur Evangelista](https://github.com/arthurevg) |
+
 ---
 
 *Esta documentação foi criada para o trabalho de Compiladores, demonstrando a implementação completa de um interpretador Python usando as ferramentas Flex e Bison.*
+
