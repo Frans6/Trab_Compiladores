@@ -218,6 +218,6 @@ valor:
     ;
 %%
 void yyerror(const char* s) { 
-    fprintf(stderr, "[ERRO] (linha %d): %s\n", yylineno, s);
+    fprintf(stderr, "[ERRO] (linha %d, token '%s'): %s\n", yylineno, yytext, s);
     exit(1); 
 }
